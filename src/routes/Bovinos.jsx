@@ -4,6 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Combobox } from "@/components/ui/combobox";
 import {
   FaCircle,
   FaFilter,
@@ -12,7 +13,7 @@ import {
   FaPlus,
   FaVenus,
 } from "react-icons/fa6";
-import { GiCow } from "react-icons/gi";
+import { GiCow, GiPig } from "react-icons/gi";
 import {
   Dialog,
   DialogContent,
@@ -23,7 +24,33 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+const data = [
+  {
+    value: "Lola",
+    label: "Lola",
+  },
+  {
+    value: "Cenizo",
+    label: "Cenizo",
+  },
+  {
+    value: "Cuernudo",
+    label: "Cuernudo",
+  },
+  {
+    value: "Chato",
+    label: "Chato",
+  },
+  {
+    value: "Gloria",
+    label: "Gloria",
+  },
+  {
+    value: "Mechuda",
+    label: "Mechuda",
+  },
+];
 export default function Bovinos() {
   return (
     <>
@@ -122,32 +149,115 @@ export default function Bovinos() {
               Nuevo animal
             </Button>
           </DialogTrigger>
-          <DialogContent className="flex flex-col h-full sm:max-w-3xl">
+          <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
             <DialogHeader>
-              <DialogTitle>Edit profile</DialogTitle>
+              <DialogTitle>Agregar bovino</DialogTitle>
               <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
+                Agregue las caracteristicas del bovino
               </DialogDescription>
             </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
-                </Label>
-                <Input id="name" value="Pedro Duarte" className="col-span-3" />
+            <form>
+              <div className="flex flex-col gap-y-3 w-full">
+                <div className="grid w-full max-w-sm items-center gap-y-1.5">
+                  <Label className="font-semibold" htmlFor="number">
+                    Numero de chapa
+                  </Label>
+                  <Input type="number" id="number" placeholder="001" />
+                </div>
+                <div className="flex flex-col gap-y-1.5">
+                  <Label className="font-semibold">Sexo del animal</Label>
+                  <RadioGroup defaultValue="option-one">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        className="border-blue-500"
+                        value="option-one"
+                        id="option-one"
+                      />
+                      <Label className="text-[14px]" htmlFor="option-one">
+                        Macho
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        className="border-pink-500 appearance-none checked:border-blue-500"
+                        value="option-two"
+                        id="option-two"
+                      />
+                      <Label className="text-[14px]" htmlFor="option-two">
+                        Hembra
+                      </Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+                <div className="grid w-full max-w-sm items-center gap-y-2.5">
+                  <div className="flex flex-col gap-y-1.5">
+                    <Label className="font-semibold" htmlFor="peso">
+                      Peso del animal
+                    </Label>
+                    <Input type="number" id="peso" placeholder="400..." />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <Label className="font-semibold">Padre</Label>
+                    <Combobox data={data} />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <Label className="font-semibold">Madre</Label>
+                    <Combobox data={data} />
+                  </div>
+
+                  <div className="flex flex-col gap-2">
+                    <Label className="font-semibold" htmlFor="raza">
+                      Raza del bovino
+                    </Label>
+                    <Input type="text" id="raza" placeholder="Brahman..." />
+                  </div>
+                </div>
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
-                  Username
-                </Label>
-                <Input id="username" value="@peduarte" className="col-span-3" />
-              </div>
-            </div>
-            <DialogFooter>
-              <Button type="submit">Save changes</Button>
-            </DialogFooter>
+              <DialogFooter className="flex-row gap-x-2 mt-4">
+                <Button className="flex-1" size="lg" variant="outline">
+                  Cancelar
+                </Button>
+                <Button type="submit" className="flex-1" size="lg">
+                  Agregar
+                </Button>
+              </DialogFooter>
+            </form>
           </DialogContent>
         </Dialog>
+        {/* <Dialog>
+          <DialogTrigger asChild>
+            <Button className="absolute bottom-20 right-6">
+              <FaPlus className="me-2" />
+              Nuevo animal
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="flex flex-col  sm:max-w-3xl">
+            <DialogHeader>
+              <DialogTitle>Agregar animal</DialogTitle>
+              <DialogDescription>
+                Seleccione el tipo de animal que desea añadir
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="flex flex-row gap-2 w-full">
+              <Button
+                className="gap-x-1 flex-1 py-2 font-semibold"
+                variant="outline"
+                size="lg"
+              >
+                <GiCow className="text-xl" /> Bovino
+              </Button>
+              <Button
+                className="gap-x-1 flex-1 py-2 font-semibold"
+                variant="outline"
+                size="lg"
+              >
+                <GiPig className="text-xl" /> Porcino
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog> */}
       </div>
     </>
   );
