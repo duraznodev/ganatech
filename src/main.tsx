@@ -1,12 +1,11 @@
+import Bovines from "@/routes/Bovines.jsx";
+import Dashboard from "@/routes/Dashboard.jsx";
+import Nutrition from "@/routes/Nutrition.jsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Root from "@/routes/Root.jsx";
-import Dashboard from "@/routes/Dashboard.jsx";
-import Bovinos from "@/routes/Bovinos.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./index.css";
 import { registerSW } from "virtual:pwa-register";
-import signIn from "@/firebase/auth/signin";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path: "bovinos",
-    element: <Bovinos />,
+    element: <Bovines />,
+  },
+  {
+    path: "nutricion",
+    element: <Nutrition />,
   },
 ]);
 
@@ -27,11 +30,13 @@ const updateSW = registerSW({
   },
 });
 
-async function init() {
-  const resp = await signIn("romaneduardorm@gmail.com", "durazno");
-}
+// async function init() {
+// const resp = await signIn("romaneduardorm@gmail.com", "durazno");
+// console.log(resp);
+//   seeder();
+// }
 
-init();
+// init();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

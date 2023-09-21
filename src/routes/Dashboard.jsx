@@ -6,30 +6,25 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
+import { Separator } from "@/components/ui/separator";
 import { GiCow } from "react-icons/gi";
 import { SiHappycow } from "react-icons/si";
 import {
-  PieChart,
-  Pie,
   Cell,
   Legend,
-  Tooltip,
+  Pie,
+  PieChart,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
-import { Separator } from "@/components/ui/separator";
 
 export default function Dashboard() {
   const [dynamicText, setDynamicText] = useState("estado");
 
   const [isMounted, setIsMounted] = useState(false);
-
-  // const [chartDimensions, setChartDimensions] = useState({
-  //     width: 300,
-  //     height: 300,
-  // })
 
   const [timeFilter, setTimeFilter] = useState("Hoy");
 
@@ -82,10 +77,6 @@ export default function Dashboard() {
 
   useEffect(() => {
     setIsMounted(true);
-    // setChartDimensions({
-    //     width: 300,
-    //     height: 300,
-    // })
   }, []);
 
   return (
@@ -134,8 +125,6 @@ export default function Dashboard() {
                   data={
                     dynamicText === "tipo" ? dataByTime[timeFilter] : dataEstado
                   }
-                  // cx={chartDimensions.width / 2}
-                  // cy={chartDimensions.height / 2}
                   labelLine={true}
                   label={renderLabel}
                   outerRadius={80}

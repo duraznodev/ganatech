@@ -1,57 +1,19 @@
-import { addDoc, collection, doc } from "firebase/firestore";
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+} from "firebase/firestore";
 import { firebase_db } from "./config";
 
-const bovinesCollection = collection(
-  firebase_db,
-  "farms/Y2ZMx8WST52QYZD5XkiF/bovines"
-);
+const farm_id = "Y2ZMx8WST52QYZD5XkiF";
 
-const birthsCollection = collection(
-  firebase_db,
-  "farms/Y2ZMx8WST52QYZD5XkiF/births"
-);
+export const getCollection = (collection_name) =>
+  collection(firebase_db, `farms/${farm_id}/${collection_name}`);
 
-const inseminationsCollection = collection(
-  firebase_db,
-  "farms/Y2ZMx8WST52QYZD5XkiF/inseminations"
-);
+export const addToCollection = (collection, data) => addDoc(collection, data);
 
-export function addBovine(
-  bovine = {
-    animal_id: "1",
-    breed: "vero",
-    earring: {
-      country: "NIC",
-      earring_code: "1238",
-      farm_code: "1034",
-    },
-    father_id: null,
-    genre: "M",
-    its_pregnant: true,
-    mother_id: null,
-    name: "Gonzalo",
-    purposes: ["reproduction", "production"],
-    status: ["observed"],
-    weight: 37.76,
-  }
-) {
-  return addDoc(bovinesCollection, bovine);
-}
-
-export function addBirth(
-  birth = {
-    animal_id: "1",
-    children_ids: ["4"],
-    date: "2021-08-09",
-    father_id: "2",
-    mother_id: "3",
-    number_of_babies: 1,
-    observations: "Ninguna",
-  }
-) {
-  return addDoc(birthsCollection, birth);
-}
-
-export function inseminations() {
-  return addDoc();
-}
+export const allFromCollection = async (collection) => {
+  return (await getDocs(collection)).docs.map((doc) => doc.data());
+};

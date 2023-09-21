@@ -24,10 +24,10 @@ const firebaseConfig = {
 export const firebase_app = initializeApp(firebaseConfig);
 
 // export const firebase_auth = getAuth(firebase_app);
-export const firebase_auth = getAuth();
-connectAuthEmulator(firebase_auth, "http://127.0.0.1:9099");
+// export const firebase_auth = getAuth();
+// connectAuthEmulator(firebase_auth, "http://127.0.0.1:9099");
 
-// export const firebase_db = getFirestore(firebase_app);
 export const firebase_db = getFirestore(firebase_app);
+// export const firebase_db = getFirestore();
 
-connectFirestoreEmulator(firebase_db, "127.0.0.1", 8080);
+// connectFirestoreEmulator(firebase_db, "127.0.0.1", 8080);

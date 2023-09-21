@@ -19,7 +19,6 @@ import {
 export function Combobox({ data }) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
-  console.log();
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -30,7 +29,7 @@ export function Combobox({ data }) {
           className="w-[200px] justify-between"
         >
           {value
-            ? data.find((animal) => animal.value.toLowerCase() === value)?.label
+            ? data.find((animal) => animal.label.toLowerCase() === value)?.label
             : "Seleccionar animal..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -51,7 +50,9 @@ export function Combobox({ data }) {
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === animal.value ? "opacity-100" : "opacity-0"
+                    value === animal.label.toLowerCase()
+                      ? "opacity-100"
+                      : "opacity-0"
                   )}
                 />
                 {animal.label}
