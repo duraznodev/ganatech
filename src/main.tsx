@@ -1,6 +1,7 @@
 import Bovines from "@/routes/Bovines.jsx";
 import Dashboard from "@/routes/Dashboard.jsx";
 import Nutrition from "@/routes/Nutrition.jsx";
+import WeightHistory from "@/routes/WeightHistory.jsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "nutricion",
     element: <Nutrition />,
+  },
+  {
+    path: "historial",
+    element: <WeightHistory />,
   },
 ]);
 

@@ -4,7 +4,11 @@ import { connectAuthEmulator, getAuth } from "firebase/auth";
 import {
   Firestore,
   connectFirestoreEmulator,
+  disableNetwork,
   getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,7 +31,13 @@ export const firebase_app = initializeApp(firebaseConfig);
 // export const firebase_auth = getAuth();
 // connectAuthEmulator(firebase_auth, "http://127.0.0.1:9099");
 
-export const firebase_db = getFirestore(firebase_app);
+export const firebase_db = initializeFirestore(firebase_app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager(),
+  }),
+});
+await disableNetwork(firebase_db);
+console.log("Firebase DB initialized");
 // export const firebase_db = getFirestore();
 
 // connectFirestoreEmulator(firebase_db, "127.0.0.1", 8080);
