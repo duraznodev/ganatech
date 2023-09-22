@@ -1,10 +1,9 @@
-// Import the functions you need from the SDKs you need
+import { disableNetwork } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import {
   Firestore,
   connectFirestoreEmulator,
-  disableNetwork,
   getFirestore,
   initializeFirestore,
   persistentLocalCache,
@@ -36,8 +35,9 @@ export const firebase_db = initializeFirestore(firebase_app, {
     tabManager: persistentMultipleTabManager(),
   }),
 });
-await disableNetwork(firebase_db);
-console.log("Firebase DB initialized");
 // export const firebase_db = getFirestore();
 
 // connectFirestoreEmulator(firebase_db, "127.0.0.1", 8080);
+
+// await disableNetwork(firebase_db);
+// console.log("Network disabled!");
