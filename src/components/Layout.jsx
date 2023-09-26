@@ -18,7 +18,7 @@ export default function Layout() {
             <span className="text-xs">Panel</span>
           </Link>
           <Link
-            to="/bovinos"
+            to="/animales"
             className="h-full justify-center flex-col flex items-center aspect-square"
           >
             <FaHouse className="text-xl" />

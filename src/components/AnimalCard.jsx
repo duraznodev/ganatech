@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { FaCircle, FaHeart, FaMars, FaVenus } from "react-icons/fa6";
-import { GiCow } from "react-icons/gi";
+import { GiCow, GiPig } from "react-icons/gi";
 import { cn } from "../lib/utils";
 import { Badge } from "./ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
@@ -14,6 +14,7 @@ export default function AnimalCard({
   selected,
   multiple,
   simple,
+  type,
 }) {
   return (
     <Card className={cn("flex", selected && "bg-secondary")}>
@@ -28,18 +29,22 @@ export default function AnimalCard({
           <CardTitle className="font-semibold tracking-tight text-lg">
             {name}
           </CardTitle>
-          <GiCow className="text-2xl" />
+          {type === "bovines" ? (
+            <GiCow className="text-2xl" />
+          ) : (
+            <GiPig className="text-2xl" />
+          )}
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">
           {attributes?.genre === "M" ? (
             <Badge variant="secondary" className="gap-x-1">
               <FaMars className="text-blue-500" />
-              Toro
+              {type === "bovines" ? "Toro" : "Cerdo"}
             </Badge>
           ) : (
             <Badge variant="secondary" className="gap-x-1">
               <FaVenus className="text-rose-500" />
-              Vaca
+              {type === "bovines" ? "Vaca" : "Cerda"}
             </Badge>
           )}
           {attributes?.its_pregnant && (

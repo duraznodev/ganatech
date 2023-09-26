@@ -9,6 +9,7 @@ export default function AnimalList({
   selectedAnimals,
   simple = false,
   multiple = true,
+  type,
 }) {
   const [filteredAnimals, setFilteredAnimals] = useState(animals);
 
@@ -59,6 +60,7 @@ export default function AnimalList({
           filteredAnimals.map((animal) => {
             return (
               <AnimalCard
+                type={type}
                 selected={selectedAnimals?.includes(animal?.id)}
                 onSelect={onSelect}
                 simple={simple}

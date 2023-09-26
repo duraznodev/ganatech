@@ -20,31 +20,11 @@ import AnimalList from "./AnimalList";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 const FormSchemaAdd = z.object({
-  earring: z
-    .string()
-    .min(4, {
-      message: "La chapa debe tener 4 digitos",
-    })
-    .max(4, {
-      message: "La chapa debe tener 4 digitos",
-    }),
+  earring: z.string().nullable(),
+  name: z.string().nullable(),
   genre: z.string(),
-  weight: z
-    .string()
-    .min(2, {
-      message: "Ingrese una cantidad valida",
-    })
-    .max(4, {
-      message: "Ingrese una cantidad valida",
-    }),
-  breed: z
-    .string()
-    .min(3, {
-      message: "Ingrese una raza valida",
-    })
-    .max(30, {
-      message: "Ingrese una raza valida",
-    }),
+  weight: z.string().nullable(),
+  breed: z.string().nullable(),
   father: z.string().nullable(),
   mother: z.string().nullable(),
 });
@@ -70,6 +50,7 @@ export default function AddAnimalForm({ children, animals, type }) {
   const form = useForm({
     resolver: zodResolver(FormSchemaAdd),
     defaultValues: {
+      name: "",
       earring: "",
       genre: "",
       weight: "",
@@ -87,12 +68,20 @@ export default function AddAnimalForm({ children, animals, type }) {
   async function onSubmit(data) {
     toggleFatherSelection("");
     toggleFatherSelection("");
+    console.log(
+      `${type === "bovines" ? "Bovino" : "Porcino"} ${new Date().getTime()}`
+    );
     const animal = {
       ...data,
       weight: Number(data.weight),
+      name: data.name.trim()
+        ? data.name.trim()
+        : `${
+            type === "bovines" ? "Bovino" : "Porcino"
+          } ${new Date().getTime()}}`,
     };
+    console.log(data);
     const submitedAnimal = await addToCollection(getCollection(type), animal);
-    console.log(submitedAnimal);
 
     form.reset();
   }
@@ -103,6 +92,24 @@ export default function AddAnimalForm({ children, animals, type }) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-y-3 w-full"
         >
+          <FormField
+            className="grid w-full max-w-sm items-center gap-y-1.5"
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="font-semibold">Nombre</FormLabel>
+                <FormControl>
+                  <Input placeholder="Nombre del animal" {...field} />
+                </FormControl>
+                {/* <FormDescription>
+                Este es el numero de chapa de la vaca
+              </FormDescription> */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             className="grid w-full max-w-sm items-center gap-y-1.5"
             control={form.control}
@@ -186,7 +193,9 @@ export default function AddAnimalForm({ children, animals, type }) {
             name="breed"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-semibold">Raza del bovino</FormLabel>
+                <FormLabel className="font-semibold">
+                  Raza del {type === "bovines" ? "bovino" : "cerdo"}
+                </FormLabel>
                 <FormControl>
                   <Input type="text" placeholder="Brahman..." {...field} />
                 </FormControl>

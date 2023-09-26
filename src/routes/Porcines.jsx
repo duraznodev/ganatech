@@ -15,23 +15,23 @@ import AnimalList from "../components/AnimalList";
 import { allFromCollection, getCollection } from "../firebase/api";
 import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
 
-export default function Bovines() {
+export default function Porcines() {
   const { selectedAnimals, toggleAnimalSelection } = useSelectedAnimals();
-  const [bovines, setBovines] = useState([]);
+  const [porcines, setPorcines] = useState([]);
 
   useEffect(() => {
     const init = async () => {
-      setBovines(await allFromCollection(getCollection("bovines")));
+      setPorcines(await allFromCollection(getCollection("porcines")));
     };
     init();
   }, []);
   return (
     <>
       <AnimalList
-        type="bovines"
+        type="porcines"
         selectedAnimals={selectedAnimals}
         onSelect={toggleAnimalSelection}
-        animals={bovines}
+        animals={porcines}
       />
       <Dialog>
         <DialogTrigger>
@@ -42,12 +42,12 @@ export default function Bovines() {
         </DialogTrigger>
         <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
           <DialogHeader>
-            <DialogTitle>Agregar bovino</DialogTitle>
+            <DialogTitle>Agregar porcino</DialogTitle>
             <DialogDescription>
-              Agregue las caracteristicas del bovino
+              Agregue las caracteristicas del porcino
             </DialogDescription>
           </DialogHeader>
-          <AddAnimalForm type="bovines" animals={bovines}>
+          <AddAnimalForm type="porcines" animals={porcines}>
             <DialogFooter className="flex-row gap-x-2 mt-4">
               <Button className="flex-1" size="lg" variant="outline">
                 Cancelar
