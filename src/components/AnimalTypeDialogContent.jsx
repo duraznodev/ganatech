@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   DialogContent,
   DialogDescription,
@@ -5,7 +6,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
 import { GiCow, GiPig } from "react-icons/gi";
 
 export function AnimalTypeDialogContent({ handleTypeSelection }) {

@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { allFromCollection, getCollection } from "../firebase/api";
-import { seeder } from "../firebase/seeder";
 
 export const GlobalContext = createContext(null);
 

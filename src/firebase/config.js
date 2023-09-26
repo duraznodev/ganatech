@@ -1,10 +1,5 @@
-import { disableNetwork } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { connectAuthEmulator, getAuth } from "firebase/auth";
 import {
-  Firestore,
-  connectFirestoreEmulator,
-  getFirestore,
   initializeFirestore,
   persistentLocalCache,
   persistentMultipleTabManager,
@@ -30,14 +25,14 @@ export const firebase_app = initializeApp(firebaseConfig);
 // export const firebase_auth = getAuth();
 // connectAuthEmulator(firebase_auth, "http://127.0.0.1:9099");
 
-// export const firebase_db = initializeFirestore(firebase_app, {
-//   localCache: persistentLocalCache({
-//     tabManager: persistentMultipleTabManager(),
-//   }),
-// });
-export const firebase_db = getFirestore();
+export const firebase_db = initializeFirestore(firebase_app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager(),
+  }),
+});
+// export const firebase_db = getFirestore();
 
-connectFirestoreEmulator(firebase_db, "127.0.0.1", 8080);
+// connectFirestoreEmulator(firebase_db, "127.0.0.1", 8080);
 
 // await disableNetwork(firebase_db);
 // console.log("Network disabled!");

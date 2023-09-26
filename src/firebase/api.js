@@ -1,10 +1,4 @@
-import {
-  Timestamp,
-  addDoc,
-  collection,
-  doc,
-  getDocs,
-} from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { firebase_db } from "./config";
 
 const farm_id = "Y2ZMx8WST52QYZD5XkiF";

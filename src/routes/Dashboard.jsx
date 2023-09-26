@@ -20,7 +20,6 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { getCountFromServer, query, where } from "firebase/firestore";
 import { allFromCollection, getCollection } from "../firebase/api";
 
 export default function Dashboard() {

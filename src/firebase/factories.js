@@ -1,7 +1,6 @@
-import { addDoc } from "firebase/firestore";
+import { faker } from "@faker-js/faker";
 import { Timestamp } from "firebase/firestore";
 import { addToCollection, getCollection } from "./api";
-import { fa, faker } from "@faker-js/faker";
 
 export function bovineFactory() {
   const fakeBovine = {

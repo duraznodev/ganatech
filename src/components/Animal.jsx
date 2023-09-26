@@ -14,8 +14,6 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FaPlus } from "react-icons/fa6";
 import AnimalList from "../components/AnimalList";
-import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
-import { useGlobal } from "../contexts/GlobalContext";
 export default function Animal() {
   return (
     <div className="container h-screen py-6 flex flex-col gap-y-6">

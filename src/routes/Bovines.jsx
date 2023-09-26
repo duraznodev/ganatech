@@ -8,8 +8,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FaPlus } from "react-icons/fa6";
 import { useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa6";
 import AddAnimalForm from "../components/AddAnimalForm";
 import AnimalList from "../components/AnimalList";
 import { allFromCollection, getCollection } from "../firebase/api";

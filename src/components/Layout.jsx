@@ -1,7 +1,6 @@
 import { FaHouse, FaList } from "react-icons/fa6";
 import { HiChartPie } from "react-icons/hi";
-import { Link } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (

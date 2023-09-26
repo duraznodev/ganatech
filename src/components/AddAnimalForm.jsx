@@ -9,23 +9,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaMars, FaPlus, FaVenus } from "react-icons/fa6";
 import * as z from "zod";
-import AnimalList from "./AnimalList";
-import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
-import { useSelectAnimal } from "../hooks/useSelectAnimal";
-import { useEffect } from "react";
 import { addToCollection, getCollection } from "../firebase/api";
+import { useSelectAnimal } from "../hooks/useSelectAnimal";
+import AnimalList from "./AnimalList";
+import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 
 const FormSchemaAdd = z.object({
   earring: z

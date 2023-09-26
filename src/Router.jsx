@@ -1,16 +1,10 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Bovines from "@/routes/Bovines.jsx";
 import Dashboard from "@/routes/Dashboard.jsx";
 import Nutrition from "@/routes/Nutrition.jsx";
 import WeightHistory from "@/routes/WeightHistory.jsx";
-import { GlobalProvider } from "./contexts/GlobalContext";
-import { FaCow, FaHouse, FaList } from "react-icons/fa6";
-import { Button } from "./components/ui/button";
-import { GiCow, GiPig } from "react-icons/gi";
-import { HiChartPie, HiViewList } from "react-icons/hi";
-import { SiHappycow } from "react-icons/si";
-import { Link } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
+import { GlobalProvider } from "./contexts/GlobalContext";
 
 const router = createBrowserRouter([
   {
