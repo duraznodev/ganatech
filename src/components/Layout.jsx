@@ -8,7 +8,7 @@ export default function Layout() {
       <div className="container h-screen pt-5 pb-14 flex flex-col gap-y-6">
         <Outlet />
       </div>
-      <footer className="fixed bottom-4 pb-2 border-t h-14 bg-white/80 w-full">
+      <footer className="fixed bottom-0 pb-2 border-t h-14 bg-white/80 w-full">
         <nav className="container h-full justify-around flex items-center text-muted-foreground">
           <Link
             to="/"
