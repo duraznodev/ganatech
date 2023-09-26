@@ -1,31 +1,8 @@
-import Bovines from "@/routes/Bovines.jsx";
-import Dashboard from "@/routes/Dashboard.jsx";
-import Nutrition from "@/routes/Nutrition.jsx";
-import WeightHistory from "@/routes/WeightHistory.jsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { registerSW } from "virtual:pwa-register";
+import Router from "./Router";
 import "./index.css";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Dashboard />,
-  },
-  {
-    path: "bovinos",
-    element: <Bovines />,
-  },
-  {
-    path: "nutricion",
-    element: <Nutrition />,
-  },
-  {
-    path: "historial",
-    element: <WeightHistory />,
-  },
-]);
 
 const updateSW = registerSW({
   onNeedRefresh() {
@@ -45,6 +22,6 @@ const updateSW = registerSW({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Router />
   </React.StrictMode>
 );

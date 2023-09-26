@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 import { Separator } from "@/components/ui/separator";
-import { GiCow } from "react-icons/gi";
+import { GiCow, GiPig } from "react-icons/gi";
 import { SiHappycow } from "react-icons/si";
 import {
   Cell,
@@ -20,18 +20,56 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { getCountFromServer, query, where } from "firebase/firestore";
+import { allFromCollection, getCollection } from "../firebase/api";
 
 export default function Dashboard() {
+  const [data, setData] = useState({
+    bovineMCount: 0,
+    bovineFCount: 0,
+    porcineMCount: 0,
+    porcineFCount: 0,
+  });
+  const { bovineMCount, bovineFCount, porcineMCount, porcineFCount } =
+    !!data && data;
+  useEffect(() => {
+    async function init() {
+      const bovines = allFromCollection(getCollection("bovines"));
+      const porcines = allFromCollection(getCollection("porcines"));
+
+      const bovineMCount = (await bovines).filter(
+        (bovine) => bovine?.attributes?.genre == "M"
+      ).length;
+      const bovineFCount = (await bovines).filter(
+        (bovine) => bovine?.attributes?.genre == "F"
+      ).length;
+      const porcineMCount = (await porcines).filter(
+        (bovine) => bovine?.attributes?.genre == "M"
+      ).length;
+      const porcineFCount = (await porcines).filter(
+        (bovine) => bovine?.attributes?.genre == "F"
+      ).length;
+      setData({
+        bovineMCount,
+        bovineFCount,
+        porcineMCount,
+        porcineFCount,
+      });
+    }
+    init();
+  }, []);
+
   const [dynamicText, setDynamicText] = useState("estado");
 
   const [isMounted, setIsMounted] = useState(false);
 
-  const [timeFilter, setTimeFilter] = useState("Hoy");
+  // const [timeFilter, setTimeFilter] = useState("Hoy");
 
   const dataTipo = [
-    { name: "Vacas", value: 400 },
-    { name: "Toros", value: 300 },
-    { name: "Cerdos", value: 200 },
+    { name: "Vacas", value: bovineFCount },
+    { name: "Toros", value: bovineMCount },
+    { name: "Cerdos", value: porcineMCount },
+    { name: "Cerdas", value: porcineFCount },
   ];
 
   const dataEstado = [
@@ -39,28 +77,28 @@ export default function Dashboard() {
     { name: "Muertos", value: 200 },
   ];
 
-  const dataByTime = {
-    Hoy: [
-      { name: "Vacas", value: 100 },
-      { name: "Toros", value: 80 },
-      { name: "Cerdos", value: 50 },
-    ],
-    Semanal: [
-      { name: "Vacas", value: 500 },
-      { name: "Toros", value: 400 },
-      { name: "Cerdos", value: 300 },
-    ],
-    Mensual: [
-      { name: "Vacas", value: 2000 },
-      { name: "Toros", value: 1500 },
-      { name: "Cerdos", value: 1200 },
-    ],
-    Anual: [
-      { name: "Vacas", value: 8000 },
-      { name: "Toros", value: 7000 },
-      { name: "Cerdos", value: 6000 },
-    ],
-  };
+  // const dataByTime = {
+  //   Hoy: [
+  //     { name: "Vacas", value: 100 },
+  //     { name: "Toros", value: 80 },
+  //     { name: "Cerdos", value: 50 },
+  //   ],
+  //   Semanal: [
+  //     { name: "Vacas", value: 500 },
+  //     { name: "Toros", value: 400 },
+  //     { name: "Cerdos", value: 300 },
+  //   ],
+  //   Mensual: [
+  //     { name: "Vacas", value: 2000 },
+  //     { name: "Toros", value: 1500 },
+  //     { name: "Cerdos", value: 1200 },
+  //   ],
+  //   Anual: [
+  //     { name: "Vacas", value: 8000 },
+  //     { name: "Toros", value: 7000 },
+  //     { name: "Cerdos", value: 6000 },
+  //   ],
+  // };
 
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
@@ -69,8 +107,8 @@ export default function Dashboard() {
   };
 
   const renderLabel = (entry) => {
-    const currentData =
-      dynamicText === "tipo" ? dataByTime[timeFilter] : dataEstado;
+    const currentData = dynamicText === "tipo" ? dataTipo : dataEstado;
+    // dynamicText === "tipo" ? dataByTime[timeFilter] : dataEstado;
     const total = currentData.reduce((acc, curr) => acc + curr.value, 0);
     return `${((entry.value / total) * 100).toFixed(1)}%`;
   };
@@ -80,7 +118,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="container py-8 flex flex-col gap-y-6">
+    <>
       <Card>
         <CardHeader className="space-y-2 pb-0">
           <div className="flex justify-between items-center">
@@ -104,7 +142,7 @@ export default function Dashboard() {
             </div>
           </div>
           <Separator />
-          <div className="flex gap-x-1 w-full ">
+          {/* <div className="flex gap-x-1 w-full ">
             {["Hoy", "Semanal", "Mensual", "Anual"].map((filter) => (
               <Button
                 className="flex-1"
@@ -115,7 +153,7 @@ export default function Dashboard() {
                 {filter.charAt(0).toUpperCase() + filter.slice(1)}
               </Button>
             ))}
-          </div>
+          </div> */}
         </CardHeader>
         <CardContent className="h-72">
           {isMounted && (
@@ -123,7 +161,10 @@ export default function Dashboard() {
               <PieChart>
                 <Pie
                   data={
-                    dynamicText === "tipo" ? dataByTime[timeFilter] : dataEstado
+                    dynamicText === "tipo"
+                      ? // dataByTime[timeFilter]
+                        dataTipo
+                      : dataEstado
                   }
                   labelLine={true}
                   label={renderLabel}
@@ -155,26 +196,54 @@ export default function Dashboard() {
           </CardTitle>
           <CardDescription>
             Bienvenido
-            <span className="font-medium"> Roman Rizo</span>
+            <span className="font-medium"> Querido Finquero</span>
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-2.5 grid-cols-2 lg:grid-cols-4">
-            {[...Array(4)].map((_, i) => (
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
-                  <CardTitle className="text-sm font-medium">Vacas</CardTitle>
-                  <GiCow className="text-2xl" />
-                </CardHeader>
-                <CardContent className="pb-4">
-                  <div className="text-xl font-bold">34</div>
-                  <p className="text-xs text-muted-foreground">+20.1%</p>
-                </CardContent>
-              </Card>
-            ))}
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+                <CardTitle className="text-sm font-medium">Toros</CardTitle>
+                <GiCow className="text-2xl" />
+              </CardHeader>
+              <CardContent className="pb-4">
+                <div className="text-xl font-bold">{bovineMCount}</div>
+                {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+                <CardTitle className="text-sm font-medium">Vacas</CardTitle>
+                <GiCow className="text-2xl" />
+              </CardHeader>
+              <CardContent className="pb-4">
+                <div className="text-xl font-bold">{bovineFCount}</div>
+                {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+                <CardTitle className="text-sm font-medium">Cerdos</CardTitle>
+                <GiPig className="text-2xl" />
+              </CardHeader>
+              <CardContent className="pb-4">
+                <div className="text-xl font-bold">{porcineMCount}</div>
+                {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+                <CardTitle className="text-sm font-medium">Cerdas</CardTitle>
+                <GiPig className="text-2xl" />
+              </CardHeader>
+              <CardContent className="pb-4">
+                <div className="text-xl font-bold">{porcineFCount}</div>
+                {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
+              </CardContent>
+            </Card>
           </div>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 }

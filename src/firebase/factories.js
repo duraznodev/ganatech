@@ -78,7 +78,7 @@ export function porcineFactory() {
 
 export function weightHistoryFactory() {
   const fakeWeightHistory = {
-    id: faker.string.uuid(),
+    animal_id: "032c2260-cb94-4cad-98b2-67d5e3fa4996",
     date: Timestamp.fromDate(faker.date.soon()),
     weight: faker.number.float({ min: 60, max: 20000 }),
   };

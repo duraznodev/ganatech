@@ -12,10 +12,18 @@ export default function AnimalCard({
   attributes,
   onSelect,
   selected,
+  multiple,
+  simple,
 }) {
   return (
     <Card className={cn("flex", selected && "bg-secondary")}>
-      <div className="flex-1">
+      <button
+        onClick={() => {
+          !multiple && onSelect(id);
+          console.log(!multiple);
+        }}
+        className="flex-1"
+      >
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="font-semibold tracking-tight text-lg">
             {name}
@@ -61,28 +69,30 @@ export default function AnimalCard({
             </Badge>
           )}
         </CardContent>
-      </div>
-      <Separator orientation="vertical" className="h-auto" />
-      <button
-        onClick={() => onSelect(id)}
-        className="flex justify-center items-center p-4"
-      >
-        <div
-          aria-checked="true"
-          data-state={selected ? "checked" : "unchecked"}
-          value="on"
-          className="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground scale-125"
-        >
-          {selected && (
-            <span
-              data-state="checked"
-              className="flex items-center justify-center text-current"
-            >
-              <Check className="h-4 w-4" />
-            </span>
-          )}
-        </div>
       </button>
+      <Separator orientation="vertical" className="h-auto" />
+      {!simple && (
+        <button
+          onClick={() => onSelect(id)}
+          className="flex justify-center items-center p-4"
+        >
+          <div
+            aria-checked="true"
+            data-state={selected ? "checked" : "unchecked"}
+            value="on"
+            className="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground scale-125"
+          >
+            {selected && (
+              <span
+                data-state="checked"
+                className="flex items-center justify-center text-current"
+              >
+                <Check className="h-4 w-4" />
+              </span>
+            )}
+          </div>
+        </button>
+      )}
       {/* <Checkbox onClick={() => onSelect(id)} className="scale-125" /> */}
     </Card>
   );

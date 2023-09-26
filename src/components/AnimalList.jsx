@@ -3,7 +3,13 @@ import React, { useEffect, useState } from "react";
 import AnimalCard from "./AnimalCard";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
-export default function AnimalList({ animals, onSelect, selectedAnimals }) {
+export default function AnimalList({
+  animals,
+  onSelect,
+  selectedAnimals,
+  simple = false,
+  multiple = true,
+}) {
   const [filteredAnimals, setFilteredAnimals] = useState(animals);
 
   useEffect(() => {
@@ -53,8 +59,10 @@ export default function AnimalList({ animals, onSelect, selectedAnimals }) {
           filteredAnimals.map((animal) => {
             return (
               <AnimalCard
-                selected={selectedAnimals.includes(animal?.id)}
+                selected={selectedAnimals?.includes(animal?.id)}
                 onSelect={onSelect}
+                simple={simple}
+                multiple={multiple}
                 key={animal?.id}
                 {...animal}
               />
