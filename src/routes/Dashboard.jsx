@@ -28,10 +28,24 @@ export default function Dashboard() {
     bovineFCount: 0,
     porcineMCount: 0,
     porcineFCount: 0,
+    alive: 0,
+    dead: 0,
+    sold: 0,
+    lost: 0,
   });
-  const { bovineMCount, bovineFCount, porcineMCount, porcineFCount } =
-    !!data && data;
+  const {
+    bovineMCount,
+    bovineFCount,
+    porcineMCount,
+    porcineFCount,
+    alive,
+    dead,
+    sold,
+    lost,
+  } = !!data && data;
+  console.log(data);
   useEffect(() => {
+    const statusArr = ["alive", "dead", "sold", "lost"];
     async function init() {
       const bovines = allFromCollection(getCollection("bovines"));
       const porcines = allFromCollection(getCollection("porcines"));
@@ -54,6 +68,12 @@ export default function Dashboard() {
         porcineMCount,
         porcineFCount,
       });
+      statusArr.forEach(async (status) => {
+        const count = (await bovines).filter(
+          (bovine) => bovine?.attributes?.status == status
+        ).length;
+        setData((prev) => ({ ...prev, [status]: count }));
+      });
     }
     init();
   }, []);
@@ -72,8 +92,10 @@ export default function Dashboard() {
   ];
 
   const dataEstado = [
-    { name: "Activos", value: 700 },
-    { name: "Muertos", value: 200 },
+    { name: "Activos", value: alive },
+    { name: "Muertos", value: dead },
+    { name: "Perdidos", value: lost },
+    { name: "Vendidos", value: sold },
   ];
 
   // const dataByTime = {
