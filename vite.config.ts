@@ -27,13 +27,12 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: "autoUpdate",
-      devOptions: { enabled: true },
       injectRegister: "auto",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         runtimeCaching: [
           {
-            urlPattern: /^http:\/\/localhost:3000\//,
+            urlPattern: /^https:\/\/www\.ganatech\.me\//,
             handler: "CacheFirst",
             options: {
               cacheName: "api-cache",
