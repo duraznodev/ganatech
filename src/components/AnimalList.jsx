@@ -23,7 +23,7 @@ export default function AnimalList({
         animals.filter(
           (animal) =>
             animal.name.toLowerCase().includes(term) ||
-            animal?.earring?.earring_code?.includes(term)
+            animal?.earring?.includes(term)
         )
       );
     } else {

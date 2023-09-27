@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { FaCircle, FaHeart, FaMars, FaVenus } from "react-icons/fa6";
+import { FaCircle, FaHeart, FaMars, FaTag, FaVenus } from "react-icons/fa6";
 import { GiCow, GiPig } from "react-icons/gi";
 import { cn } from "../lib/utils";
 import { Badge } from "./ui/badge";
@@ -16,12 +16,12 @@ export default function AnimalCard({
   selected,
   multiple,
   simple,
+  earring,
   type,
   className,
   badges = true,
   children,
 }) {
-  console.log(type);
   return (
     <Card className={cn("flex", selected && "bg-secondary", className)}>
       <Link
@@ -48,6 +48,11 @@ export default function AnimalCard({
         </CardHeader>
         {badges ? (
           <CardContent className="flex flex-wrap gap-2">
+            {earring && (
+              <Badge variant="secondary" className="gap-x-1">
+                <FaTag /> {earring}
+              </Badge>
+            )}
             {attributes?.genre === "M" ? (
               <Badge variant="secondary" className="gap-x-1">
                 <FaMars className="text-blue-500" />

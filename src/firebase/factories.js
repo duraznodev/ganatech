@@ -15,10 +15,7 @@ export function bovineFactory() {
     id: faker.string.uuid(),
     breed: faker.animal.cow(),
     country: "NIC",
-    earring: {
-      earring_code: faker.string.numeric(4),
-      farm_code: faker.string.numeric(4),
-    },
+    earring: faker.string.numeric(12),
     purposes: faker.helpers.arrayElements(
       ["reproduction", "milk_production", "work", "meat_production"],
       {
