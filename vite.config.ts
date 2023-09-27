@@ -1,9 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { VitePWA } from 'vite-plugin-pwa';
-
-
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -11,20 +9,20 @@ export default defineConfig({
     react(),
     VitePWA({
       manifest: {
-        name: 'Ganatech pwa',
-        short_name: 'Ganatech',
-        description: 'Descripción de mi aplicación',
+        name: "Ganatech pwa",
+        short_name: "Ganatech",
+        description: "Descripción de mi aplicación",
         icons: [
           {
-            src: '/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
+            src: "/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
           },
         ],
-        start_url: '/',
-        display: 'standalone',
-        background_color: '#ffffff',
-        theme_color: '#000000',
+        start_url: "/",
+        display: "standalone",
+        background_color: "#ffffff",
+        theme_color: "#000000",
       },
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
@@ -32,7 +30,7 @@ export default defineConfig({
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/www\.ganatech\.me\//,
-            handler: "CacheFirst",
+            handler: "NetworkFirst",
             options: {
               cacheName: "api-cache",
               expiration: {
