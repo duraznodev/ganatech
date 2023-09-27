@@ -1,32 +1,31 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
+import { VitePWA } from 'vite-plugin-pwa';
 
-const manifest = {
-  theme_color: "#2dac5c",
-  background_color: "#2dac5c",
-  display: "standalone",
-  scope: "/",
-  start_url: "/",
-  short_name: "Ganatech",
-  description: "Ganatech pwa Demo",
-  name: "Ganatech Pwa",
-  icons: [
-    {
-      src: "/icon-512x512.png",
-      sizes: "497x497",
-      type: "image/png",
-    },
-  ],
-};
+
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      manifest: {
+        name: 'Ganatech pwa',
+        short_name: 'Ganatech',
+        description: 'Descripción de mi aplicación',
+        icons: [
+          {
+            src: '/icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+        start_url: '/',
+        display: 'standalone',
+        background_color: '#ffffff',
+        theme_color: '#000000',
+      },
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
@@ -44,8 +43,6 @@ export default defineConfig({
           },
         ],
       },
-      includeAssets: ["**/*"],
-      manifest,
     }),
   ],
   resolve: {
