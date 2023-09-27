@@ -21,17 +21,17 @@ export default function Animals() {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex gap-x-4">
-          <div class="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
             <Link
-              to="/bovinos"
+              to="/animales/bovinos"
               className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
             >
               <GiCow className="text-2xl" /> Bovino
             </Link>
           </div>
-          <div class="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
             <Link
-              to="/porcinos"
+              to="/animales/porcinos"
               className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
             >
               <GiPig className="text-2xl" /> Porcino

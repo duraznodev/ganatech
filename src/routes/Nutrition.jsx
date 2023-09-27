@@ -94,7 +94,12 @@ export default function Nutrition() {
               </div>
             </CardContent>
             <CardFooter className="flex-row gap-x-2 ">
-              <Button className="flex-1" size="lg" variant="outline">
+              <Button
+                type="button"
+                className="flex-1"
+                size="lg"
+                variant="outline"
+              >
                 Cancelar
               </Button>
               <Button

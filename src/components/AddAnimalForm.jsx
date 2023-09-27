@@ -68,9 +68,7 @@ export default function AddAnimalForm({ children, animals, type }) {
   async function onSubmit(data) {
     toggleFatherSelection("");
     toggleFatherSelection("");
-    console.log(
-      `${type === "bovines" ? "Bovino" : "Porcino"} ${new Date().getTime()}`
-    );
+
     const animal = {
       ...data,
       weight: Number(data.weight),
@@ -80,7 +78,6 @@ export default function AddAnimalForm({ children, animals, type }) {
             type === "bovines" ? "Bovino" : "Porcino"
           } ${new Date().getTime()}}`,
     };
-    console.log(data);
     const submitedAnimal = await addToCollection(getCollection(type), animal);
 
     form.reset();

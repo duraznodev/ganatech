@@ -21,6 +21,7 @@ import {
   Tooltip,
 } from "recharts";
 import { allFromCollection, getCollection } from "../firebase/api";
+import { useGlobal } from "../contexts/GlobalContext";
 
 export default function Dashboard() {
   const [data, setData] = useState({
@@ -43,23 +44,23 @@ export default function Dashboard() {
     sold,
     lost,
   } = !!data && data;
-  console.log(data);
+  const global = useGlobal();
+  const porcines = global?.porcines || [];
+  const bovines = global?.bovines || [];
+
   useEffect(() => {
     const statusArr = ["alive", "dead", "sold", "lost"];
     async function init() {
-      const bovines = allFromCollection(getCollection("bovines"));
-      const porcines = allFromCollection(getCollection("porcines"));
-
-      const bovineMCount = (await bovines).filter(
+      const bovineMCount = bovines.filter(
         (bovine) => bovine?.attributes?.genre == "M"
       ).length;
-      const bovineFCount = (await bovines).filter(
+      const bovineFCount = bovines.filter(
         (bovine) => bovine?.attributes?.genre == "F"
       ).length;
-      const porcineMCount = (await porcines).filter(
+      const porcineMCount = porcines.filter(
         (bovine) => bovine?.attributes?.genre == "M"
       ).length;
-      const porcineFCount = (await porcines).filter(
+      const porcineFCount = porcines.filter(
         (bovine) => bovine?.attributes?.genre == "F"
       ).length;
       setData({
@@ -69,14 +70,14 @@ export default function Dashboard() {
         porcineFCount,
       });
       statusArr.forEach(async (status) => {
-        const count = (await bovines).filter(
+        const count = bovines.filter(
           (bovine) => bovine?.attributes?.status == status
         ).length;
         setData((prev) => ({ ...prev, [status]: count }));
       });
     }
     init();
-  }, []);
+  }, [global]);
 
   const [dynamicText, setDynamicText] = useState("estado");
 

@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import { GlobalProvider } from "./contexts/GlobalContext";
 import Porcines from "./routes/Porcines";
 import Animals from "./routes/Animals";
+import Animal from "./routes/Animal";
 
 const router = createBrowserRouter([
   {
@@ -22,12 +23,20 @@ const router = createBrowserRouter([
         element: <Animals />,
       },
       {
-        path: "bovinos",
+        path: "animales/bovinos",
         element: <Bovines />,
       },
       {
-        path: "porcinos",
+        path: "animales/bovinos/:id",
+        element: <Animal type="bovines" />,
+      },
+      {
+        path: "animales/porcinos",
         element: <Porcines />,
+      },
+      {
+        path: "animales/porcinos/:id",
+        element: <Animal type="porcines" />,
       },
       {
         path: "bovinos/:id/weight_history",

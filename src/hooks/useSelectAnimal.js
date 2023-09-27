@@ -9,7 +9,6 @@ export function useSelectAnimal() {
       : setSelectedAnimal(animalId);
     const elements = document.querySelectorAll("#closeDialog");
     elements[elements.length - 1]?.click();
-    console.log(elements);
   };
 
   return { selectedAnimal, toggleAnimalSelection };

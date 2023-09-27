@@ -5,27 +5,37 @@ import { cn } from "../lib/utils";
 import { Badge } from "./ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Separator } from "./ui/separator";
+import { Link } from "react-router-dom";
 
 export default function AnimalCard({
   id,
   name,
   attributes,
-  onSelect,
+  interaction = true,
+  onSelect = () => {},
   selected,
   multiple,
   simple,
   type,
+  className,
+  badges = true,
+  children,
 }) {
   return (
-    <Card className={cn("flex", selected && "bg-secondary")}>
-      <button
+    <Card className={cn("flex", selected && "bg-secondary", className)}>
+      <Link
+        to={`${id}`}
+        disabled={!interaction}
         onClick={() => {
           !multiple && onSelect(id);
-          console.log(!multiple);
         }}
         className="flex-1"
       >
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader
+          className={cn(
+            "flex flex-row items-center justify-between space-y-0 pb-2"
+          )}
+        >
           <CardTitle className="font-semibold tracking-tight text-lg">
             {name}
           </CardTitle>
@@ -35,46 +45,50 @@ export default function AnimalCard({
             <GiPig className="text-2xl" />
           )}
         </CardHeader>
-        <CardContent className="flex flex-wrap gap-2">
-          {attributes?.genre === "M" ? (
-            <Badge variant="secondary" className="gap-x-1">
-              <FaMars className="text-blue-500" />
-              {type === "bovines" ? "Toro" : "Cerdo"}
-            </Badge>
-          ) : (
-            <Badge variant="secondary" className="gap-x-1">
-              <FaVenus className="text-rose-500" />
-              {type === "bovines" ? "Vaca" : "Cerda"}
-            </Badge>
-          )}
-          {attributes?.its_pregnant && (
-            <Badge variant="secondary" className="gap-x-1">
-              <FaHeart className="text-rose-400" /> Embarazada
-            </Badge>
-          )}
+        {badges ? (
+          <CardContent className="flex flex-wrap gap-2">
+            {attributes?.genre === "M" ? (
+              <Badge variant="secondary" className="gap-x-1">
+                <FaMars className="text-blue-500" />
+                {type === "bovines" ? "Toro" : "Cerdo"}
+              </Badge>
+            ) : (
+              <Badge variant="secondary" className="gap-x-1">
+                <FaVenus className="text-rose-500" />
+                {type === "bovines" ? "Vaca" : "Cerda"}
+              </Badge>
+            )}
+            {attributes?.its_pregnant && (
+              <Badge variant="secondary" className="gap-x-1">
+                <FaHeart className="text-rose-400" /> Embarazada
+              </Badge>
+            )}
 
-          {attributes?.status === "alive" && (
-            <Badge variant="secondary" className="gap-x-1">
-              <FaCircle className="w-2 text-primary" /> Activo
-            </Badge>
-          )}
-          {attributes?.status === "dead" && (
-            <Badge variant="secondary" className="gap-x-1">
-              <FaCircle className="w-2 text-slate-950" /> Muerto
-            </Badge>
-          )}
-          {attributes?.status === "sold" && (
-            <Badge variant="secondary" className="gap-x-1">
-              <FaCircle className="w-2 text-yellow-500" /> Vendido
-            </Badge>
-          )}
-          {attributes?.status === "lost" && (
-            <Badge variant="secondary" className="gap-x-1">
-              <FaCircle className="w-2 text-orange-900" /> Perdido
-            </Badge>
-          )}
-        </CardContent>
-      </button>
+            {attributes?.status === "alive" && (
+              <Badge variant="secondary" className="gap-x-1">
+                <FaCircle className="w-2 text-primary" /> Activo
+              </Badge>
+            )}
+            {attributes?.status === "dead" && (
+              <Badge variant="secondary" className="gap-x-1">
+                <FaCircle className="w-2 text-slate-950" /> Muerto
+              </Badge>
+            )}
+            {attributes?.status === "sold" && (
+              <Badge variant="secondary" className="gap-x-1">
+                <FaCircle className="w-2 text-yellow-500" /> Vendido
+              </Badge>
+            )}
+            {attributes?.status === "lost" && (
+              <Badge variant="secondary" className="gap-x-1">
+                <FaCircle className="w-2 text-orange-900" /> Perdido
+              </Badge>
+            )}
+          </CardContent>
+        ) : (
+          <CardContent>{children}</CardContent>
+        )}
+      </Link>
       <Separator orientation="vertical" className="h-auto" />
       {!simple && (
         <button

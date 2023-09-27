@@ -9,5 +9,8 @@ export const getCollection = (collection_name) =>
 export const addToCollection = (collection, data) => addDoc(collection, data);
 
 export const allFromCollection = async (collection) => {
-  return (await getDocs(collection)).docs.map((doc) => doc.data());
+  return (await getDocs(collection)).docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }));
 };

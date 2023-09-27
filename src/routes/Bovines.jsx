@@ -8,23 +8,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { DialogClose } from "@radix-ui/react-dialog";
+import { BiFoodMenu } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
+import { TbWeight } from "react-icons/tb";
 import AddAnimalForm from "../components/AddAnimalForm";
 import AnimalList from "../components/AnimalList";
-import { allFromCollection, getCollection } from "../firebase/api";
+import DietForm from "../components/DietForm";
+import WeightForm from "../components/WeigthForm";
+import { useGlobal } from "../contexts/GlobalContext";
 import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
 
 export default function Bovines() {
-  const { selectedAnimals, toggleAnimalSelection } = useSelectedAnimals();
-  const [bovines, setBovines] = useState([]);
+  const { selectedAnimals, resetSelection, toggleAnimalSelection } =
+    useSelectedAnimals();
+  const global = useGlobal();
+  const bovines = global?.bovines || [];
 
-  useEffect(() => {
-    const init = async () => {
-      setBovines(await allFromCollection(getCollection("bovines")));
-    };
-    init();
-  }, []);
   return (
     <>
       <AnimalList
@@ -33,32 +33,116 @@ export default function Bovines() {
         onSelect={toggleAnimalSelection}
         animals={bovines}
       />
-      <Dialog>
-        <DialogTrigger>
-          <Button className="absolute bottom-20 right-6">
-            <FaPlus className="me-2" />
-            Nuevo animal
-          </Button>
-        </DialogTrigger>
-        <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
-          <DialogHeader>
-            <DialogTitle>Agregar bovino</DialogTitle>
-            <DialogDescription>
-              Agregue las caracteristicas del bovino
-            </DialogDescription>
-          </DialogHeader>
-          <AddAnimalForm type="bovines" animals={bovines}>
-            <DialogFooter className="flex-row gap-x-2 mt-4">
-              <Button className="flex-1" size="lg" variant="outline">
-                Cancelar
-              </Button>
-              <Button type="submit" className="flex-1" size="lg">
-                Agregar
-              </Button>
-            </DialogFooter>
-          </AddAnimalForm>
-        </DialogContent>
-      </Dialog>
+      {selectedAnimals.length > 0 ? (
+        <div className=" bottom-0  border-t bg-white/80 w-full">
+          <div className="container h-full justify-around flex items-center text-muted-foreground">
+            <Dialog>
+              <DialogTrigger className="flex-1 py-2">
+                <div className="h-full justify-center flex-col flex items-center flex-1">
+                  <BiFoodMenu className="text-xl" />
+                  <span className="text-xs">Dieta</span>
+                </div>
+              </DialogTrigger>
+              <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+                <DialogHeader>
+                  <DialogTitle>Plan de Alimentacion</DialogTitle>
+                  <DialogDescription>
+                    Parametros del plan de alimentacion
+                  </DialogDescription>
+                </DialogHeader>
+                <DietForm
+                  type="bovines"
+                  resetSelection={resetSelection}
+                  selectedAnimals={selectedAnimals}
+                >
+                  <DialogFooter className="flex-row gap-x-2 mt-4">
+                    <DialogClose className="flex-1">
+                      <Button
+                        type="button"
+                        size="lg"
+                        className="w-full"
+                        variant="outline"
+                      >
+                        Cancelar
+                      </Button>
+                    </DialogClose>
+                    <Button type="submit" size="lg" className="flex-1 px-0">
+                      Agregar
+                    </Button>
+                  </DialogFooter>
+                </DietForm>
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger className="flex-1 py-2">
+                <div className="h-full justify-center flex-col flex items-center flex-1">
+                  <TbWeight className="text-xl" />
+                  <span className="text-xs">Peso</span>
+                </div>
+              </DialogTrigger>
+              <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+                <DialogHeader>
+                  <DialogTitle>Pesaje</DialogTitle>
+                  <DialogDescription>Parametros del pesaje</DialogDescription>
+                </DialogHeader>
+                <WeightForm
+                  type="bovines"
+                  resetSelection={resetSelection}
+                  selectedAnimals={selectedAnimals}
+                >
+                  <DialogFooter className="flex-row gap-x-2 mt-4">
+                    <DialogClose className="flex-1">
+                      <Button
+                        type="button"
+                        size="lg"
+                        className="w-full"
+                        variant="outline"
+                      >
+                        Cancelar
+                      </Button>
+                    </DialogClose>
+                    <Button type="submit" size="lg" className="flex-1 px-0">
+                      Agregar
+                    </Button>
+                  </DialogFooter>
+                </WeightForm>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+      ) : (
+        <Dialog>
+          <DialogTrigger>
+            <div className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 absolute bottom-20 right-6">
+              <FaPlus className="me-2" />
+              Nuevo animal
+            </div>
+          </DialogTrigger>
+          <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+            <DialogHeader>
+              <DialogTitle>Agregar bovino</DialogTitle>
+              <DialogDescription>
+                Agregue las caracteristicas del bovino
+              </DialogDescription>
+            </DialogHeader>
+            <AddAnimalForm type="bovines" animals={bovines}>
+              <DialogFooter className="flex-row gap-x-2 mt-4">
+                <Button
+                  type="button"
+                  className="flex-1"
+                  size="lg"
+                  variant="outline"
+                >
+                  Cancelar
+                </Button>
+                <Button type="submit" className="flex-1" size="lg">
+                  Agregar
+                </Button>
+              </DialogFooter>
+            </AddAnimalForm>
+          </DialogContent>
+        </Dialog>
+      )}
     </>
   );
 }
