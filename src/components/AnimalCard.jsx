@@ -25,7 +25,11 @@ export default function AnimalCard({
   return (
     <Card className={cn("flex", selected && "bg-secondary", className)}>
       <Link
-        to={`/animales/${type === "bovines" ? "bovinos" : "porcinos"}/${id}`}
+        to={
+          multiple
+            ? `/animales/${type === "bovines" ? "bovinos" : "porcinos"}/${id}`
+            : null
+        }
         disabled={!interaction}
         onClick={() => {
           !multiple && onSelect(id);
