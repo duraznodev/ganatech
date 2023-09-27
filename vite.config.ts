@@ -4,8 +4,8 @@ import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 
 const manifest = {
-  theme_color: "#f69435",
-  background_color: "#f69435",
+  theme_color: "#2dac5c",
+  background_color: "#2dac5c",
   display: "standalone",
   scope: "/",
   start_url: "/",
@@ -15,7 +15,7 @@ const manifest = {
   icons: [
     {
       src: "/icon-512x512.png",
-      sizes: "512x512",
+      sizes: "497x497",
       type: "image/png",
     },
   ],

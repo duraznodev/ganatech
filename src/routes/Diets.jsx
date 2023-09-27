@@ -16,10 +16,8 @@ export default function Diets({ type }) {
   const animals = state?.[type] || [];
   const animal = animals.find((_animal) => _animal.id === id);
   const diets = state?.diets || [];
-  console.log(diets);
 
-  const animalDiets = diets.filter((diet) => diet.animalId === id);
-
+  const animalDiets = diets.filter((diet) => diet?.animals?.includes(id));
   return (
     <>
       <AnimalCard {...animal} type={type} simple interaction={false} />
