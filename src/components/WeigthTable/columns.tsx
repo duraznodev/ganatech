@@ -27,7 +27,9 @@ export const columns = [
     header: "Peso",
     cell: ({ row }) => {
       return (
-        <div className="capitalize">{row.getValue("weight").toFixed(1)}</div>
+        <div className="capitalize">
+          {Number(row.getValue("weight")).toFixed(1)}
+        </div>
       );
     },
   },

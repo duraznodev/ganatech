@@ -236,6 +236,7 @@ export default function AddAnimalForm({ children, animals, type }) {
                     <DialogContent>
                       <div className="container h-[80vh]  flex flex-col gap-y-6">
                         <AnimalList
+                          type={type}
                           multiple={false}
                           onSelect={toggleFatherSelection}
                           simple
@@ -301,6 +302,7 @@ export default function AddAnimalForm({ children, animals, type }) {
                     <DialogContent>
                       <div className="container h-[80vh]  flex flex-col gap-y-6">
                         <AnimalList
+                          type={type}
                           multiple={false}
                           onSelect={toggleMotherSelection}
                           simple

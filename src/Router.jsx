@@ -1,13 +1,14 @@
 import Bovines from "@/routes/Bovines.jsx";
 import Dashboard from "@/routes/Dashboard.jsx";
 import Nutrition from "@/routes/Nutrition.jsx";
-import WeightHistory from "@/routes/WeightHistory.jsx";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./components/Layout";
 import { GlobalProvider } from "./contexts/GlobalContext";
 import Porcines from "./routes/Porcines";
 import Animals from "./routes/Animals";
 import Animal from "./routes/Animal";
+import WeightHistory from "./routes/WeightHistory";
+import Diets from "./routes/Diets";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ const router = createBrowserRouter([
         element: <Animal type="bovines" />,
       },
       {
+        path: "animales/bovinos/:id/weight_history",
+        element: <WeightHistory type="bovines" />,
+      },
+      {
+        path: "animales/bovinos/:id/diets",
+        element: <Diets type="bovines" />,
+      },
+      {
         path: "animales/porcinos",
         element: <Porcines />,
       },
@@ -39,8 +48,12 @@ const router = createBrowserRouter([
         element: <Animal type="porcines" />,
       },
       {
-        path: "bovinos/:id/weight_history",
-        element: <WeightHistory />,
+        path: "animales/porcinos/:id/weight_history",
+        element: <WeightHistory type="porcines" />,
+      },
+      {
+        path: "animales/porcinos/:id/diets",
+        element: <Diets type="porcines" />,
       },
       {
         path: "nutricion",

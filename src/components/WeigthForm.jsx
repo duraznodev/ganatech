@@ -73,7 +73,7 @@ export default function WeightForm({
                   name={animalId}
                   render={({ field }) => (
                     <AnimalCard
-                      interaction
+                      interaction={false}
                       type={type}
                       className="flex-1"
                       badges={false}

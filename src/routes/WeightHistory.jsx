@@ -1,23 +1,23 @@
 import { useParams } from "react-router-dom";
+import { useGlobal } from "../contexts/GlobalContext";
 import AnimalCard from "../components/AnimalCard";
 import { columns } from "../components/WeigthTable/columns";
 import { DataTable } from "../components/ui/data-table";
-import { useGlobal } from "../contexts/GlobalContext";
 
-export default function WeightHistory() {
+export default function WeightHistory({ type }) {
   const { id } = useParams();
   const state = useGlobal();
+  const animals = state?.[type] || [];
+  const animal = animals.find((_animal) => _animal.id === id);
   const weightHistories = state?.weightHistories || [];
-  const bovines = state?.bovines || [];
-  const animal = bovines.find((bovine) => bovine.id === id);
 
   const animalWeightHistory = weightHistories.filter(
-    (weightHistory) => weightHistory.animal_id === id
+    (weightHistory) => weightHistory.animalId === id
   );
 
   return (
     <>
-      <AnimalCard {...animal} simple />
+      <AnimalCard {...animal} type={type} simple interaction={false} />
       <DataTable columns={columns} data={animalWeightHistory} />
     </>
   );
