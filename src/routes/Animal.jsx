@@ -23,7 +23,7 @@ export default function Animal({ type }) {
   console.log(animal);
   return (
     <>
-      <AnimalCard {...animal} simple />
+      <AnimalCard type={type} {...animal} simple />
       {/* <DataTable columns={columns} data={[]} /> */}
       <Card>
         <CardHeader className="pb-2">
