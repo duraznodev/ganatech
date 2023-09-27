@@ -22,7 +22,7 @@ export default function AnimalList({
       setFilteredAnimals(
         animals.filter(
           (animal) =>
-            animal.name.toLowerCase().includes(term) ||
+            animal.name.toLowerCase().includes(term.toLowerCase()) ||
             animal?.earring?.includes(term)
         )
       );
