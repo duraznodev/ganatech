@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { addToCollection, getCollection } from "../firebase/api";
+import { useGlobal } from "../contexts/GlobalContext";
 
 const FormSchema = z.object({
   foodType: z.string().min(1, "El tipo de alimento es requerido"),
@@ -23,6 +24,7 @@ export default function DietForm({
   selectedAnimals,
   children,
 }) {
+  const { addDiet } = useGlobal();
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -31,13 +33,13 @@ export default function DietForm({
     },
   });
 
-  function onSubmit(data) {
-    addToCollection(getCollection("diets"), {
+  async function onSubmit(data) {
+    const collection = await addToCollection(getCollection("diets"), {
       ...data,
       type,
       animals: selectedAnimals,
     });
-
+    addDiet({ ...data, type, animals: selectedAnimals, id: collection.id });
     resetSelection();
     form.reset();
   }

@@ -18,6 +18,7 @@ import { addToCollection, getCollection } from "../firebase/api";
 import { useSelectAnimal } from "../hooks/useSelectAnimal";
 import AnimalList from "./AnimalList";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { useGlobal } from "../contexts/GlobalContext";
 
 const FormSchemaAdd = z.object({
   earring: z.string().nullable(),
@@ -30,6 +31,7 @@ const FormSchemaAdd = z.object({
 });
 
 export default function AddAnimalForm({ children, animals, type }) {
+  const { addAnimal } = useGlobal();
   const {
     selectedAnimal: selectedFather,
     toggleAnimalSelection: toggleFatherSelection,
@@ -79,6 +81,11 @@ export default function AddAnimalForm({ children, animals, type }) {
           } ${new Date().getTime()}}`,
     };
     const submitedAnimal = await addToCollection(getCollection(type), animal);
+
+    addAnimal(type, {
+      ...animal,
+      id: submitedAnimal.id,
+    });
 
     form.reset();
   }

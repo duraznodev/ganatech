@@ -23,7 +23,7 @@ export default function Diets({ type }) {
       <AnimalCard {...animal} type={type} simple interaction={false} />
       {animalDiets.length > 0 ? (
         animalDiets.map((diet) => (
-          <Card>
+          <Card key={crypto.randomUUID()}>
             <CardContent className="pt-6 flex flex-col gap-y-2">
               <div>
                 <span className="font-semibold">Cantidad de alimento: </span>

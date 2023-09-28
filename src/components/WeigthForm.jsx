@@ -49,6 +49,7 @@ export default function WeightForm({
 
     weights.forEach((w) => {
       addToCollection(getCollection("weight_history"), w);
+      global.addWeightHistory(w);
     });
 
     resetSelection();

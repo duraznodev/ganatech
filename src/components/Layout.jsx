@@ -24,13 +24,13 @@ export default function Layout() {
             <FaHouse className="text-xl" />
             <span className="text-xs">Finca</span>
           </Link>
-          <Link
+          {/* <Link
             to="/"
             className="h-full justify-center flex-col flex items-center aspect-square"
           >
             <FaList className="text-xl" />
             <span className="text-xs">Acciones</span>
-          </Link>
+          </Link> */}
         </nav>
       </footer>
     </>

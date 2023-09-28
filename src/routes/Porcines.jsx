@@ -129,15 +129,17 @@ export default function Porcines() {
             </DialogHeader>
             <AddAnimalForm type="porcines" animals={porcines}>
               <DialogFooter className="flex-row gap-x-2 mt-4">
-                <Button
-                  type="button"
-                  className="flex-1"
-                  size="lg"
-                  variant="outline"
-                >
-                  Cancelar
-                </Button>
-                <Button type="submit" className="flex-1" size="lg">
+                <DialogClose className="flex-1">
+                  <Button
+                    type="button"
+                    size="lg"
+                    className="w-full"
+                    variant="outline"
+                  >
+                    Cancelar
+                  </Button>
+                </DialogClose>
+                <Button type="submit" size="lg" className="flex-1 px-0">
                   Agregar
                 </Button>
               </DialogFooter>

@@ -21,9 +21,34 @@ export function GlobalProvider({ children }) {
     // seeder();
     init();
   }, []);
+
+  const addAnimal = (type, animal) => {
+    if (type === "bovines") {
+      setBovines([...bovines, animal]);
+    }
+    if (type === "porcines") {
+      setPorcines([...porcines, animal]);
+    }
+  };
+
+  const addDiet = (diet) => {
+    setDiets([...diets, diet]);
+  };
+  const addWeightHistory = (weightHistory) => {
+    setWeightHistories([...weightHistories, weightHistory]);
+  };
+
   return (
     <GlobalContext.Provider
-      value={{ bovines, diets, porcines, weightHistories }}
+      value={{
+        bovines,
+        diets,
+        porcines,
+        weightHistories,
+        addAnimal,
+        addDiet,
+        addWeightHistory,
+      }}
     >
       {children}
     </GlobalContext.Provider>
