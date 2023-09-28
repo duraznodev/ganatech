@@ -49,12 +49,15 @@ export default function Animal({ type }) {
           </div>
           <div>
             <span className="font-semibold">Propositos:</span>
-            {animal?.purposes.map((purpose) => {
-              if (purpose === "reproduction") return "Reproduccion ";
-              if (purpose === "milk_production") return "Produccion de leche ";
-              if (purpose === "work") return "Trabajo ";
-              if (purpose === "meat_production") return "Produccion de carne ";
-            })}
+            {animal?.purposes &&
+              animal?.purposes.map((purpose) => {
+                if (purpose === "reproduction") return "Reproduccion ";
+                if (purpose === "milk_production")
+                  return "Produccion de leche ";
+                if (purpose === "work") return "Trabajo ";
+                if (purpose === "meat_production")
+                  return "Produccion de carne ";
+              })}
           </div>
         </CardContent>
       </Card>
