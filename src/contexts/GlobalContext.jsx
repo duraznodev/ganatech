@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { allFromCollection, getCollection } from "../firebase/api";
 import { seeder } from "../firebase/seeder";
+import { firebase_auth } from "../firebase/config";
+import { onAuthStateChanged } from "firebase/auth";
 
 export const GlobalContext = createContext(null);
 
@@ -9,6 +11,8 @@ export function GlobalProvider({ children }) {
   const [porcines, setPorcines] = useState([]);
   const [diets, setDiets] = useState([]);
   const [weightHistories, setWeightHistories] = useState([]);
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
     const init = async () => {
       setBovines(await allFromCollection(getCollection("bovines")));
@@ -18,6 +22,14 @@ export function GlobalProvider({ children }) {
       setPorcines(await allFromCollection(getCollection("porcines")));
       setDiets(await allFromCollection(getCollection("diets")));
     };
+
+    onAuthStateChanged(firebase_auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
     // seeder();
     init();
   }, []);
@@ -45,6 +57,7 @@ export function GlobalProvider({ children }) {
         diets,
         porcines,
         weightHistories,
+        user,
         addAnimal,
         addDiet,
         addWeightHistory,

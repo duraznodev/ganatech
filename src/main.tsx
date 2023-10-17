@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Router from "./Router";
+import { GlobalProvider } from "./contexts/GlobalContext";
+
 import "./index.css";
-
-
 
 // async function init() {
 // const resp = await signIn("romaneduardorm@gmail.com", "durazno");
@@ -15,6 +15,8 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Router />
+    <GlobalProvider>
+      <Router />
+    </GlobalProvider>
   </React.StrictMode>
 );

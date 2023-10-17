@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, signOut } from "firebase/auth";
 import {
   initializeFirestore,
   persistentLocalCache,
@@ -21,10 +22,10 @@ const firebaseConfig = {
 // Initialize Firebase
 export const firebase_app = initializeApp(firebaseConfig);
 
-// export const firebase_auth = getAuth(firebase_app);
+export const firebase_auth = getAuth(firebase_app);
 // export const firebase_auth = getAuth();
 // connectAuthEmulator(firebase_auth, "http://127.0.0.1:9099");
-
+// signOut(firebase_auth);
 export const firebase_db = initializeFirestore(firebase_app, {
   localCache: persistentLocalCache({
     tabManager: persistentMultipleTabManager(),

@@ -18,12 +18,17 @@ import DietForm from "../components/DietForm";
 import WeightForm from "../components/WeigthForm";
 import { useGlobal } from "../contexts/GlobalContext";
 import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
+import { useEffect } from "react";
+import signUp from "@/firebase/auth/signup";
 
 export default function Bovines() {
   const { selectedAnimals, resetSelection, toggleAnimalSelection } =
     useSelectedAnimals();
   const global = useGlobal();
   const bovines = global?.bovines || [];
+  useEffect(() => {
+    signUp("test@test.test", "123456");
+  }, []);
 
   return (
     <>
