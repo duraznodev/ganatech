@@ -12,7 +12,7 @@ export default function AnimalCard({
   name,
   attributes,
   interaction = true,
-  onSelect = () => {},
+  onSelect = () => { },
   selected,
   multiple,
   simple,
@@ -22,6 +22,8 @@ export default function AnimalCard({
   badges = true,
   children,
 }) {
+
+  console.log(attributes + name)
   return (
     <Card className={cn("flex", selected && "bg-secondary", className)}>
       <Link

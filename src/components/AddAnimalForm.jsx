@@ -26,8 +26,8 @@ const FormSchemaAdd = z.object({
   genre: z.string(),
   weight: z.string().nullable(),
   breed: z.string().nullable(),
-  father: z.string().nullable(),
-  mother: z.string().nullable(),
+  father_id: z.string().nullable(),
+  mother_id: z.string().nullable(),
 });
 
 export default function AddAnimalForm({ children, animals, type }) {
@@ -56,30 +56,33 @@ export default function AddAnimalForm({ children, animals, type }) {
       earring: "",
       genre: "",
       weight: "",
-      father: "",
-      mother: "",
+      father_id: "",
+      mother_id: "",
       breed: "",
     },
   });
 
   useEffect(() => {
-    form.setValue("father", selectedFather);
-    form.setValue("mother", selectedMother);
+    form.setValue("father_id", selectedFather);
+    form.setValue("mother_id", selectedMother);
   }, [selectedFather, selectedMother]);
 
   async function onSubmit(data) {
     toggleFatherSelection("");
-    toggleFatherSelection("");
-
+    toggleMotherSelection("");
+    console.log(data)
     const animal = {
       ...data,
+      attributes: {
+        genre: data.genre
+      },
       weight: Number(data.weight),
       name: data.name.trim()
         ? data.name.trim()
-        : `${
-            type === "bovines" ? "Bovino" : "Porcino"
-          } ${new Date().getTime()}}`,
+        : `${type === "bovines" ? "Bovino" : "Porcino"
+        } ${new Date().getTime()}}`,
     };
+    animal.genre = null
     const submitedAnimal = await addToCollection(getCollection(type), animal);
 
     addAnimal(type, {
@@ -152,7 +155,7 @@ export default function AddAnimalForm({ children, animals, type }) {
                       <FormControl className="text-blue-500">
                         <RadioGroupItem
                           className="border-blue-500"
-                          value="male"
+                          value="M"
                           id="option-one"
                         />
                       </FormControl>
@@ -162,7 +165,7 @@ export default function AddAnimalForm({ children, animals, type }) {
                       <FormControl className="text-pink-500">
                         <RadioGroupItem
                           className="border-pink-500 appearance-none checked:border-blue-500"
-                          value="female"
+                          value="F"
                           id="option-two"
                         />
                       </FormControl>
@@ -212,7 +215,7 @@ export default function AddAnimalForm({ children, animals, type }) {
           <FormField
             className="flex flex-col gap-2"
             control={form.control}
-            name="father"
+            name="father_id"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel className="font-semibold">Padre</FormLabel>
@@ -277,7 +280,7 @@ export default function AddAnimalForm({ children, animals, type }) {
           <FormField
             className="flex flex-col gap-2"
             control={form.control}
-            name="mother"
+            name="mother_id"
             render={({ field }) => (
               <FormItem className="flex flex-col">
                 <FormLabel className="font-semibold">Madre</FormLabel>

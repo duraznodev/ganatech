@@ -22,12 +22,23 @@ export function GlobalProvider({ children }) {
     init();
   }, []);
 
+
   const addAnimal = (type, animal) => {
     if (type === "bovines") {
       setBovines([...bovines, animal]);
     }
     if (type === "porcines") {
       setPorcines([...porcines, animal]);
+    }
+  };
+
+  const updateAnimal = (type, id, updatedAnimal) => {
+    console.log('Updating Local State:', { type, id, updatedAnimal })
+    if (type === "bovines") {
+      setBovines(bovines.map(animal => animal.id === id ? { ...animal, ...updatedAnimal } : animal));
+    }
+    if (type === "porcines") {
+      setPorcines(porcines.map(animal => animal.id === id ? { ...animal, ...updatedAnimal } : animal));
     }
   };
 
@@ -48,6 +59,7 @@ export function GlobalProvider({ children }) {
         addAnimal,
         addDiet,
         addWeightHistory,
+        updateAnimal,
       }}
     >
       {children}
