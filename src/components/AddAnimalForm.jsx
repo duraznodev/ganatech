@@ -78,10 +78,9 @@ export default function AddAnimalForm({ children, animals, type }) {
         ? data.name.trim()
         : `${
             type === "bovines" ? "Bovino" : "Porcino"
-          } ${new Date().getTime()}}`,
+          } ${new Date().getTime()}`,
     };
     const submitedAnimal = await addToCollection(getCollection(type), animal);
-
     addAnimal(type, {
       ...animal,
       id: submitedAnimal.id,
