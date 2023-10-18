@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { BiFoodMenu } from "react-icons/bi";
+import { BiFoodMenu, BiEditAlt } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
 import { TbWeight } from "react-icons/tb";
 import AddAnimalForm from "../components/AddAnimalForm";
@@ -21,6 +21,7 @@ import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
 import { GiScalpel } from "react-icons/gi";
 import { CastrationForm } from "../components/CastrationForm";
 
+
 export default function Bovines() {
   const { selectedAnimals, resetSelection, toggleAnimalSelection } =
     useSelectedAnimals();
@@ -29,6 +30,7 @@ export default function Bovines() {
 
   return (
     <>
+      <BiEditAlt />
       <AnimalList
         type="bovines"
         selectedAnimals={selectedAnimals}
