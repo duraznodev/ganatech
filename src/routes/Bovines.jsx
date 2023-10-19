@@ -27,7 +27,7 @@ export default function Bovines() {
     useSelectedAnimals();
   const global = useGlobal();
   const bovines = global?.bovines || [];
-  console.log()
+
 
   const allMale = selectedAnimals.every(animal =>
     bovines.find(bovine => bovine.id === animal)?.attributes?.genre === 'M'
