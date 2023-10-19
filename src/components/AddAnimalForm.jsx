@@ -70,7 +70,6 @@ export default function AddAnimalForm({ children, animals, type }) {
   async function onSubmit(data) {
     toggleFatherSelection("");
     toggleMotherSelection("");
-    console.log(data)
     const animal = {
       ...data,
       attributes: {

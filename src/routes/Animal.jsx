@@ -50,6 +50,7 @@ import { Button } from "@/components/ui/button"
 import { BiEditAlt } from "react-icons/bi";
 
 
+
 const formSchema = z.object({
   father_id: z.string().nullable(),
   mother_id: z.string().nullable(),
@@ -70,6 +71,10 @@ export default function Animal({ type }) {
   );
   const mother = animals.find((_animal) => _animal.id === animal?.mother_id
   );
+
+  const castrationDate = animal?.castrationDate;
+  const castrationDateJs = castrationDate?.toDate();
+
 
   const [initialValues, setInitialValues] = useState({
     father_id: animal?.father_id || "",
@@ -150,30 +155,41 @@ export default function Animal({ type }) {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle>Informacion:</CardTitle>
+          <CardTitle>Informacion General:</CardTitle>
         </CardHeader>
-        <CardContent className="grid grid-cols-2">
+        <CardContent className="">
           <div>
-            <span className="font-semibold">Padre:</span> {father?.name}
+            <span className="font-semibold text-sm">Padre:</span> <span className="text-sm">{father?.name}</span>
           </div>
           <div>
-            <span className="font-semibold">Madre:</span> {mother?.name}
+            <span className="font-semibold text-sm">Madre:</span> <span className="text-sm">{mother?.name}</span>
           </div>
           <div>
-            <span className="font-semibold">Raza:</span> {animal?.breed}
+            <span className="font-semibold text-sm">Raza:</span> <span className="text-sm">{animal?.breed}</span>
           </div>
           <div>
-            <span className="font-semibold">Genero:</span>{" "}
-            {animal?.genre === "M" ? "Macho" : "Hembra"}
+            <span className="font-semibold text-sm">Genero:</span>{" "}
+            <span className="text-sm"> {animal?.attributes?.genre === "M" ? "Macho" : "Hembra"}</span>
           </div>
           <div>
-            <span className="font-semibold">Peso:</span>{" "}
-            {Number(animal?.weight).toFixed(2)}
+            <span className="font-semibold text-sm">Peso:</span>{" "}
+            <span className="text-sm">{Number(animal?.weight).toFixed(2)} L</span>
           </div>
           <div>
-            <span className="font-semibold">Propositos:</span>
-            {animal?.purposes}
+            <span className="font-semibold text-sm">Proposito: </span >
+            <span className="text-sm">{animal?.purposes}</span>
           </div>
+
+          {
+            animal?.attributes.genre === "M"
+              ? <div>
+                <span className="font-semibold text-sm">Fecha Castracion: </span>
+                <span className="text-sm">{castrationDateJs ? castrationDateJs.toLocaleDateString() : 'N/A'}</span>
+              </div>
+              : ""
+          }
+
+
         </CardContent>
       </Card>
 
@@ -398,7 +414,6 @@ export default function Animal({ type }) {
                       </FormItem>
                     )}
                   />
-
 
               }
 

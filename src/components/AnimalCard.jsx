@@ -23,7 +23,6 @@ export default function AnimalCard({
   children,
 }) {
 
-  console.log(attributes + name)
   return (
     <Card className={cn("flex", selected && "bg-secondary", className)}>
       <Link

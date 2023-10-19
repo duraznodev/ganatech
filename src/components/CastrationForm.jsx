@@ -4,7 +4,6 @@ import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -22,7 +21,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { toast } from "@/components/ui/use-toast";
+import { Timestamp } from "firebase/firestore";
+import { updateInCollection } from "../firebase/api";
+import { useGlobal } from "../contexts/GlobalContext";
 
 const FormSchema = z.object({
   dob: z.date({
@@ -30,17 +31,37 @@ const FormSchema = z.object({
   }),
 });
 
-export function CastrationForm({ children }) {
+export function CastrationForm({ children, type, selectedAnimals, resetSelection }) {
+
   const form = useForm({
     resolver: zodResolver(FormSchema),
-    defaultValues:{
-      dob:null
+    defaultValues: {
+      dob: null
     }
   });
 
-  function onSubmit(data) {
+  const global = useGlobal();
+
+  const onSubmit = async (data) => {
+    const castrationDate = data.dob;
+    for (const animalId of selectedAnimals) {
+      const updatedFields = {
+        castrationDate: Timestamp.fromDate(new Date(castrationDate)),
+      };
+
+      const response = await updateInCollection(`${type}`, animalId, updatedFields);
+
+      console.log(response);
+      if (response.success) {
+        global.updateAnimal(type, animalId, updatedFields);
+      } else {
+        console.error(animalId, '; Error:', response.error);
+      }
+    }
+
+    resetSelection();
     form.reset();
-  }
+  };
 
   return (
     <>
