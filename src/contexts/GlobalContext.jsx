@@ -37,6 +37,24 @@ export function GlobalProvider({ children }) {
     }
   };
 
+  const updateAnimal = (type, id, updatedAnimal) => {
+    console.log("Updating Local State:", { type, id, updatedAnimal });
+    if (type === "bovines") {
+      setBovines(
+        bovines.map((animal) =>
+          animal.id === id ? { ...animal, ...updatedAnimal } : animal
+        )
+      );
+    }
+    if (type === "porcines") {
+      setPorcines(
+        porcines.map((animal) =>
+          animal.id === id ? { ...animal, ...updatedAnimal } : animal
+        )
+      );
+    }
+  };
+
   const addDiet = (diet) => {
     setDiets([...diets, diet]);
   };

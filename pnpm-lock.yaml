@@ -35,6 +35,9 @@ dependencies:
   '@radix-ui/react-slot':
     specifier: ^1.0.2
     version: 1.0.2(@types/react@18.2.23)(react@18.2.0)
+  '@radix-ui/react-toast':
+    specifier: ^1.1.5
+    version: 1.1.5(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
   '@radix-ui/react-toggle':
     specifier: ^1.0.3
     version: 1.0.3(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
@@ -50,6 +53,9 @@ dependencies:
   cmdk:
     specifier: ^0.2.0
     version: 0.2.0(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
+  date-fns:
+    specifier: ^2.30.0
+    version: 2.30.0
   firebase:
     specifier: ^10.4.0
     version: 10.4.0
@@ -59,6 +65,9 @@ dependencies:
   react:
     specifier: ^18.2.0
     version: 18.2.0
+  react-day-picker:
+    specifier: ^8.9.0
+    version: 8.9.0(date-fns@2.30.0)(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -3024,6 +3033,38 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@radix-ui/react-toast@1.1.5(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-fRLn227WHIBRSzuRzGJ8W+5YALxofH23y0MlPLddaIpLpCDqdE0NZlS2NRQDRiptfxDeeCjgFIpexB1/zkxDlw==}
+    peerDependencies:
+      '@types/react': '*'
+      '@types/react-dom': '*'
+      react: ^16.8 || ^17.0 || ^18.0
+      react-dom: ^16.8 || ^17.0 || ^18.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      '@types/react-dom':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.1
+      '@radix-ui/primitive': 1.0.1
+      '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.23)(react@18.2.0)
+      '@radix-ui/react-context': 1.0.1(@types/react@18.2.23)(react@18.2.0)
+      '@radix-ui/react-dismissable-layer': 1.0.5(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-portal': 1.0.4(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-presence': 1.0.1(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.23)(react@18.2.0)
+      '@radix-ui/react-use-controllable-state': 1.0.1(@types/react@18.2.23)(react@18.2.0)
+      '@radix-ui/react-use-layout-effect': 1.0.1(@types/react@18.2.23)(react@18.2.0)
+      '@radix-ui/react-visually-hidden': 1.0.3(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.23
+      '@types/react-dom': 18.2.8
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@radix-ui/react-toggle@1.0.3(@types/react-dom@18.2.8)(@types/react@18.2.23)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Pkqg3+Bc98ftZGsl60CLANXQBBQ4W3mTFS9EJvNxKMZ7magklKV69/id1mlAlOFDDfHvlCms0fx8fA4CMKDJHg==}
     peerDependencies:
@@ -4091,6 +4132,13 @@ packages:
   /d3-timer@3.0.1:
     resolution: {integrity: sha512-ndfJ/JxxMd3nw31uyKoY2naivF+r29V+Lc0svZxe1JvvIRmi8hUsrMvdOwgS1o6uBHmiz91geQ0ylPP0aj1VUA==}
     engines: {node: '>=12'}
+    dev: false
+
+  /date-fns@2.30.0:
+    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
+    engines: {node: '>=0.11'}
+    dependencies:
+      '@babel/runtime': 7.23.1
     dev: false
 
   /debug@4.3.4:
@@ -5461,6 +5509,16 @@ packages:
     dependencies:
       safe-buffer: 5.2.1
     dev: true
+
+  /react-day-picker@8.9.0(date-fns@2.30.0)(react@18.2.0):
+    resolution: {integrity: sha512-XgoUgexp5KUy03lGsBDRkV+YQy73qJOLNPojeKe0dDNamrCM75PSBhMBkYVjgMSDy12LGWlbThSRK8p0kozAOA==}
+    peerDependencies:
+      date-fns: ^2.28.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      date-fns: 2.30.0
+      react: 18.2.0
+    dev: false
 
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}

@@ -22,7 +22,7 @@ export default function Layout({ children }) {
             className="h-full justify-center flex-col flex items-center aspect-square"
           >
             <FaHouse className="text-xl" />
-            <span className="text-xs">Finca</span>
+            <span className="text-xs">Hato</span>
           </Link>
           {/* <Link
             to="/"

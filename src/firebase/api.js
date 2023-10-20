@@ -32,3 +32,18 @@ export const allFromCollection = async (collection) => {
     id: doc.id,
   }));
 };
+
+export const updateInCollection = async (
+  collection_name,
+  id,
+  updatedFields
+) => {
+  const animalRef = doc(firebase_db, `farms/${farm_id}/${collection_name}`, id);
+  try {
+    await updateDoc(animalRef, updatedFields);
+    return { success: true };
+  } catch (error) {
+    // console.error('Error updating document:', error);
+    return { success: false, error };
+  }
+};

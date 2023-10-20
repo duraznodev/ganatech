@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { BiFoodMenu } from "react-icons/bi";
+import { BiFoodMenu, BiEditAlt } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
 import { TbWeight } from "react-icons/tb";
 import AddAnimalForm from "../components/AddAnimalForm";
@@ -18,6 +18,9 @@ import DietForm from "../components/DietForm";
 import WeightForm from "../components/WeigthForm";
 import { useGlobal } from "../contexts/GlobalContext";
 import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
+import { GiScalpel } from "react-icons/gi";
+import { CastrationForm } from "../components/CastrationForm";
+
 
 export default function Bovines() {
   const { selectedAnimals, resetSelection, toggleAnimalSelection } =
@@ -25,8 +28,15 @@ export default function Bovines() {
   const global = useGlobal();
   const bovines = global?.bovines || [];
 
+
+  const allMale = selectedAnimals.every(animal =>
+    bovines.find(bovine => bovine.id === animal)?.attributes?.genre === 'M'
+  );
+
+
   return (
     <>
+      <BiEditAlt />
       <AnimalList
         type="bovines"
         selectedAnimals={selectedAnimals}
@@ -108,6 +118,43 @@ export default function Bovines() {
                 </WeightForm>
               </DialogContent>
             </Dialog>
+
+            {allMale ? (
+              <Dialog>
+                <DialogTrigger className="flex-1 py-2">
+                  <div className="h-full justify-center flex-col flex items-center flex-1">
+                    <GiScalpel className="text-xl" />
+                    <span className="text-xs">Castración</span>
+                  </div>
+                </DialogTrigger>
+                <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+                  <DialogHeader>
+                    <DialogTitle>Castracion</DialogTitle>
+                    <DialogDescription>Registro de castraciones</DialogDescription>
+                  </DialogHeader>
+                  <CastrationForm type="bovines" selectedAnimals={selectedAnimals} resetSelection={resetSelection}>
+                    <DialogFooter className="flex-row gap-x-2 mt-1">
+                      <DialogClose className="flex-1">
+                        <Button
+                          type="button"
+                          size="lg"
+                          className="w-full"
+                          variant="outline"
+                        >
+                          Cancelar
+                        </Button>
+                      </DialogClose>
+                      <Button type="submit" size="lg" className="flex-1 px-0">
+                        Agregar
+                      </Button>
+                    </DialogFooter>
+                  </CastrationForm>
+
+                </DialogContent>
+              </Dialog>
+
+            ) : null}
+
           </div>
         </div>
       ) : (
