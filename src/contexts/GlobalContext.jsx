@@ -11,28 +11,22 @@ export function GlobalProvider({ children }) {
   const [porcines, setPorcines] = useState([]);
   const [diets, setDiets] = useState([]);
   const [weightHistories, setWeightHistories] = useState([]);
+  const [farmId, setFarmId] = useState(null);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const init = async () => {
-      setBovines(await allFromCollection(getCollection("bovines")));
+      setBovines(await allFromCollection(getCollection("bovines", farmId)));
       setWeightHistories(
-        await allFromCollection(getCollection("weight_history"))
+        await allFromCollection(getCollection("weight_history", farmId))
       );
-      setPorcines(await allFromCollection(getCollection("porcines")));
-      setDiets(await allFromCollection(getCollection("diets")));
+      setPorcines(await allFromCollection(getCollection("porcines", farmId)));
+      setDiets(await allFromCollection(getCollection("diets", farmId)));
     };
 
-    onAuthStateChanged(firebase_auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
-    });
     // seeder();
-    init();
-  }, []);
+    if (farmId) init();
+  }, [farmId]);
 
   const addAnimal = (type, animal) => {
     if (type === "bovines") {
@@ -55,12 +49,15 @@ export function GlobalProvider({ children }) {
       value={{
         bovines,
         diets,
+        farmId,
         porcines,
-        weightHistories,
         user,
+        weightHistories,
         addAnimal,
         addDiet,
         addWeightHistory,
+        setFarmId,
+        setUser,
       }}
     >
       {children}

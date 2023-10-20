@@ -2,11 +2,11 @@ import { FaHouse, FaList } from "react-icons/fa6";
 import { HiChartPie } from "react-icons/hi";
 import { Link, Outlet } from "react-router-dom";
 
-export default function Layout() {
+export default function Layout({ children }) {
   return (
     <>
       <div className="container h-screen pt-5 pb-14 flex flex-col gap-y-6">
-        <Outlet />
+        {children}
       </div>
       <footer className="fixed bottom-0 pb-2 border-t h-14 bg-white/80 w-full">
         <nav className="container h-full justify-around flex items-center text-muted-foreground">

@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signOut } from "firebase/auth";
+import {
+  browserLocalPersistence,
+  getAuth,
+  setPersistence,
+  signOut,
+} from "firebase/auth";
 import {
   initializeFirestore,
   persistentLocalCache,
@@ -23,6 +28,11 @@ const firebaseConfig = {
 export const firebase_app = initializeApp(firebaseConfig);
 
 export const firebase_auth = getAuth(firebase_app);
+
+setPersistence(firebase_auth, browserLocalPersistence);
+
+export const user = firebase_auth.currentUser;
+
 // export const firebase_auth = getAuth();
 // connectAuthEmulator(firebase_auth, "http://127.0.0.1:9099");
 // signOut(firebase_auth);

@@ -1,0 +1,11 @@
+export { default as Animal } from "./Animal";
+export { default as Animals } from "./Animals";
+export { default as Bovines } from "./Bovines";
+export { default as Dashboard } from "./Dashboard";
+export { default as Diets } from "./Diets";
+export { default as Login } from "./Login";
+export { default as NewFarm } from "./NewFarm";
+export { default as Nutrition } from "./Nutrition";
+export { default as Porcines } from "./Porcines";
+export { default as Register } from "./Register";
+export { default as WeightHistory } from "./WeightHistory";

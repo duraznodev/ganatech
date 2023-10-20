@@ -16,8 +16,9 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import signUp from "@/firebase/auth/signup";
-import signIn from "@/firebase/auth/signin";
+import { signIn, signUp } from "@/firebase/auth";
+import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const formAuth = z.object({
   email: z.string().email(),
@@ -26,6 +27,7 @@ const formAuth = z.object({
 
 export function UserAuthForm({ className, ...props }) {
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const form = useForm({
     resolver: zodResolver(formAuth),
@@ -34,6 +36,7 @@ export function UserAuthForm({ className, ...props }) {
       password: "",
     },
   });
+
   async function onSubmit() {
     setIsLoading(true);
     const { email, password } = form.getValues();
@@ -49,6 +52,7 @@ export function UserAuthForm({ className, ...props }) {
     if (resp?.result) {
       setError(null);
       setIsLoading(false);
+      navigate("/");
     }
   }
 
