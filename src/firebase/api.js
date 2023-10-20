@@ -5,6 +5,7 @@ import {
   getDocs,
   or,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { firebase_db } from "./config";
@@ -37,7 +38,8 @@ export const allFromCollection = async (collection) => {
 export const updateInCollection = async (
   collection_name,
   id,
-  updatedFields
+  updatedFields,
+  farm_id
 ) => {
   const animalRef = doc(firebase_db, `farms/${farm_id}/${collection_name}`, id);
   try {

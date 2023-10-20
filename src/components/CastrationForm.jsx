@@ -1,4 +1,3 @@
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
@@ -31,13 +30,17 @@ const FormSchema = z.object({
   }),
 });
 
-export function CastrationForm({ children, type, selectedAnimals, resetSelection }) {
-
+export function CastrationForm({
+  children,
+  type,
+  selectedAnimals,
+  resetSelection,
+}) {
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      dob: null
-    }
+      dob: null,
+    },
   });
 
   const global = useGlobal();
@@ -49,13 +52,18 @@ export function CastrationForm({ children, type, selectedAnimals, resetSelection
         castrationDate: Timestamp.fromDate(new Date(castrationDate)),
       };
 
-      const response = await updateInCollection(`${type}`, animalId, updatedFields);
+      const response = await updateInCollection(
+        `${type}`,
+        animalId,
+        updatedFields,
+        global.farmId
+      );
 
       console.log(response);
       if (response.success) {
         global.updateAnimal(type, animalId, updatedFields);
       } else {
-        console.error(animalId, '; Error:', response.error);
+        console.error(animalId, "; Error:", response.error);
       }
     }
 

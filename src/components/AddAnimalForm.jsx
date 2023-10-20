@@ -31,7 +31,7 @@ const FormSchemaAdd = z.object({
 });
 
 export default function AddAnimalForm({ children, animals, type }) {
-  const { addAnimal } = useGlobal();
+  const { addAnimal, farmId } = useGlobal();
   const {
     selectedAnimal: selectedFather,
     toggleAnimalSelection: toggleFatherSelection,
@@ -73,16 +73,21 @@ export default function AddAnimalForm({ children, animals, type }) {
     const animal = {
       ...data,
       attributes: {
-        genre: data.genre
+        genre: data.genre,
       },
       weight: Number(data.weight),
       name: data.name.trim()
         ? data.name.trim()
-        : `${type === "bovines" ? "Bovino" : "Porcino"
-        } ${new Date().getTime()}}`,
+        : `${
+            type === "bovines" ? "Bovino" : "Porcino"
+          } ${new Date().getTime()}}`,
     };
-    animal.genre = null
-    const submitedAnimal = await addToCollection(getCollection(type), animal);
+    animal.genre = null;
+    const submitedAnimal = await addToCollection(
+      getCollection(type, farmId),
+      animal
+    );
+    console.log(submitedAnimal);
     addAnimal(type, {
       ...animal,
       id: submitedAnimal.id,

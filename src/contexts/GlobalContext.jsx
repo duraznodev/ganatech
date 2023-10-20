@@ -72,6 +72,7 @@ export function GlobalProvider({ children }) {
         user,
         weightHistories,
         addAnimal,
+        updateAnimal,
         addDiet,
         addWeightHistory,
         setFarmId,
