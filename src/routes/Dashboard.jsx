@@ -142,7 +142,7 @@ export default function Dashboard() {
   return (
     <>
       <Card>
-        <CardHeader className="space-y-2 pb-0">
+        <CardHeader className="space-y-2">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-x-1">
               <SiHappycow />
@@ -177,7 +177,7 @@ export default function Dashboard() {
             ))}
           </div> */}
         </CardHeader>
-        <CardContent className="h-72">
+        <CardContent className="h-80">
           {isMounted && (
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
