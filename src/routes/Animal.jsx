@@ -49,6 +49,8 @@ import { updateInCollection } from "../firebase/api";
 import { Button } from "@/components/ui/button";
 import { BiEditAlt } from "react-icons/bi";
 import { FaBirthdayCake } from "react-icons/fa";
+import { MdVaccines } from "react-icons/md";
+
 
 const formSchema = z.object({
   father_id: z.string().nullable(),
@@ -78,7 +80,7 @@ export default function Animal({ type }) {
     purposes: animal?.purposes || "",
     weight: animal?.weight || "",
   });
-
+  const global = useGlobal()
   // console.log(animal);
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -123,7 +125,8 @@ export default function Animal({ type }) {
       const { success, error } = await updateInCollection(
         type,
         id,
-        updatedFields
+        updatedFields,
+        global.farmId
       );
       if (success) {
         // console.log("Document updated successfully");
@@ -458,9 +461,9 @@ export default function Animal({ type }) {
       </Dialog>
       <Card>
         <CardHeader>
-          <CardTitle>Registros</CardTitle>
+          <CardTitle className="text-center">Registros</CardTitle>
         </CardHeader>
-        <CardContent className="flex gap-x-4">
+        <CardContent className="grid grid-cols-2 gap-3">
           <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
             <Link
               to="diets"
@@ -486,6 +489,16 @@ export default function Animal({ type }) {
             >
               <FaBirthdayCake className="text-xl" />
               Partos
+            </Link>
+          </div>
+
+          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+            <Link
+              to="vaccine"
+              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+            >
+              <MdVaccines className="text-xl" />
+              Vacunas
             </Link>
           </div>
         </CardContent>

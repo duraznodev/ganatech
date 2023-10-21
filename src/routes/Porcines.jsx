@@ -22,7 +22,8 @@ import { useGlobal } from "../contexts/GlobalContext";
 import WeightForm from "../components/WeigthForm";
 import { GiScalpel } from "react-icons/gi";
 import { CastrationForm } from "../components/CastrationForm";
-
+import ModalOptions from "../components/ModalOptions";
+import { IoMdOptions } from "react-icons/io";
 export default function Porcines() {
   const { selectedAnimals, resetSelection, toggleAnimalSelection } =
     useSelectedAnimals();
@@ -152,6 +153,42 @@ export default function Porcines() {
               </Dialog>
 
             ) : null}
+
+            <Dialog>
+              <DialogTrigger className="flex-1 py-2">
+                <div className="h-full justify-center flex-col flex items-center flex-1">
+                  <IoMdOptions className="text-xl" />
+                  <span className="text-xs">Mas</span>
+                </div>
+              </DialogTrigger>
+              <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+                <DialogHeader>
+                  <DialogTitle>Opciones</DialogTitle>
+                  <DialogDescription>Selecciona una opción</DialogDescription>
+                </DialogHeader>
+                <ModalOptions
+                  type="porcines"
+                  resetSelection={resetSelection}
+                  selectedAnimals={selectedAnimals}
+                >
+                  <DialogFooter className="flex-row gap-x-2 mt-4">
+                    <DialogClose className="flex-1">
+                      <Button
+                        type="button"
+                        size="lg"
+                        className="w-full"
+                        variant="outline"
+                      >
+                        Cancelar
+                      </Button>
+                    </DialogClose>
+                    <Button type="submit" size="lg" className="flex-1 px-0">
+                      Agregar
+                    </Button>
+                  </DialogFooter>
+                </ModalOptions>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       ) : (

@@ -16,6 +16,7 @@ export function GlobalProvider({ children }) {
   const [ironImgRef, setIronImgRef] = useState(null);
   const [ironImgURL, setIronImgURL] = useState(null);
   const [calvings, setCalvings] = useState([]);
+  const [vaccines, setVaccines] = useState([]);
   const [farm, setFarm] = useState(null);
 
   useEffect(() => {
@@ -27,6 +28,7 @@ export function GlobalProvider({ children }) {
       setPorcines(await allFromCollection(getCollection("porcines", farmId)));
       setDiets(await allFromCollection(getCollection("diets", farmId)));
       setCalvings(await allFromCollection(getCollection("calvings", farmId)));
+      setVaccines(await allFromCollection(getCollection("vaccines", farmId)));
     };
 
     if (farmId) {
@@ -72,12 +74,16 @@ export function GlobalProvider({ children }) {
   const addCalving = (_calvings) => {
     setCalvings([...calvings, _calvings]);
   };
+  const addVaccines = (_vaccines) => {
+    setVaccines([...vaccines, _vaccines]);
+  };
 
   return (
     <GlobalContext.Provider
       value={{
         bovines,
         calvings,
+        vaccines,
         diets,
         farm,
         farmId,
@@ -96,6 +102,8 @@ export function GlobalProvider({ children }) {
         setIronImgURL,
         setUser,
         updateAnimal,
+        addVaccines,
+
       }}
     >
       {children}

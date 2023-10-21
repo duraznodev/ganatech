@@ -40,28 +40,5 @@ export default function Calving({ type }) {
       <DataTable columns={columns} data={animalCalvings} />
     </>
   );
-  return (
-    <>
-      <AnimalCard {...animal} type={type} simple interaction={false} />
-      {animalCalvings.length > 0 ? (
-        animalCalvings.map((calving) => (
-          <Card key={crypto.randomUUID()}>
-            <CardContent className="pt-6 flex flex-col gap-y-2">
-              <div>
-                <span className="font-semibold">Fecha de parto: </span>
-                {new Date(calving?.calvingDate)?.toLocaleDateString()}
-              </div>
-              <div>
-                <span className="font-semibold">Cantidad de partos: </span>
-              </div>
-            </CardContent>
-          </Card>
-        ))
-      ) : (
-        <div className="flex justify-center items-center h-full">
-          <div className="text-2xl text-gray-400">No hay Partos :(</div>
-        </div>
-      )}
-    </>
-  );
+
 }
