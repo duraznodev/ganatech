@@ -12,18 +12,26 @@ import { VaccineForm } from "./VaccineForm";
 import { MdVaccines } from "react-icons/md";
 
 import { FaBirthdayCake } from "react-icons/fa";
+import { useGlobal } from "../contexts/GlobalContext";
 
 
 export default function ModalOptions({ type, resetSelection, selectedAnimals, children }) {
     const [openModal, setOpenModal] = useState(null);
+    const state = useGlobal();
+    const animals = state?.[type] || [];
+    const animal = animals.find((_animal) => _animal.id === selectedAnimals[0]);
+    console.log(animal)
     return (
         <Dialog>
-            <DialogTrigger className="flex flex-col gap-3" >
-                <Button className="flex gap-2 w-40" onClick={() => setOpenModal('partos')}>
-                    <FaBirthdayCake />
-                    Partos
-                </Button>
-                <Button className="flex gap-2 w-40" onClick={() => setOpenModal('vacunas')}>
+            <DialogTrigger className="flex justify-around " >
+                {animal?.attributes?.genre === "F"
+                    ? <Button variant="outline" className="flex gap-2 w-40" onClick={() => setOpenModal('partos')}>
+                        <FaBirthdayCake />
+                        Partos
+                    </Button>
+                    : ""
+                }
+                <Button variant="outline" className="flex gap-2 w-40" onClick={() => setOpenModal('vacunas')}>
                     <MdVaccines />
                     Vacunas
                 </Button>

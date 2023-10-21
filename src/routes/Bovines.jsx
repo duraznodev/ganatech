@@ -163,10 +163,10 @@ export default function Bovines() {
                   <span className="text-xs">Mas</span>
                 </div>
               </DialogTrigger>
-              <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
-                <DialogHeader>
-                  <DialogTitle>Opciones</DialogTitle>
-                  <DialogDescription>Selecciona una opción</DialogDescription>
+              <DialogContent className=" h-auto   sm:max-w-3xl">
+                <DialogHeader >
+                  <DialogTitle className="text-center">Opciones</DialogTitle>
+                  <DialogDescription className="text-center">Selecciona una opción</DialogDescription>
                 </DialogHeader>
                 <ModalOptions
                   type="bovines"
