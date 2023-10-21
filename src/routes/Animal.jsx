@@ -50,6 +50,7 @@ import { Button } from "@/components/ui/button";
 import { BiEditAlt } from "react-icons/bi";
 import { FaBirthdayCake } from "react-icons/fa";
 import { MdVaccines } from "react-icons/md";
+import { LuMilk } from "react-icons/lu";
 
 
 const formSchema = z.object({
@@ -170,9 +171,9 @@ export default function Animal({ type }) {
             </span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Peso Actual:</span>{" "}
+            <span className="font-semibold text-sm"><Peso></Peso>:</span>{" "}
             <span className="text-sm">
-              {Number(animal?.weight).toFixed(2)} L
+              {Number(animal?.weight).toFixed(2)} Kg
             </span>
           </div>
           <div>
@@ -371,10 +372,10 @@ export default function Animal({ type }) {
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="Trabajo">Trabajo</SelectItem>
-                              <SelectItem value="Produccion de carne">
+                              <SelectItem value="Producción de carne">
                                 Producción de carne
                               </SelectItem>
-                              <SelectItem value="Reproduccion">
+                              <SelectItem value="Reproducción">
                                 Reproducción
                               </SelectItem>
                             </SelectContent>
@@ -499,6 +500,15 @@ export default function Animal({ type }) {
             >
               <MdVaccines className="text-xl" />
               Vacunas
+            </Link>
+          </div>
+          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+            <Link
+              to="milk_history"
+              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+            >
+              <LuMilk className="text-xl" />
+              Leche
             </Link>
           </div>
         </CardContent>

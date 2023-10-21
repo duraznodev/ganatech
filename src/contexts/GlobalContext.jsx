@@ -17,6 +17,7 @@ export function GlobalProvider({ children }) {
   const [ironImgURL, setIronImgURL] = useState(null);
   const [calvings, setCalvings] = useState([]);
   const [vaccines, setVaccines] = useState([]);
+  const [milkHistories, setMilkHistories] = useState([]);
   const [farm, setFarm] = useState(null);
   const [isAdmin, setIsAdmin] = useState(null);
 
@@ -30,6 +31,10 @@ export function GlobalProvider({ children }) {
       setDiets(await allFromCollection(getCollection("diets", farmId)));
       setCalvings(await allFromCollection(getCollection("calvings", farmId)));
       setVaccines(await allFromCollection(getCollection("vaccines", farmId)));
+      setMilkHistories(
+        await allFromCollection(getCollection("milk_history", farmId))
+      );
+
     };
 
     if (farmId) {
@@ -71,6 +76,9 @@ export function GlobalProvider({ children }) {
   const addWeightHistory = (weightHistory) => {
     setWeightHistories([...weightHistories, weightHistory]);
   };
+  const addMilkHistory = (milkHistory) => {
+    setMilkHistories([...milkHistories, milkHistory]);
+  };
 
   const addCalving = (_calvings) => {
     setCalvings([...calvings, _calvings]);
@@ -94,11 +102,13 @@ export function GlobalProvider({ children }) {
         user,
         vaccines,
         weightHistories,
+        milkHistories,
         addAnimal,
         addCalving,
         addDiet,
         addVaccines,
         addWeightHistory,
+        addMilkHistory,
         setFarm,
         setFarmId,
         setIronImgRef,

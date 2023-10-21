@@ -21,6 +21,7 @@ import {
   Vaccine,
 } from "./routes";
 import Settings from "./routes/Settings";
+import { MilkHistory } from "./routes";
 
 export default function Router() {
   const {
@@ -97,6 +98,16 @@ export default function Router() {
           path="/animales/bovinos/:id/weight_history"
           element={Private(<WeightHistory type="bovines" />, user, farmId)}
         />
+        <Route
+          path="/animales/bovinos/:id/milk_history"
+          element={Private(<MilkHistory type="bovines" />, user, farmId)}
+        />
+        <Route
+          path="/animales/bovinos/:id/milk_history"
+          element={Private(<MilkHistory type="porcines" />, user, farmId)}
+        />
+
+        milk_history
         <Route
           path="/animales/bovinos/:id/diets"
           element={Private(<Diets type="bovines" />, user, farmId)}
