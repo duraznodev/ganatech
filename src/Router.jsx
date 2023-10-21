@@ -1,6 +1,6 @@
 import Bovines from "@/routes/Bovines.jsx";
 import { onAuthStateChanged } from "firebase/auth";
-import { ref } from "firebase/storage";
+import { getDownloadURL, ref } from "firebase/storage";
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useGlobal } from "./contexts/GlobalContext";
@@ -22,15 +22,28 @@ import {
 import Settings from "./routes/Settings";
 
 export default function Router() {
-  const { user, farmId, setFarm, setFarmId, setUser } = useGlobal();
+  const {
+    user,
+    farmId,
+    setFarm,
+    setFarmId,
+    setIronImgRef,
+    setUser,
+    setIronImgURL,
+  } = useGlobal();
 
   useEffect(() => {
     if (user) {
       userFarms(user).then((res) => {
         const farm = res?.docs?.[0];
         if (farm?.id) {
+          const ironImgPath = `images/${farm.id}.png`;
+          const ironImgRef = ref(firebase_storage, ironImgPath);
+
+          getDownloadURL(ironImgRef).then(setIronImgURL);
           setFarm(farm);
           setFarmId(farm.id);
+          setIronImgRef(ironImgRef);
         }
       });
     }

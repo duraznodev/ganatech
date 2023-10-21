@@ -144,7 +144,7 @@ export default function Animal({ type }) {
 
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle>Informacion General:</CardTitle>
+          <CardTitle>Información General:</CardTitle>
         </CardHeader>
         <CardContent className="">
           <div>
