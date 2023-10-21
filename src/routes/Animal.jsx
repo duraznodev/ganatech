@@ -171,7 +171,7 @@ export default function Animal({ type }) {
             </span>
           </div>
           <div>
-            <span className="font-semibold text-sm"><Peso></Peso>:</span>{" "}
+            <span className="font-semibold text-sm">Peso:</span>{" "}
             <span className="text-sm">
               {Number(animal?.weight).toFixed(2)} Kg
             </span>

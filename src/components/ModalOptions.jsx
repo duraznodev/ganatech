@@ -24,7 +24,7 @@ export default function ModalOptions({ type, resetSelection, selectedAnimals, ch
     console.log(animal)
     return (
         <Dialog>
-            <DialogTrigger className="flex justify-around " >
+            <DialogTrigger className="flex flex-wrap justify-center gap-2" >
                 {animal?.attributes?.genre === "F"
                     ? <Button variant="outline" className="flex gap-2 w-40" onClick={() => setOpenModal('partos')}>
                         <FaBirthdayCake />
