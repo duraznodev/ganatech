@@ -1,9 +1,12 @@
 import Bovines from "@/routes/Bovines.jsx";
-import Nutrition from "@/routes/Nutrition.jsx";
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { ref } from "firebase/storage";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { firebase_auth } from "./firebase/config";
+import { useGlobal } from "./contexts/GlobalContext";
+import { userFarms } from "./firebase/api";
+import { firebase_auth, firebase_storage } from "./firebase/config";
+import { Guest, Private } from "./lib/Auth";
 import {
   Animal,
   Animals,
@@ -14,19 +17,23 @@ import {
   Porcines,
   Register,
   WeightHistory,
+  Calving,
 } from "./routes";
-import { Private, Guest } from "./lib/Auth";
-import { userFarms } from "./firebase/api";
-import { useGlobal } from "./contexts/GlobalContext";
+import Settings from "./routes/Settings";
 
 export default function Router() {
-  const { user, farmId, setFarmId, setUser } = useGlobal();
+  const { user, farmId, setFarm, setFarmId, setUser } = useGlobal();
 
   useEffect(() => {
-    if (user)
-      userFarms(user)
-        .then((res) => res.docs[0].id)
-        .then(setFarmId);
+    if (user) {
+      userFarms(user).then((res) => {
+        const farm = res?.docs?.[0];
+        if (farm?.id) {
+          setFarm(farm);
+          setFarmId(farm.id);
+        }
+      });
+    }
   }, [user]);
 
   useEffect(() => {
@@ -41,39 +48,51 @@ export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="new-farm" element={Private(<NewFarm />, user)} />
-        <Route path="/" element={Private(<Dashboard />, user)} />
-        <Route path="/animales" element={Private(<Animals />, user)} />
-        <Route path="/animales/bovinos" element={Private(<Bovines />, user)} />
+        <Route path="new-farm" element={Private(<NewFarm />, user, farmId)} />
+        <Route path="/" element={Private(<Dashboard />, user, farmId)} />
+        <Route path="/animales" element={Private(<Animals />, user, farmId)} />
+        <Route
+          path="/animales/bovinos"
+          element={Private(<Bovines />, user, farmId)}
+        />
         <Route
           path="/animales/bovinos/:id"
-          element={Private(<Animal type="bovines" />, user)}
+          element={Private(<Animal type="bovines" />, user, farmId)}
+        />
+        <Route
+          path="/animales/bovinos/:id/calving"
+          element={Private(<Calving type="bovines" />, user, farmId)}
+        />
+        <Route
+          path="/animales/porcinos/:id/calving"
+          element={Private(<Calving type="porcines" />, user, farmId)}
         />
         <Route
           path="/animales/bovinos/:id/weight_history"
-          element={Private(<WeightHistory type="bovines" />, user)}
+          element={Private(<WeightHistory type="bovines" />, user, farmId)}
         />
         <Route
           path="/animales/bovinos/:id/diets"
-          element={Private(<Diets type="bovines" />, user)}
+          element={Private(<Diets type="bovines" />, user, farmId)}
         />
         <Route
           path="/animales/porcinos"
-          element={Private(<Porcines />, user)}
+          element={Private(<Porcines />, user, farmId)}
         />
         <Route
           path="/animales/porcinos/:id"
-          element={Private(<Animal type="porcines" />, user)}
+          element={Private(<Animal type="porcines" />, user, farmId)}
         />
         <Route
           path="/animales/porcinos/:id/weight_history"
-          element={Private(<WeightHistory type="porcines" />, user)}
+          element={Private(<WeightHistory type="porcines" />, user, farmId)}
         />
         <Route
           path="/animales/porcinos/:id/diets"
-          element={Private(<Diets type="porcines" />, user)}
+          element={Private(<Diets type="porcines" />, user, farmId)}
         />
-        <Route path="/nutricion" element={Private(<Nutrition />, user)} />
+        {/* <Route path="/nutricion" element={Private(<Nutrition />, user,farmId)} /> */}
+        <Route path="/settings" element={Private(<Settings />, user, farmId)} />
         <Route path="/login" element={Guest(<Login />, user)} />
         <Route path="/register" element={Guest(<Register />, user)} />
       </Routes>

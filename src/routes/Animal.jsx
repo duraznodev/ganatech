@@ -37,19 +37,18 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import { useSelectAnimal } from "../hooks/useSelectAnimal";
 import { Input } from "@/components/ui/input";
 import { FaMars, FaPlus, FaVenus } from "react-icons/fa6";
 import AnimalList from "../components/AnimalList";
 import { doc, updateDoc } from "firebase/firestore";
 import { firebase_db } from "../firebase/config";
-import { useState } from 'react';
+import { useState } from "react";
 import { updateInCollection } from "../firebase/api";
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import { BiEditAlt } from "react-icons/bi";
-
-
+import { FaBirthdayCake } from "react-icons/fa";
 
 const formSchema = z.object({
   father_id: z.string().nullable(),
@@ -58,23 +57,18 @@ const formSchema = z.object({
   genre: z.string().nullable(),
   purposes: z.string().nullable(),
   weight: z.string().nullable(),
-
 });
-
 
 export default function Animal({ type }) {
   const { id } = useParams();
   const state = useGlobal();
   const animals = state?.[type] || [];
   const animal = animals.find((_animal) => _animal.id === id);
-  const father = animals.find((_animal) => _animal.id === animal?.father_id
-  );
-  const mother = animals.find((_animal) => _animal.id === animal?.mother_id
-  );
+  const father = animals.find((_animal) => _animal.id === animal?.father_id);
+  const mother = animals.find((_animal) => _animal.id === animal?.mother_id);
 
   const castrationDate = animal?.castrationDate;
   const castrationDateJs = castrationDate?.toDate();
-
 
   const [initialValues, setInitialValues] = useState({
     father_id: animal?.father_id || "",
@@ -85,13 +79,11 @@ export default function Animal({ type }) {
     weight: animal?.weight || "",
   });
 
-  console.log(animal)
+  // console.log(animal);
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: initialValues,
   });
-
-
 
   const {
     selectedAnimal: selectedFather,
@@ -110,48 +102,45 @@ export default function Animal({ type }) {
     (animal) => animal?.attributes?.genre === "F"
   );
 
-
-
   const onSubmit = async (data) => {
     toggleFatherSelection("");
     toggleMotherSelection("");
 
     const updatedFields = {};
 
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       if (data[key] !== initialValues[key]) {
         updatedFields[key] = data[key];
       }
     });
 
     if (Object.keys(updatedFields).length === 0) {
-      console.log('No hay cambios');
+      // console.log("No hay cambios");
       return;
     }
 
     try {
-      const { success, error } = await updateInCollection(type, id, updatedFields);
+      const { success, error } = await updateInCollection(
+        type,
+        id,
+        updatedFields
+      );
       if (success) {
-        console.log('Document updated successfully');
+        // console.log("Document updated successfully");
         state.updateAnimal(type, id, updatedFields);
         form.reset();
       } else {
-        console.error('Error updating document:', error);
+        console.error("Error updating document:", error);
       }
     } catch (error) {
-      console.error('Error updating document:', error);
+      console.error("Error updating document:", error);
     }
-
-
   };
-
-
 
   return (
     <>
       <AnimalCard type={type} {...animal} simple />
       {/* <DataTable columns={columns} data={[]} /> */}
-
 
       <Card>
         <CardHeader className="pb-2">
@@ -159,50 +148,66 @@ export default function Animal({ type }) {
         </CardHeader>
         <CardContent className="">
           <div>
-            <span className="font-semibold text-sm">Padre:</span> <span className="text-sm">{father?.name}</span>
+            <span className="font-semibold text-sm">Padre:</span>{" "}
+            <span className="text-sm">{father?.name}</span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Madre:</span> <span className="text-sm">{mother?.name}</span>
+            <span className="font-semibold text-sm">Madre:</span>{" "}
+            <span className="text-sm">{mother?.name}</span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Raza:</span> <span className="text-sm">{animal?.breed}</span>
+            <span className="font-semibold text-sm">Raza:</span>{" "}
+            <span className="text-sm">{animal?.breed}</span>
           </div>
           <div>
             <span className="font-semibold text-sm">Genero:</span>{" "}
-            <span className="text-sm"> {animal?.attributes?.genre === "M" ? "Macho" : "Hembra"}</span>
+            <span className="text-sm">
+              {" "}
+              {animal?.attributes?.genre === "M" ? "Macho" : "Hembra"}
+            </span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Peso:</span>{" "}
-            <span className="text-sm">{Number(animal?.weight).toFixed(2)} L</span>
+            <span className="font-semibold text-sm">Peso Actual:</span>{" "}
+            <span className="text-sm">
+              {Number(animal?.weight).toFixed(2)} L
+            </span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Proposito: </span >
+            <span className="font-semibold text-sm">Proposito: </span>
             <span className="text-sm">{animal?.purposes}</span>
           </div>
 
-          {
-            animal?.attributes.genre === "M"
-              ? <div>
-                <span className="font-semibold text-sm">Fecha Castracion: </span>
-                <span className="text-sm">{castrationDateJs ? castrationDateJs.toLocaleDateString() : 'N/A'}</span>
-              </div>
-              : ""
-          }
-
-
+          {animal?.attributes.genre === "M" ? (
+            <div>
+              <span className="font-semibold text-sm">Fecha Castracion: </span>
+              <span className="text-sm">
+                {castrationDateJs
+                  ? castrationDateJs.toLocaleDateString()
+                  : "N/A"}
+              </span>
+            </div>
+          ) : (
+            ""
+          )}
         </CardContent>
       </Card>
 
       <Dialog>
         <DialogTrigger className="flex justify-center">
-          <Button type="submit" className="flex gap-2" ><BiEditAlt />Editar Informacion</Button>
+          <Button type="submit" className="flex gap-2">
+            <BiEditAlt />
+            Editar Informacion
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Editar Información del Animal</DialogTitle>
           </DialogHeader>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-y-3 w-full">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="flex flex-col gap-y-3 w-full"
+            >
               <FormField
                 className="flex flex-col gap-2"
                 control={form.control}
@@ -241,7 +246,7 @@ export default function Animal({ type }) {
                               multiple={false}
                               onSelect={(animalId) => {
                                 toggleFatherSelection(animalId);
-                                form.setValue('father_id', animalId);
+                                form.setValue("father_id", animalId);
                               }}
                               simple
                               animals={masculineAnimals}
@@ -294,7 +299,7 @@ export default function Animal({ type }) {
                               multiple={false}
                               onSelect={(animalId) => {
                                 toggleMotherSelection(animalId);
-                                form.setValue('mother_id', animalId);
+                                form.setValue("mother_id", animalId);
                               }}
                               simple
                               animals={femenineAnimals}
@@ -314,9 +319,7 @@ export default function Animal({ type }) {
                 name="breed"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="font-semibold">
-                      Raza
-                    </FormLabel>
+                    <FormLabel className="font-semibold">Raza</FormLabel>
                     <FormControl>
                       <Input placeholder="Reescribe la raza" {...field} />
                     </FormControl>
@@ -331,82 +334,46 @@ export default function Animal({ type }) {
                 name="weight"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="font-semibold">
-                      Peso
-                    </FormLabel>
+                    <FormLabel className="font-semibold">Peso</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="Digite el peso" {...field} />
+                      <Input
+                        type="number"
+                        placeholder="Digite el peso"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
 
-
-              {
-                animal?.hasOwnProperty('earring')
-                  ? (animal.attributes?.genre === "M"
-                    ? <FormField
-                      className="flex flex-col gap-y-1.5"
-                      control={form.control}
-                      name="purposes"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="font-semibold">Propósitos</FormLabel>
-                          <FormControl>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Selecciona un propósito" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="Trabajo">Trabajo</SelectItem>
-                                <SelectItem value="Produccion de carne">Producción de carne</SelectItem>
-                                <SelectItem value="Reproduccion">Reproducción</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    : <FormField
-                      className="flex flex-col gap-y-1.5"
-                      control={form.control}
-                      name="purposes"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="font-semibold">Propósitos</FormLabel>
-                          <FormControl>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Selecciona un propósito" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="Produccion de carne">Producción de carne</SelectItem>
-                                <SelectItem value="Produccion de leche">Producción de leche</SelectItem>
-                                <SelectItem value="Reproduccion">Reproducción</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />)
-                  : <FormField
+              {animal?.hasOwnProperty("earring") ? (
+                animal.attributes?.genre === "M" ? (
+                  <FormField
                     className="flex flex-col gap-y-1.5"
                     control={form.control}
                     name="purposes"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="font-semibold">Propósitos</FormLabel>
+                        <FormLabel className="font-semibold">
+                          Propósitos
+                        </FormLabel>
                         <FormControl>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
                             <SelectTrigger>
                               <SelectValue placeholder="Selecciona un propósito" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="Produccion de carne">Producción de carne</SelectItem>
-                              <SelectItem value="Reproduccion">Reproducción</SelectItem>
+                              <SelectItem value="Trabajo">Trabajo</SelectItem>
+                              <SelectItem value="Produccion de carne">
+                                Producción de carne
+                              </SelectItem>
+                              <SelectItem value="Reproduccion">
+                                Reproducción
+                              </SelectItem>
                             </SelectContent>
                           </Select>
                         </FormControl>
@@ -414,11 +381,77 @@ export default function Animal({ type }) {
                       </FormItem>
                     )}
                   />
+                ) : (
+                  <FormField
+                    className="flex flex-col gap-y-1.5"
+                    control={form.control}
+                    name="purposes"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-semibold">
+                          Propósitos
+                        </FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={field.onChange}
+                            defaultValue={field.value}
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="Selecciona un propósito" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Produccion de carne">
+                                Producción de carne
+                              </SelectItem>
+                              <SelectItem value="Produccion de leche">
+                                Producción de leche
+                              </SelectItem>
+                              <SelectItem value="Reproduccion">
+                                Reproducción
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )
+              ) : (
+                <FormField
+                  className="flex flex-col gap-y-1.5"
+                  control={form.control}
+                  name="purposes"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-semibold">
+                        Propósitos
+                      </FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecciona un propósito" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Produccion de carne">
+                              Producción de carne
+                            </SelectItem>
+                            <SelectItem value="Reproduccion">
+                              Reproducción
+                            </SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
-              }
-
-              <Button type="submit" >Actualizar</Button>
-
+              <Button type="submit">Actualizar</Button>
             </form>
           </Form>
         </DialogContent>
@@ -446,13 +479,17 @@ export default function Animal({ type }) {
               Pesajes
             </Link>
           </div>
+          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+            <Link
+              to="calving"
+              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+            >
+              <FaBirthdayCake className="text-xl" />
+              Partos
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </>
   );
 }
-
-
-
-
-

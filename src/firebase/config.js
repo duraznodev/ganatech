@@ -10,6 +10,7 @@ import {
   persistentLocalCache,
   persistentMultipleTabManager,
 } from "firebase/firestore";
+import { getStorage, ref } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -32,6 +33,8 @@ export const firebase_auth = getAuth(firebase_app);
 setPersistence(firebase_auth, browserLocalPersistence);
 
 export const user = firebase_auth.currentUser;
+
+export const firebase_storage = getStorage(firebase_app);
 
 // export const firebase_auth = getAuth();
 // connectAuthEmulator(firebase_auth, "http://127.0.0.1:9099");

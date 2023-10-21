@@ -1,5 +1,6 @@
-import { FaHouse, FaList } from "react-icons/fa6";
+import { FaHouse } from "react-icons/fa6";
 import { HiChartPie } from "react-icons/hi";
+import { MdSettings } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
 
 export default function Layout({ children }) {
@@ -24,13 +25,13 @@ export default function Layout({ children }) {
             <FaHouse className="text-xl" />
             <span className="text-xs">Hato</span>
           </Link>
-          {/* <Link
-            to="/"
+          <Link
+            to="/settings"
             className="h-full justify-center flex-col flex items-center aspect-square"
           >
-            <FaList className="text-xl" />
-            <span className="text-xs">Acciones</span>
-          </Link> */}
+            <MdSettings className="text-xl" />
+            <span className="text-xs">Ajustes</span>
+          </Link>
         </nav>
       </footer>
     </>

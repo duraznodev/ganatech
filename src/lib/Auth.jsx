@@ -1,20 +1,16 @@
 import Layout from "@/components/Layout";
-import { useSearchParams, Navigate } from "react-router-dom";
-import {} from "react-router-dom";
-import { userFarms } from "../firebase/api";
+import { Navigate } from "react-router-dom";
+import { NewFarm } from "../routes";
 
 function render(c) {
   return c;
 }
 
-export function Private(Component, user) {
+export function Private(Component, user, farm_id) {
   if (!user) return <Navigate to="/login" />;
-
-  // if () {
-  //   console.log("no farm");
-  //   window.location.replace("/new-farm");
-  // }
-
+  if (user && !farm_id) {
+    return <NewFarm />;
+  }
   return <Layout>{render(Component)}</Layout>;
 }
 

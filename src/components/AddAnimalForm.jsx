@@ -54,7 +54,7 @@ export default function AddAnimalForm({ children, animals, type }) {
     defaultValues: {
       name: "",
       earring: "",
-      genre: "",
+      genre: null,
       weight: "",
       father_id: "",
       mother_id: "",
@@ -80,14 +80,14 @@ export default function AddAnimalForm({ children, animals, type }) {
         ? data.name.trim()
         : `${
             type === "bovines" ? "Bovino" : "Porcino"
-          } ${new Date().getTime()}}`,
+          } ${new Date().getTime()}`,
     };
     animal.genre = null;
     const submitedAnimal = await addToCollection(
       getCollection(type, farmId),
       animal
     );
-    console.log(submitedAnimal);
+    // console.log(submitedAnimal);
     addAnimal(type, {
       ...animal,
       id: submitedAnimal.id,

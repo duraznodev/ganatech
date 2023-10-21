@@ -24,7 +24,7 @@ export default function DietForm({
   selectedAnimals,
   children,
 }) {
-  const { addDiet } = useGlobal();
+  const { addDiet, farmId } = useGlobal();
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -34,7 +34,7 @@ export default function DietForm({
   });
 
   async function onSubmit(data) {
-    const collection = await addToCollection(getCollection("diets"), {
+    const collection = await addToCollection(getCollection("diets", farmId), {
       ...data,
       type,
       animals: selectedAnimals,

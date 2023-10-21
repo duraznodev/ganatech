@@ -20,7 +20,8 @@ import { useGlobal } from "../contexts/GlobalContext";
 import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
 import { GiScalpel } from "react-icons/gi";
 import { CastrationForm } from "../components/CastrationForm";
-
+import { IoMdOptions } from "react-icons/io";
+import ModalOptions from "../components/ModalOptions";
 
 export default function Bovines() {
   const { selectedAnimals, resetSelection, toggleAnimalSelection } =
@@ -28,15 +29,13 @@ export default function Bovines() {
   const global = useGlobal();
   const bovines = global?.bovines || [];
 
-
-  const allMale = selectedAnimals.every(animal =>
-    bovines.find(bovine => bovine.id === animal)?.attributes?.genre === 'M'
+  const allMale = selectedAnimals.every(
+    (animal) =>
+      bovines.find((bovine) => bovine.id === animal)?.attributes?.genre === "M"
   );
-
 
   return (
     <>
-      <BiEditAlt />
       <AnimalList
         type="bovines"
         selectedAnimals={selectedAnimals}
@@ -130,9 +129,15 @@ export default function Bovines() {
                 <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
                   <DialogHeader>
                     <DialogTitle>Castracion</DialogTitle>
-                    <DialogDescription>Registro de castraciones</DialogDescription>
+                    <DialogDescription>
+                      Registro de castraciones
+                    </DialogDescription>
                   </DialogHeader>
-                  <CastrationForm type="bovines" selectedAnimals={selectedAnimals} resetSelection={resetSelection}>
+                  <CastrationForm
+                    type="bovines"
+                    selectedAnimals={selectedAnimals}
+                    resetSelection={resetSelection}
+                  >
                     <DialogFooter className="flex-row gap-x-2 mt-1">
                       <DialogClose className="flex-1">
                         <Button
@@ -149,12 +154,44 @@ export default function Bovines() {
                       </Button>
                     </DialogFooter>
                   </CastrationForm>
-
                 </DialogContent>
               </Dialog>
-
             ) : null}
-
+            <Dialog>
+              <DialogTrigger className="flex-1 py-2">
+                <div className="h-full justify-center flex-col flex items-center flex-1">
+                  <IoMdOptions className="text-xl" />
+                  <span className="text-xs">Mas</span>
+                </div>
+              </DialogTrigger>
+              <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+                <DialogHeader>
+                  <DialogTitle>Opciones</DialogTitle>
+                  <DialogDescription>Selecciona una opción</DialogDescription>
+                </DialogHeader>
+                <ModalOptions
+                  type="bovines"
+                  resetSelection={resetSelection}
+                  selectedAnimals={selectedAnimals}
+                >
+                  <DialogFooter className="flex-row gap-x-2 mt-4">
+                    <DialogClose className="flex-1">
+                      <Button
+                        type="button"
+                        size="lg"
+                        className="w-full"
+                        variant="outline"
+                      >
+                        Cancelar
+                      </Button>
+                    </DialogClose>
+                    <Button type="submit" size="lg" className="flex-1 px-0">
+                      Agregar
+                    </Button>
+                  </DialogFooter>
+                </ModalOptions>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       ) : (
@@ -169,7 +206,7 @@ export default function Bovines() {
             <DialogHeader>
               <DialogTitle>Agregar bovino</DialogTitle>
               <DialogDescription>
-                Agregue las caracteristicas del bovino
+                Agregue las características del bovino
               </DialogDescription>
             </DialogHeader>
             <AddAnimalForm type="bovines" animals={bovines}>

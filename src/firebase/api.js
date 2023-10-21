@@ -8,7 +8,8 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { firebase_db } from "./config";
+import { firebase_db, firebase_storage } from "./config";
+import { getDownloadURL, uploadBytes } from "firebase/storage";
 
 export const getCollection = (collection_name, farm_id) =>
   collection(firebase_db, `farms/${farm_id}/${collection_name}`);
@@ -25,6 +26,8 @@ export const userFarms = (user) =>
       )
     )
   );
+
+export const newFarm = (data) => addToCollection(getFarms(), data);
 
 export const addToCollection = (collection, data) => addDoc(collection, data);
 
@@ -49,4 +52,10 @@ export const updateInCollection = async (
     // console.error('Error updating document:', error);
     return { success: false, error };
   }
+};
+
+export const uploadFile = async (file, ref) => {
+  await uploadBytes(ref, file);
+  const url = await getDownloadURL(ref);
+  return url;
 };

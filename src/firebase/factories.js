@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Timestamp } from "firebase/firestore";
 import { addToCollection, getCollection } from "./api";
 
-export function bovineFactory() {
+export function bovineFactory(farm_id) {
   const fakeBovine = {
     attributes: {
       genre: faker.helpers.arrayElement(["M", "F"]),
@@ -25,10 +25,10 @@ export function bovineFactory() {
     in_observation: faker.datatype.boolean(),
     weight: faker.number.float({ min: 60, max: 20000 }),
   };
-  return addToCollection(getCollection("bovines"), fakeBovine);
+  return addToCollection(getCollection("bovines", farm_id), fakeBovine);
 }
 
-export function birthFactory() {
+export function birthFactory(farm_id) {
   const fakeBirth = {
     id: faker.string.uuid(),
     children_ids: faker.helpers.arrayElements(
@@ -41,19 +41,22 @@ export function birthFactory() {
     number_of_babies: 1,
     observations: "Ninguna",
   };
-  return addToCollection(getCollection("births"), fakeBirth);
+  return addToCollection(getCollection("births", farm_id), fakeBirth);
 }
 
-export function inseminationFactory() {
+export function inseminationFactory(farm_id) {
   const fakeInsemination = {
     id: faker.string.uuid(),
     date: Timestamp.fromDate(faker.date.soon()),
     observations: "Ninguna",
   };
-  return addToCollection(getCollection("inseminations"), fakeInsemination);
+  return addToCollection(
+    getCollection("inseminations", farm_id),
+    fakeInsemination
+  );
 }
 
-export function porcineFactory() {
+export function porcineFactory(farm_id) {
   const fakePorcine = {
     id: faker.string.uuid(),
     attributes: {
@@ -69,19 +72,22 @@ export function porcineFactory() {
     purposes: faker.helpers.arrayElements(["reproduction", "production"]),
     weight: faker.number.float({ min: 60, max: 20000 }),
   };
-  return addToCollection(getCollection("porcines"), fakePorcine);
+  return addToCollection(getCollection("porcines", farm_id), fakePorcine);
 }
 
-export function weightHistoryFactory() {
+export function weightHistoryFactory(farm_id) {
   const fakeWeightHistory = {
     animal_id: "032c2260-cb94-4cad-98b2-67d5e3fa4996",
     date: Timestamp.fromDate(faker.date.soon()),
     weight: faker.number.float({ min: 60, max: 20000 }),
   };
 
-  return addToCollection(getCollection("weight_history"), fakeWeightHistory);
+  return addToCollection(
+    getCollection("weight_history", farm_id),
+    fakeWeightHistory
+  );
 }
-// export function BovineToBirthFactory(
+// export function BovineToBirthFactory(farm_id
 //   birth_id,
 //   bovine_id = {
 //     id:faker.string.uuid(),

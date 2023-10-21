@@ -59,7 +59,7 @@ export function CastrationForm({
         global.farmId
       );
 
-      console.log(response);
+      // console.log(response);
       if (response.success) {
         global.updateAnimal(type, animalId, updatedFields);
       } else {

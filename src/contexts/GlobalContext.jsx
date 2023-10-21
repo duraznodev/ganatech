@@ -13,6 +13,10 @@ export function GlobalProvider({ children }) {
   const [weightHistories, setWeightHistories] = useState([]);
   const [farmId, setFarmId] = useState(null);
   const [user, setUser] = useState(null);
+  const [ironImgRef, setIronImgRef] = useState(null);
+  const [ironImgURL, setIronImgURL] = useState(null);
+  const [calvings, setCalvings] = useState([]);
+  const [farm, setFarm] = useState(null);
 
   useEffect(() => {
     const init = async () => {
@@ -22,10 +26,13 @@ export function GlobalProvider({ children }) {
       );
       setPorcines(await allFromCollection(getCollection("porcines", farmId)));
       setDiets(await allFromCollection(getCollection("diets", farmId)));
+      setCalvings(await allFromCollection(getCollection("calvings", farmId)));
     };
 
-    // seeder();
-    if (farmId) init();
+    if (farmId) {
+      // seeder(farmId);
+      init(farmId);
+    }
   }, [farmId]);
 
   const addAnimal = (type, animal) => {
@@ -38,7 +45,7 @@ export function GlobalProvider({ children }) {
   };
 
   const updateAnimal = (type, id, updatedAnimal) => {
-    console.log("Updating Local State:", { type, id, updatedAnimal });
+    // console.log("Updating Local State:", { type, id, updatedAnimal });
     if (type === "bovines") {
       setBovines(
         bovines.map((animal) =>
@@ -62,21 +69,33 @@ export function GlobalProvider({ children }) {
     setWeightHistories([...weightHistories, weightHistory]);
   };
 
+  const addCalving = (_calvings) => {
+    setCalvings([...calvings, _calvings]);
+  };
+
   return (
     <GlobalContext.Provider
       value={{
         bovines,
+        calvings,
         diets,
+        farm,
         farmId,
+        ironImgRef,
+        ironImgURL,
         porcines,
         user,
         weightHistories,
         addAnimal,
-        updateAnimal,
+        addCalving,
         addDiet,
         addWeightHistory,
+        setFarm,
         setFarmId,
+        setIronImgRef,
+        setIronImgURL,
         setUser,
+        updateAnimal,
       }}
     >
       {children}
