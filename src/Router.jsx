@@ -18,6 +18,7 @@ import {
   Register,
   WeightHistory,
   Calving,
+  Vaccine
 } from "./routes";
 import Settings from "./routes/Settings";
 
@@ -80,6 +81,16 @@ export default function Router() {
           path="/animales/porcinos/:id/calving"
           element={Private(<Calving type="porcines" />, user, farmId)}
         />
+
+        <Route
+          path="/animales/bovinos/:id/vaccine"
+          element={Private(< Vaccine type="bovines" />, user, farmId)}
+        />
+        <Route
+          path="/animales/porcinos/:id/vaccine"
+          element={Private(< Vaccine type="porcines" />, user, farmId)}
+        />
+
         <Route
           path="/animales/bovinos/:id/weight_history"
           element={Private(<WeightHistory type="bovines" />, user, farmId)}

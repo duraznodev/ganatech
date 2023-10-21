@@ -22,7 +22,6 @@ import { GiScalpel } from "react-icons/gi";
 import { CastrationForm } from "../components/CastrationForm";
 import { IoMdOptions } from "react-icons/io";
 import ModalOptions from "../components/ModalOptions";
-
 export default function Bovines() {
   const { selectedAnimals, resetSelection, toggleAnimalSelection } =
     useSelectedAnimals();
