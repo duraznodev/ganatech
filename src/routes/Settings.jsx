@@ -15,7 +15,6 @@ import { useGlobal } from "@/contexts/GlobalContext";
 export default function Settings() {
   const { farm, ironImgURL, user } = useGlobal();
   const farmData = farm.data();
-  console.log(user);
   const owner = farmData?.owners;
   const users = farmData?.users;
 

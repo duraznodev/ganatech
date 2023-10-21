@@ -18,7 +18,7 @@ import {
   Register,
   WeightHistory,
   Calving,
-  Vaccine
+  Vaccine,
 } from "./routes";
 import Settings from "./routes/Settings";
 
@@ -30,6 +30,7 @@ export default function Router() {
     setFarmId,
     setIronImgRef,
     setUser,
+    setIsAdmin,
     setIronImgURL,
   } = useGlobal();
 
@@ -45,6 +46,7 @@ export default function Router() {
           setFarm(farm);
           setFarmId(farm.id);
           setIronImgRef(ironImgRef);
+          farm?.data()?.owners?.includes(user.uid) && setIsAdmin(true);
         }
       });
     }
@@ -84,11 +86,11 @@ export default function Router() {
 
         <Route
           path="/animales/bovinos/:id/vaccine"
-          element={Private(< Vaccine type="bovines" />, user, farmId)}
+          element={Private(<Vaccine type="bovines" />, user, farmId)}
         />
         <Route
           path="/animales/porcinos/:id/vaccine"
-          element={Private(< Vaccine type="porcines" />, user, farmId)}
+          element={Private(<Vaccine type="porcines" />, user, farmId)}
         />
 
         <Route

@@ -18,6 +18,7 @@ export function GlobalProvider({ children }) {
   const [calvings, setCalvings] = useState([]);
   const [vaccines, setVaccines] = useState([]);
   const [farm, setFarm] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(null);
 
   useEffect(() => {
     const init = async () => {
@@ -83,27 +84,28 @@ export function GlobalProvider({ children }) {
       value={{
         bovines,
         calvings,
-        vaccines,
         diets,
         farm,
         farmId,
         ironImgRef,
         ironImgURL,
+        isAdmin,
         porcines,
         user,
+        vaccines,
         weightHistories,
         addAnimal,
         addCalving,
         addDiet,
+        addVaccines,
         addWeightHistory,
         setFarm,
         setFarmId,
         setIronImgRef,
         setIronImgURL,
+        setIsAdmin,
         setUser,
         updateAnimal,
-        addVaccines,
-
       }}
     >
       {children}
