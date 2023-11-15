@@ -142,7 +142,7 @@ export default function Dashboard() {
   return (
     <>
       <div className="md:flex md:sw-screen md:gap-5 md:h-full ">
-        <Card className="md:w-2/3 h-full">
+        <Card className="md:w-2/3 md:h-full">
           <CardHeader className="space-y-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-x-1">
