@@ -12,15 +12,15 @@ import { Link } from "react-router-dom";
 
 export default function Animals() {
   return (
-    <div className="h-full flex flex-col justify-center">
-      <Card>
-        <CardHeader className="pb-3">
+    <div className="h-full flex flex-col justify-center md:items-center">
+      <Card className="md:w-2/3">
+        <CardHeader className="pb-3 md:flex md:flex-col md:items-center">
           <CardTitle>Seleccionar tipo</CardTitle>
           <CardDescription>
             Seleccione el tipo de animal a revisar
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex gap-x-4">
+        <CardContent className="flex gap-x-4 ">
           <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
             <Link
               to="/animales/bovinos"

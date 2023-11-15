@@ -141,30 +141,31 @@ export default function Dashboard() {
 
   return (
     <>
-      <Card>
-        <CardHeader className="space-y-2">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-x-1">
-              <SiHappycow />
-              <CardTitle>Ganado por {dynamicText}</CardTitle>
+      <div className="md:flex md:sw-screen md:gap-5 md:h-full ">
+        <Card className="md:w-2/3 h-full">
+          <CardHeader className="space-y-2">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-x-1">
+                <SiHappycow />
+                <CardTitle>Ganado por {dynamicText}</CardTitle>
+              </div>
+              <div className="flex gap-x-2">
+                <Button
+                  variant={dynamicText === "estado" ? "default" : "outline"}
+                  onClick={() => handleButtonClick("estado")}
+                >
+                  Estado
+                </Button>
+                <Button
+                  variant={dynamicText === "tipo" ? "default" : "outline"}
+                  onClick={() => handleButtonClick("tipo")}
+                >
+                  Tipo
+                </Button>
+              </div>
             </div>
-            <div className="flex gap-x-2">
-              <Button
-                variant={dynamicText === "estado" ? "default" : "outline"}
-                onClick={() => handleButtonClick("estado")}
-              >
-                Estado
-              </Button>
-              <Button
-                variant={dynamicText === "tipo" ? "default" : "outline"}
-                onClick={() => handleButtonClick("tipo")}
-              >
-                Tipo
-              </Button>
-            </div>
-          </div>
-          <Separator />
-          {/* <div className="flex gap-x-1 w-full ">
+            <Separator />
+            {/* <div className="flex gap-x-1 w-full ">
             {["Hoy", "Semanal", "Mensual", "Anual"].map((filter) => (
               <Button
                 className="flex-1"
@@ -176,96 +177,98 @@ export default function Dashboard() {
               </Button>
             ))}
           </div> */}
-        </CardHeader>
-        <CardContent className="h-80">
-          {isMounted && (
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={
-                    dynamicText === "tipo"
-                      ? // dataByTime[timeFilter]
+          </CardHeader>
+          <CardContent className="h-80">
+            {isMounted && (
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={
+                      dynamicText === "tipo"
+                        ? // dataByTime[timeFilter]
                         dataTipo
-                      : dataEstado
-                  }
-                  labelLine={true}
-                  label={renderLabel}
-                  outerRadius={80}
-                  fill="#8884d8"
-                  dataKey="value"
-                >
-                  {(dynamicText === "tipo" ? dataTipo : dataEstado).map(
-                    (entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    )
-                  )}
-                </Pie>
-                <Tooltip />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          )}
-        </CardContent>
-      </Card>
+                        : dataEstado
+                    }
+                    labelLine={true}
+                    label={renderLabel}
+                    outerRadius={80}
+                    fill="#8884d8"
+                    dataKey="value"
+                  >
+                    {(dynamicText === "tipo" ? dataTipo : dataEstado).map(
+                      (entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                        />
+                      )
+                    )}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            )}
+          </CardContent>
+        </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="font-semibold tracking-tight text-xl">
-            Control Ganadero
-          </CardTitle>
-          <CardDescription>
-            Bienvenido
-            <span className="font-medium"> Querido Finquero</span>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-2.5 grid-cols-2 lg:grid-cols-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
-                <CardTitle className="text-sm font-medium">Toros</CardTitle>
-                <GiCow className="text-2xl" />
-              </CardHeader>
-              <CardContent className="pb-4">
-                <div className="text-xl font-bold">{bovineMCount}</div>
-                {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
-                <CardTitle className="text-sm font-medium">Vacas</CardTitle>
-                <GiCow className="text-2xl" />
-              </CardHeader>
-              <CardContent className="pb-4">
-                <div className="text-xl font-bold">{bovineFCount}</div>
-                {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
-                <CardTitle className="text-sm font-medium">Cerdos</CardTitle>
-                <GiPig className="text-2xl" />
-              </CardHeader>
-              <CardContent className="pb-4">
-                <div className="text-xl font-bold">{porcineMCount}</div>
-                {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
-                <CardTitle className="text-sm font-medium">Cerdas</CardTitle>
-                <GiPig className="text-2xl" />
-              </CardHeader>
-              <CardContent className="pb-4">
-                <div className="text-xl font-bold">{porcineFCount}</div>
-                {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
-              </CardContent>
-            </Card>
-          </div>
-        </CardContent>
-      </Card>
+        <Card className="md:w-1/3">
+          <CardHeader>
+            <CardTitle className="font-semibold tracking-tight text-xl">
+              Control Ganadero
+            </CardTitle>
+            <CardDescription>
+              Bienvenido
+              <span className="font-medium"> Querido Finquero</span>
+            </CardDescription>
+          </CardHeader>
+          <CardContent >
+            <div className="grid gap-2.5 grid-cols-2 md:grid-cols-1 ">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+                  <CardTitle className="text-sm font-medium">Toros</CardTitle>
+                  <GiCow className="text-2xl" />
+                </CardHeader>
+                <CardContent className="pb-4">
+                  <div className="text-xl font-bold">{bovineMCount}</div>
+                  {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+                  <CardTitle className="text-sm font-medium">Vacas</CardTitle>
+                  <GiCow className="text-2xl" />
+                </CardHeader>
+                <CardContent className="pb-4">
+                  <div className="text-xl font-bold">{bovineFCount}</div>
+                  {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+                  <CardTitle className="text-sm font-medium">Cerdos</CardTitle>
+                  <GiPig className="text-2xl" />
+                </CardHeader>
+                <CardContent className="pb-4">
+                  <div className="text-xl font-bold">{porcineMCount}</div>
+                  {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+                  <CardTitle className="text-sm font-medium">Cerdas</CardTitle>
+                  <GiPig className="text-2xl" />
+                </CardHeader>
+                <CardContent className="pb-4">
+                  <div className="text-xl font-bold">{porcineFCount}</div>
+                  {/* <p className="text-xs text-muted-foreground">+20.1%</p> */}
+                </CardContent>
+              </Card>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
     </>
   );
 }
