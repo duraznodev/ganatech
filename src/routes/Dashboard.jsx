@@ -48,7 +48,7 @@ export default function Dashboard() {
           curr?.attributes?.genre === "M"
             ? [acc[0] + 1, acc[1]]
             : [acc[0], acc[1] + 1],
-        [0, 0]
+        [0, 0],
       );
 
       const [porcineMCount, porcineFCount] = porcines?.reduce(
@@ -56,7 +56,7 @@ export default function Dashboard() {
           curr?.attributes?.genre === "M"
             ? [acc[0] + 1, acc[1]]
             : [acc[0], acc[1] + 1],
-        [0, 0]
+        [0, 0],
       );
 
       setData({
@@ -68,7 +68,7 @@ export default function Dashboard() {
 
       statusArr.forEach(async (status) => {
         const count = bovines.filter(
-          (bovine) => bovine?.attributes?.status == status
+          (bovine) => bovine?.attributes?.status == status,
         ).length;
 
         setData((prev) => ({ ...prev, [status]: count }));
@@ -99,72 +99,76 @@ export default function Dashboard() {
 
   return (
     <>
-      <Card>
-        <CardHeader className="space-y-2">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-x-1">
-              <SiHappycow />
-              <CardTitle>Ganado por {filterText}</CardTitle>
+      <div className="md:sw-screen flex flex-col gap-6 md:h-full md:flex-row">
+        <Card className="md:h-full md:w-2/3">
+          <CardHeader className="space-y-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-x-1">
+                <SiHappycow />
+                <CardTitle>
+                  Ganado por {filterText === "state" && "Estado"}
+                  {filterText === "type" && "Tipo"}
+                </CardTitle>
+              </div>
+              <div className="flex gap-x-2">
+                <Button
+                  variant={filterText === "state" ? "default" : "outline"}
+                  onClick={() => handleChangeFilter("state")}
+                >
+                  Estado
+                </Button>
+                <Button
+                  variant={filterText === "type" ? "default" : "outline"}
+                  onClick={() => handleChangeFilter("type")}
+                >
+                  Tipo
+                </Button>
+              </div>
             </div>
-            <div className="flex gap-x-2">
-              <Button
-                variant={filterText === "state" ? "default" : "outline"}
-                onClick={() => handleChangeFilter("state")}
-              >
-                Estado
-              </Button>
-              <Button
-                variant={filterText === "type" ? "default" : "outline"}
-                onClick={() => handleChangeFilter("type")}
-              >
-                Tipo
-              </Button>
+            <Separator />
+          </CardHeader>
+          <CardContent className="h-80">
+            <FarmStatsPieChart
+              data={filterText === "type" ? dataType : dataState}
+            />
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-xl font-semibold tracking-tight">
+              Control Ganadero
+            </CardTitle>
+            <CardDescription>
+              Bienvenido
+              <span className="font-medium"> Querido Finquero</span>
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex-1">
+            <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-1">
+              <AnimalQuantityCard
+                type="bovine"
+                title="Toros"
+                count={bovineMCount}
+              />
+              <AnimalQuantityCard
+                type="bovine"
+                title="Vacas"
+                count={bovineFCount}
+              />
+              <AnimalQuantityCard
+                type="porcine"
+                title="Cerdos"
+                count={porcineMCount}
+              />
+              <AnimalQuantityCard
+                type="porcine"
+                title="Cerdas"
+                count={porcineFCount}
+              />
             </div>
-          </div>
-          <Separator />
-        </CardHeader>
-        <CardContent className="h-80">
-          <FarmStatsPieChart
-            data={filterText === "type" ? dataType : dataState}
-          />
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="font-semibold tracking-tight text-xl">
-            Control Ganadero
-          </CardTitle>
-          <CardDescription>
-            Bienvenido
-            <span className="font-medium"> Querido Finquero</span>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-2.5 grid-cols-2 lg:grid-cols-4">
-            <AnimalQuantityCard
-              type="bovine"
-              title="Toros"
-              count={bovineMCount}
-            />
-            <AnimalQuantityCard
-              type="bovine"
-              title="Vacas"
-              count={bovineFCount}
-            />
-            <AnimalQuantityCard
-              type="porcine"
-              title="Cerdos"
-              count={porcineMCount}
-            />
-            <AnimalQuantityCard
-              type="porcine"
-              title="Cerdas"
-              count={porcineFCount}
-            />
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
     </>
   );
 }

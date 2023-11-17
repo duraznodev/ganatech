@@ -1,5 +1,4 @@
-import { GiCow, GiPig } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { AnimalTypeDialogContent } from "../components/AnimalTypeDialogContent";
 import {
   Card,
   CardContent,
@@ -7,8 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
+import { Button } from "../components/ui/button";
+import { GiCow, GiPig } from "react-icons/gi";
+import { Link } from "react-router-dom";
 
-export default function AnimalTypes() {
+export default function Animals() {
   return (
     <div className="flex h-full flex-col justify-center">
       <Card>
@@ -19,7 +21,7 @@ export default function AnimalTypes() {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex gap-x-4">
-          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
+          <div className="flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
             <Link
               to="/animales/bovinos"
               className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
@@ -27,7 +29,7 @@ export default function AnimalTypes() {
               <GiCow className="text-2xl" /> Bovino
             </Link>
           </div>
-          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
+          <div className="flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
             <Link
               to="/animales/porcinos"
               className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"

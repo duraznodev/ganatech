@@ -5,13 +5,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import React, { useState } from "react";
+import { useState } from "react";
+import { FaBirthdayCake } from "react-icons/fa";
+import { LuMilk } from "react-icons/lu";
 import { MdVaccines } from "react-icons/md";
 import { Button } from "../components/ui/button";
+import { useGlobal } from "../contexts/GlobalContext";
 import { CalvingForm } from "./CalvingForm";
+import MilkForm from "./MilkForm";
 import { VaccineForm } from "./VaccineForm";
-
-import { FaBirthdayCake } from "react-icons/fa";
 
 export default function ModalOptions({
   type,
@@ -20,17 +22,40 @@ export default function ModalOptions({
   children,
 }) {
   const [openModal, setOpenModal] = useState(null);
+  const state = useGlobal();
+  const animals = state?.[type] || [];
+  const animal = animals.find((_animal) => _animal.id === selectedAnimals[0]);
+
   return (
     <Dialog>
-      <DialogTrigger className="flex flex-col gap-3">
+      <DialogTrigger className="flex flex-wrap justify-center gap-2">
+        {animal?.attributes?.genre === "F" ? (
+          <Button
+            variant="outline"
+            className="flex w-40 gap-2"
+            onClick={() => setOpenModal("partos")}
+          >
+            <FaBirthdayCake />
+            Partos
+          </Button>
+        ) : (
+          ""
+        )}
+
+        {animal?.attributes?.genre === "F" ? (
+          <Button
+            variant="outline"
+            className="flex w-40 gap-2"
+            onClick={() => setOpenModal("milk")}
+          >
+            <LuMilk />
+            Leche
+          </Button>
+        ) : (
+          ""
+        )}
         <Button
-          className="flex w-40 gap-2"
-          onClick={() => setOpenModal("partos")}
-        >
-          <FaBirthdayCake />
-          Partos
-        </Button>
-        <Button
+          variant="outline"
           className="flex w-40 gap-2"
           onClick={() => setOpenModal("vacunas")}
         >
@@ -61,6 +86,16 @@ export default function ModalOptions({
           >
             {children}
           </VaccineForm>
+        )}
+        {openModal === "milk" && (
+          <MilkForm
+            type={type}
+            resetSelection={resetSelection}
+            selectedAnimals={selectedAnimals}
+            onClose={() => setOpenModal(null)}
+          >
+            {children}
+          </MilkForm>
         )}
       </DialogContent>
     </Dialog>

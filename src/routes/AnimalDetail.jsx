@@ -88,12 +88,13 @@ export default function AnimalDetail({ type }) {
     toggleAnimalSelection: toggleMotherSelection,
   } = useSelectAnimal();
 
-  const masculineAnimals = animals.filter(
-    (animal) => animal?.attributes?.genre === "M",
-  );
-
-  const feminineAnimals = animals.filter(
-    (animal) => animal?.attributes?.genre === "F",
+  const [masculineAnimals, feminineAnimals] = animals.reduce(
+    (acc, animal) => {
+      const targetArray = animal?.attributes?.genre === "M" ? acc[0] : acc[1];
+      targetArray.push(animal);
+      return acc;
+    },
+    [[], []],
   );
 
   const onSubmit = async (data) => {
