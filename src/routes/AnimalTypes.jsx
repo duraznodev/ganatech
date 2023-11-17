@@ -8,9 +8,9 @@ import {
   CardTitle,
 } from "../components/ui/card";
 
-export default function Animals() {
+export default function AnimalTypes() {
   return (
-    <div className="h-full flex flex-col justify-center">
+    <div className="flex h-full flex-col justify-center">
       <Card>
         <CardHeader className="pb-3">
           <CardTitle>Seleccionar tipo</CardTitle>
@@ -19,18 +19,18 @@ export default function Animals() {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex gap-x-4">
-          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
             <Link
               to="/animales/bovinos"
-              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
             >
               <GiCow className="text-2xl" /> Bovino
             </Link>
           </div>
-          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
             <Link
               to="/animales/porcinos"
-              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
             >
               <GiPig className="text-2xl" /> Porcino
             </Link>

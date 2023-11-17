@@ -19,7 +19,7 @@ import AnimalList from "../components/AnimalList";
 import { CastrationForm } from "../components/CastrationForm";
 import DietForm from "../components/DietForm";
 import ModalOptions from "../components/ModalOptions";
-import WeightForm from "../components/WeigthForm";
+import WeightForm from "../components/WeightForm";
 import { useGlobal } from "../contexts/GlobalContext";
 import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
 export default function Porcines() {
@@ -31,7 +31,7 @@ export default function Porcines() {
   const allMale = selectedAnimals.every(
     (animal) =>
       porcines.find((porcine) => porcine.id === animal)?.attributes?.genre ===
-      "M"
+      "M",
   );
 
   return (
@@ -43,16 +43,16 @@ export default function Porcines() {
         animals={porcines}
       />
       {selectedAnimals.length > 0 ? (
-        <div className=" bottom-0  border-t bg-white/80 w-full">
-          <div className="container h-full justify-around flex items-center text-muted-foreground">
+        <div className=" bottom-0  w-full border-t bg-white/80">
+          <div className="container flex h-full items-center justify-around text-muted-foreground">
             <Dialog>
               <DialogTrigger className="flex-1 py-2">
-                <div className="h-full justify-center flex-col flex items-center flex-1">
+                <div className="flex h-full flex-1 flex-col items-center justify-center">
                   <BiFoodMenu className="text-xl" />
                   <span className="text-xs">Dieta</span>
                 </div>
               </DialogTrigger>
-              <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+              <DialogContent className=" flex h-auto flex-col  sm:max-w-3xl">
                 <DialogHeader>
                   <DialogTitle>Plan de Alimentación</DialogTitle>
                   <DialogDescription>
@@ -64,7 +64,7 @@ export default function Porcines() {
                   resetSelection={resetSelection}
                   selectedAnimals={selectedAnimals}
                 >
-                  <DialogFooter className="flex-row gap-x-2 mt-4">
+                  <DialogFooter className="mt-4 flex-row gap-x-2">
                     <DialogClose className="flex-1">
                       <Button
                         type="button"
@@ -84,12 +84,12 @@ export default function Porcines() {
             </Dialog>
             <Dialog>
               <DialogTrigger className="flex-1 py-2">
-                <div className="h-full justify-center flex-col flex items-center flex-1">
+                <div className="flex h-full flex-1 flex-col items-center justify-center">
                   <TbWeight className="text-xl" />
                   <span className="text-xs">Peso</span>
                 </div>
               </DialogTrigger>
-              <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+              <DialogContent className=" flex h-auto flex-col  sm:max-w-3xl">
                 <DialogHeader>
                   <DialogTitle>Pesaje</DialogTitle>
                   <DialogDescription>Parámetros del pesaje</DialogDescription>
@@ -99,7 +99,7 @@ export default function Porcines() {
                   resetSelection={resetSelection}
                   selectedAnimals={selectedAnimals}
                 >
-                  <DialogFooter className="flex-row gap-x-2 mt-4">
+                  <DialogFooter className="mt-4 flex-row gap-x-2">
                     <DialogClose className="flex-1">
                       <Button
                         type="button"
@@ -121,12 +121,12 @@ export default function Porcines() {
             {allMale ? (
               <Dialog>
                 <DialogTrigger className="flex-1 py-2">
-                  <div className="h-full justify-center flex-col flex items-center flex-1">
+                  <div className="flex h-full flex-1 flex-col items-center justify-center">
                     <GiScalpel className="text-xl" />
                     <span className="text-xs">Castración</span>
                   </div>
                 </DialogTrigger>
-                <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+                <DialogContent className=" flex h-auto flex-col  sm:max-w-3xl">
                   <DialogHeader>
                     <DialogTitle>Castración</DialogTitle>
                     <DialogDescription>
@@ -138,7 +138,7 @@ export default function Porcines() {
                     selectedAnimals={selectedAnimals}
                     resetSelection={resetSelection}
                   >
-                    <DialogFooter className="flex-row gap-x-2 mt-1">
+                    <DialogFooter className="mt-1 flex-row gap-x-2">
                       <DialogClose className="flex-1">
                         <Button
                           type="button"
@@ -160,12 +160,12 @@ export default function Porcines() {
 
             <Dialog>
               <DialogTrigger className="flex-1 py-2">
-                <div className="h-full justify-center flex-col flex items-center flex-1">
+                <div className="flex h-full flex-1 flex-col items-center justify-center">
                   <IoMdOptions className="text-xl" />
                   <span className="text-xs">Mas</span>
                 </div>
               </DialogTrigger>
-              <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+              <DialogContent className=" flex h-auto flex-col  sm:max-w-3xl">
                 <DialogHeader>
                   <DialogTitle>Opciones</DialogTitle>
                   <DialogDescription>Selecciona una opción</DialogDescription>
@@ -175,7 +175,7 @@ export default function Porcines() {
                   resetSelection={resetSelection}
                   selectedAnimals={selectedAnimals}
                 >
-                  <DialogFooter className="flex-row gap-x-2 mt-4">
+                  <DialogFooter className="mt-4 flex-row gap-x-2">
                     <DialogClose className="flex-1">
                       <Button
                         type="button"
@@ -198,12 +198,12 @@ export default function Porcines() {
       ) : (
         <Dialog>
           <DialogTrigger>
-            <div className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 absolute bottom-20 right-6">
+            <div className="absolute bottom-20 right-6 inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
               <FaPlus className="me-2" />
               Nuevo animal
             </div>
           </DialogTrigger>
-          <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+          <DialogContent className=" flex h-auto flex-col  sm:max-w-3xl">
             <DialogHeader>
               <DialogTitle>Agregar porcino</DialogTitle>
               <DialogDescription>
@@ -211,7 +211,7 @@ export default function Porcines() {
               </DialogDescription>
             </DialogHeader>
             <AddAnimalForm type="porcines" animals={porcines}>
-              <DialogFooter className="flex-row gap-x-2 mt-4">
+              <DialogFooter className="mt-4 flex-row gap-x-2">
                 <DialogClose className="flex-1">
                   <Button
                     type="button"

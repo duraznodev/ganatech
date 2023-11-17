@@ -35,7 +35,7 @@ export function VaccineForm({
     selectedAnimals.reduce((acc, animalId) => {
       acc[animalId] = z.string().min(2, "La vacuna es obligatoria");
       return acc;
-    }, {})
+    }, {}),
   );
 
   const form = useForm({
@@ -72,7 +72,7 @@ export function VaccineForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-y-3 w-full"
+        className="flex w-full flex-col gap-y-3"
       >
         {selectedAnimals.map((animalId) => {
           const animal = animals.find((animal) => animal.id === animalId);

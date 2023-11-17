@@ -53,7 +53,7 @@ const formSchema = z.object({
   weight: z.string().nullable(),
 });
 
-export default function Animal({ type }) {
+export default function AnimalDetail({ type }) {
   const { id } = useParams();
   const state = useGlobal();
   const animals = state?.[type] || [];
@@ -89,11 +89,11 @@ export default function Animal({ type }) {
   } = useSelectAnimal();
 
   const masculineAnimals = animals.filter(
-    (animal) => animal?.attributes?.genre === "M"
+    (animal) => animal?.attributes?.genre === "M",
   );
 
   const feminineAnimals = animals.filter(
-    (animal) => animal?.attributes?.genre === "F"
+    (animal) => animal?.attributes?.genre === "F",
   );
 
   const onSubmit = async (data) => {
@@ -117,7 +117,7 @@ export default function Animal({ type }) {
         type,
         id,
         updatedFields,
-        global.farmId
+        global.farmId,
       );
       if (success) {
         state.updateAnimal(type, id, updatedFields);
@@ -139,38 +139,38 @@ export default function Animal({ type }) {
         </CardHeader>
         <CardContent className="">
           <div>
-            <span className="font-semibold text-sm">Padre:</span>{" "}
+            <span className="text-sm font-semibold">Padre:</span>{" "}
             <span className="text-sm">{father?.name}</span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Madre:</span>{" "}
+            <span className="text-sm font-semibold">Madre:</span>{" "}
             <span className="text-sm">{mother?.name}</span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Raza:</span>{" "}
+            <span className="text-sm font-semibold">Raza:</span>{" "}
             <span className="text-sm">{animal?.breed}</span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Genero:</span>{" "}
+            <span className="text-sm font-semibold">Genero:</span>{" "}
             <span className="text-sm">
               {" "}
               {animal?.attributes?.genre === "M" ? "Macho" : "Hembra"}
             </span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Peso Actual:</span>{" "}
+            <span className="text-sm font-semibold">Peso Actual:</span>{" "}
             <span className="text-sm">
               {Number(animal?.weight).toFixed(2)} L
             </span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Propósito: </span>
+            <span className="text-sm font-semibold">Propósito: </span>
             <span className="text-sm">{animal?.purposes}</span>
           </div>
 
           {animal?.attributes.genre === "M" ? (
             <div>
-              <span className="font-semibold text-sm">Fecha Castración: </span>
+              <span className="text-sm font-semibold">Fecha Castración: </span>
               <span className="text-sm">
                 {castrationDateJs
                   ? castrationDateJs.toLocaleDateString()
@@ -197,7 +197,7 @@ export default function Animal({ type }) {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="flex flex-col gap-y-3 w-full"
+              className="flex w-full flex-col gap-y-3"
             >
               <FormField
                 className="flex flex-col gap-2"
@@ -212,26 +212,26 @@ export default function Animal({ type }) {
                           {selectedFather ? (
                             <button
                               type="button"
-                              className="flex h-10 w-full items-center gap-x-2 font-medium rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                              className="flex h-10 w-full items-center gap-x-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                               <FaMars className="text-blue-500" />
                               {
                                 animals.find(
-                                  (animal) => animal.id === selectedFather
+                                  (animal) => animal.id === selectedFather,
                                 )?.name
                               }
                             </button>
                           ) : (
                             <button
                               type="button"
-                              className="flex h-10 w-full items-center text-muted-foreground gap-x-2 font-medium rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                              className="flex h-10 w-full items-center gap-x-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-muted-foreground ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                               <FaPlus /> Elegir un padre
                             </button>
                           )}
                         </DialogTrigger>
                         <DialogContent>
-                          <div className="container h-[80vh]  flex flex-col gap-y-6">
+                          <div className="container flex  h-[80vh] flex-col gap-y-6">
                             <AnimalList
                               type={type}
                               multiple={false}
@@ -264,27 +264,27 @@ export default function Animal({ type }) {
                           {selectedMother ? (
                             <button
                               type="button"
-                              className="flex h-10 w-full items-center gap-x-2 font-medium rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                              className="flex h-10 w-full items-center gap-x-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                               <FaVenus className="text-rose-500" />
 
                               {
                                 animals.find(
-                                  (animal) => animal.id === selectedMother
+                                  (animal) => animal.id === selectedMother,
                                 )?.name
                               }
                             </button>
                           ) : (
                             <button
                               type="button"
-                              className="flex h-10 w-full items-center text-muted-foreground gap-x-2 font-medium rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                              className="flex h-10 w-full items-center gap-x-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-muted-foreground ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                             >
                               <FaPlus /> Elegir una madre
                             </button>
                           )}
                         </DialogTrigger>
                         <DialogContent>
-                          <div className="container h-[80vh]  flex flex-col gap-y-6">
+                          <div className="container flex  h-[80vh] flex-col gap-y-6">
                             <AnimalList
                               type={type}
                               multiple={false}
@@ -452,38 +452,38 @@ export default function Animal({ type }) {
           <CardTitle className="text-center">Registros</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-2 gap-3">
-          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
             <Link
               to="diets"
-              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
             >
               <BiFoodMenu className="text-xl" />
               Dietas
             </Link>
           </div>
-          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
             <Link
               to="weight_history"
-              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
             >
               <TbWeight className="text-xl" />
               Pesajes
             </Link>
           </div>
-          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
             <Link
               to="calving"
-              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
             >
               <FaBirthdayCake className="text-xl" />
               Partos
             </Link>
           </div>
 
-          <div className="  rounded-lg border bg-card text-card-foreground shadow-sm flex-1 items-center justify-center flex">
+          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
             <Link
               to="vaccine"
-              className="gap-x-2 justify-center flex-1 py-4 text-lg items-center font-semibold flex"
+              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
             >
               <MdVaccines className="text-xl" />
               Vacunas

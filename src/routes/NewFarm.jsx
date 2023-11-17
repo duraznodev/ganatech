@@ -9,16 +9,16 @@ import {
 
 export default function NewFarm() {
   return (
-    <div className="container h-screen pt-5 pb-14 flex flex-col justify-center gap-y-6">
+    <div className="container flex h-screen flex-col justify-center gap-y-6 pb-14 pt-5">
       <Card>
         <CardHeader className="">
-          <CardTitle className="font-semibold tracking-tight text-lg ">
+          <CardTitle className="text-lg font-semibold tracking-tight ">
             Crea tu finca
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col gap-y-2">
           <NewFarmForm>
-            <div className="flex gap-x-2 mt-4">
+            <div className="mt-4 flex gap-x-2">
               <Button
                 type="button"
                 size="lg"

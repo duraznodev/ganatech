@@ -15,7 +15,7 @@ export default function Calving({ type }) {
   const calvings = state?.calvings || [];
 
   const animalCalvings = calvings.filter(
-    (calvings) => calvings.animalId === id
+    (calvings) => calvings.animalId === id,
   );
 
   return (

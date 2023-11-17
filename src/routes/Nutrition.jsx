@@ -53,16 +53,16 @@ export default function Nutrition() {
 
   return (
     <>
-      <div className="container py-6 flex flex-col gap-y-6">
+      <div className="container flex flex-col gap-y-6 py-6">
         <Card>
           <CardHeader>
-            <CardTitle className="font-semibold tracking-tight text-lg ">
+            <CardTitle className="text-lg font-semibold tracking-tight ">
               Plan de Nutrición
             </CardTitle>
           </CardHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
             <CardContent>
-              <div className="flex flex-col gap-y-3 w-full">
+              <div className="flex w-full flex-col gap-y-3">
                 <div className="grid w-full max-w-sm items-center gap-y-2.5">
                   <div className="flex flex-col gap-y-1.5">
                     <Label className="font-semibold" htmlFor="foodType">
@@ -126,7 +126,7 @@ export default function Nutrition() {
           </Button>
         </DialogTrigger>
         {type != null ? (
-          <DialogContent className="max-h-screen flex flex-col">
+          <DialogContent className="flex max-h-screen flex-col">
             <DialogHeader>
               <DialogTitle>Agregar animal</DialogTitle>
               <DialogDescription>

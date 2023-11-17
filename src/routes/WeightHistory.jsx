@@ -12,7 +12,7 @@ export default function WeightHistory({ type }) {
   const weightHistories = state?.weightHistories || [];
 
   const animalWeightHistory = weightHistories.filter(
-    (weightHistory) => weightHistory.animalId === id
+    (weightHistory) => weightHistory.animalId === id,
   );
 
   return (

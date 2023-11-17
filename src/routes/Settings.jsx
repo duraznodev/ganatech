@@ -19,11 +19,12 @@ export default function Settings() {
   function handleSignOut() {
     signOut(firebase_auth);
   }
+
   return (
     <>
       <Card>
         <CardHeader>
-          <CardTitle className="font-semibold tracking-tight text-xl">
+          <CardTitle className="text-xl font-semibold tracking-tight">
             Finca
           </CardTitle>
         </CardHeader>
@@ -38,7 +39,7 @@ export default function Settings() {
       </Card>
       <Card>
         <CardHeader>
-          <CardTitle className="font-semibold tracking-tight text-xl">
+          <CardTitle className="text-xl font-semibold tracking-tight">
             Usuario
           </CardTitle>
         </CardHeader>

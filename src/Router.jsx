@@ -8,8 +8,8 @@ import { userFarms } from "./firebase/api";
 import { firebase_auth, firebase_storage } from "./firebase/config";
 import { Guest, Private } from "./lib/Auth";
 import {
-  Animal,
-  Animals,
+  AnimalDetail,
+  AnimalTypes,
   Calving,
   Dashboard,
   Diets,
@@ -66,14 +66,17 @@ export default function Router() {
       <Routes>
         <Route path="new-farm" element={Private(<NewFarm />, user, farmId)} />
         <Route path="/" element={Private(<Dashboard />, user, farmId)} />
-        <Route path="/animales" element={Private(<Animals />, user, farmId)} />
+        <Route
+          path="/animales"
+          element={Private(<AnimalTypes />, user, farmId)}
+        />
         <Route
           path="/animales/bovinos"
           element={Private(<Bovines />, user, farmId)}
         />
         <Route
           path="/animales/bovinos/:id"
-          element={Private(<Animal type="bovines" />, user, farmId)}
+          element={Private(<AnimalDetail type="bovines" />, user, farmId)}
         />
         <Route
           path="/animales/bovinos/:id/calving"
@@ -107,7 +110,7 @@ export default function Router() {
         />
         <Route
           path="/animales/porcinos/:id"
-          element={Private(<Animal type="porcines" />, user, farmId)}
+          element={Private(<AnimalDetail type="porcines" />, user, farmId)}
         />
         <Route
           path="/animales/porcinos/:id/weight_history"

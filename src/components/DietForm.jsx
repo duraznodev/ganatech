@@ -49,7 +49,7 @@ export default function DietForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-y-3 w-full"
+          className="flex w-full flex-col gap-y-3"
         >
           <FormField
             className="grid w-full max-w-sm items-center gap-y-1.5"

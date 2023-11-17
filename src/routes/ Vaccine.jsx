@@ -14,7 +14,7 @@ export default function Vaccine({ type }) {
   const vaccines = state?.vaccines || [];
 
   const animalVaccines = vaccines.filter(
-    (vaccines) => vaccines.animalId === id
+    (vaccines) => vaccines.animalId === id,
   );
 
   return (

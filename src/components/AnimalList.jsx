@@ -23,8 +23,8 @@ export default function AnimalList({
         animals.filter(
           (animal) =>
             animal.name.toLowerCase().includes(term.toLowerCase()) ||
-            animal?.earring?.includes(term)
-        )
+            animal?.earring?.includes(term),
+        ),
       );
     } else {
       setFilteredAnimals(animals);
@@ -35,7 +35,7 @@ export default function AnimalList({
     <>
       <Card>
         <CardHeader className="pb-2">
-          <CardTitle className="font-semibold tracking-tight text-lg ">
+          <CardTitle className="text-lg font-semibold tracking-tight ">
             Filtrar
           </CardTitle>
         </CardHeader>
@@ -71,7 +71,7 @@ export default function AnimalList({
           <Card key={crypto.randomUUID()}>
             <div className="flex-1">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 ">
-                <CardTitle className="font-semibold tracking-tight text-lg">
+                <CardTitle className="text-lg font-semibold tracking-tight">
                   No se encontraron resultados :(
                 </CardTitle>
               </CardHeader>

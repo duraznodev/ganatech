@@ -24,21 +24,21 @@ export default function ModalOptions({
     <Dialog>
       <DialogTrigger className="flex flex-col gap-3">
         <Button
-          className="flex gap-2 w-40"
+          className="flex w-40 gap-2"
           onClick={() => setOpenModal("partos")}
         >
           <FaBirthdayCake />
           Partos
         </Button>
         <Button
-          className="flex gap-2 w-40"
+          className="flex w-40 gap-2"
           onClick={() => setOpenModal("vacunas")}
         >
           <MdVaccines />
           Vacunas
         </Button>
       </DialogTrigger>
-      <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
+      <DialogContent className=" flex h-auto flex-col  sm:max-w-3xl">
         <DialogHeader>
           <DialogTitle>Selecciona una opción</DialogTitle>
         </DialogHeader>

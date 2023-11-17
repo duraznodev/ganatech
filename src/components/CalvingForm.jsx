@@ -25,7 +25,7 @@ export function CalvingForm({
     selectedAnimals.reduce((acc, animalId) => {
       acc[animalId] = z.string().min(1, "La cantidad de crías es obligatoria.");
       return acc;
-    }, {})
+    }, {}),
   );
 
   const form = useForm({
@@ -47,7 +47,7 @@ export function CalvingForm({
           childrenNumber,
           date: Timestamp.now(),
           type,
-        })
+        }),
       );
       // console.log(calvings);
 
@@ -66,7 +66,7 @@ export function CalvingForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-y-3 w-full"
+        className="flex w-full flex-col gap-y-3"
       >
         {selectedAnimals.map((animalId) => {
           const animal = animals.find((animal) => animal.id === animalId);

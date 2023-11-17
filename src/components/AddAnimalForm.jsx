@@ -42,11 +42,11 @@ export default function AddAnimalForm({ children, animals, type }) {
   } = useSelectAnimal();
 
   const masculineAnimals = animals.filter(
-    (animal) => animal?.attributes?.genre === "M"
+    (animal) => animal?.attributes?.genre === "M",
   );
 
   const feminineAnimals = animals.filter(
-    (animal) => animal?.attributes?.genre === "F"
+    (animal) => animal?.attributes?.genre === "F",
   );
 
   const form = useForm({
@@ -85,7 +85,7 @@ export default function AddAnimalForm({ children, animals, type }) {
     animal.genre = null;
     const submittedAnimal = await addToCollection(
       getCollection(type, farmId),
-      animal
+      animal,
     );
 
     addAnimal(type, {
@@ -100,7 +100,7 @@ export default function AddAnimalForm({ children, animals, type }) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-y-3 w-full"
+          className="flex w-full flex-col gap-y-3"
         >
           <FormField
             className="grid w-full max-w-sm items-center gap-y-1.5"
@@ -148,7 +148,7 @@ export default function AddAnimalForm({ children, animals, type }) {
                     // defaultValue="option-one"
                     className="flex flex-col space-y-1"
                   >
-                    <FormItem className="flex items-center space-y-0 space-x-2">
+                    <FormItem className="flex items-center space-x-2 space-y-0">
                       <FormControl className="text-blue-500">
                         <RadioGroupItem
                           className="border-blue-500"
@@ -161,7 +161,7 @@ export default function AddAnimalForm({ children, animals, type }) {
                     <FormItem className="flex items-center space-x-2 space-y-0">
                       <FormControl className="text-pink-500">
                         <RadioGroupItem
-                          className="border-pink-500 appearance-none checked:border-blue-500"
+                          className="appearance-none border-pink-500 checked:border-blue-500"
                           value="F"
                           id="option-two"
                         />
@@ -222,26 +222,26 @@ export default function AddAnimalForm({ children, animals, type }) {
                       {selectedFather ? (
                         <button
                           type="button"
-                          className="flex h-10 w-full items-center gap-x-2 font-medium rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex h-10 w-full items-center gap-x-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <FaMars className="text-blue-500" />
                           {
                             animals.find(
-                              (animal) => animal.id === selectedFather
+                              (animal) => animal.id === selectedFather,
                             )?.name
                           }
                         </button>
                       ) : (
                         <button
                           type="button"
-                          className="flex h-10 w-full items-center text-muted-foreground gap-x-2 font-medium rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex h-10 w-full items-center gap-x-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-muted-foreground ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <FaPlus /> Elegir un padre
                         </button>
                       )}
                     </DialogTrigger>
                     <DialogContent>
-                      <div className="container h-[80vh]  flex flex-col gap-y-6">
+                      <div className="container flex  h-[80vh] flex-col gap-y-6">
                         <AnimalList
                           type={type}
                           multiple={false}
@@ -270,27 +270,27 @@ export default function AddAnimalForm({ children, animals, type }) {
                       {selectedMother ? (
                         <button
                           type="button"
-                          className="flex h-10 w-full items-center gap-x-2 font-medium rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex h-10 w-full items-center gap-x-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <FaVenus className="text-rose-500" />
 
                           {
                             animals.find(
-                              (animal) => animal.id === selectedMother
+                              (animal) => animal.id === selectedMother,
                             )?.name
                           }
                         </button>
                       ) : (
                         <button
                           type="button"
-                          className="flex h-10 w-full items-center text-muted-foreground gap-x-2 font-medium rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          className="flex h-10 w-full items-center gap-x-2 rounded-md border border-input bg-background px-3 py-2 text-sm font-medium text-muted-foreground ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                         >
                           <FaPlus /> Elegir una madre
                         </button>
                       )}
                     </DialogTrigger>
                     <DialogContent>
-                      <div className="container h-[80vh]  flex flex-col gap-y-6">
+                      <div className="container flex  h-[80vh] flex-col gap-y-6">
                         <AnimalList
                           type={type}
                           multiple={false}

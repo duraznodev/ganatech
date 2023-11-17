@@ -8,15 +8,15 @@ export default function Layout({ children }) {
   const { isAdmin } = useGlobal();
   return (
     <>
-      <div className="container h-screen pt-5 pb-14 flex flex-col gap-y-6">
+      <div className="container flex h-screen flex-col gap-y-6 pb-14 pt-5">
         {children}
       </div>
-      <footer className="fixed bottom-0 pb-2 border-t h-14 bg-white/80 w-full">
-        <nav className="container h-full justify-around flex items-center text-muted-foreground">
+      <footer className="fixed bottom-0 h-14 w-full border-t bg-white/80 pb-2">
+        <nav className="container flex h-full items-center justify-around text-muted-foreground">
           {isAdmin && (
             <Link
               to="/"
-              className="h-full justify-center flex-col flex items-center aspect-square"
+              className="flex aspect-square h-full flex-col items-center justify-center"
             >
               <HiChartPie className="text-xl" />
               <span className="text-xs">Panel</span>
@@ -24,14 +24,14 @@ export default function Layout({ children }) {
           )}
           <Link
             to="/animales"
-            className="h-full justify-center flex-col flex items-center aspect-square"
+            className="flex aspect-square h-full flex-col items-center justify-center"
           >
             <FaHouse className="text-xl" />
             <span className="text-xs">Hato</span>
           </Link>
           <Link
             to="/settings"
-            className="h-full justify-center flex-col flex items-center aspect-square"
+            className="flex aspect-square h-full flex-col items-center justify-center"
           >
             <MdSettings className="text-xl" />
             <span className="text-xs">Ajustes</span>

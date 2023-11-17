@@ -60,9 +60,9 @@ export function UserAuthForm({ className, ...props }) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-y-4 w-full"
+          className="flex w-full flex-col gap-y-4"
         >
-          <div className="flex flex-col gap-y-2 w-full">
+          <div className="flex w-full flex-col gap-y-2">
             <FormField
               className="grid w-full max-w-sm items-center gap-y-1.5"
               control={form.control}

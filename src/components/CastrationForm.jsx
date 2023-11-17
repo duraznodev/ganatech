@@ -55,7 +55,7 @@ export function CastrationForm({
         `${type}`,
         animalId,
         updatedFields,
-        global.farmId
+        global.farmId,
       );
 
       // console.log(response);
@@ -75,7 +75,7 @@ export function CastrationForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-y-3 w-full"
+          className="flex w-full flex-col gap-y-3"
         >
           <FormField
             className="grid w-full max-w-sm items-center gap-y-1.5"
@@ -91,7 +91,7 @@ export function CastrationForm({
                         variant={"outline"}
                         className={cn(
                           " pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
+                          !field.value && "text-muted-foreground",
                         )}
                       >
                         {field.value ? (

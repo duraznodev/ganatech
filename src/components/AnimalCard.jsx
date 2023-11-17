@@ -38,10 +38,10 @@ export default function AnimalCard({
       >
         <CardHeader
           className={cn(
-            "flex flex-row items-center justify-between space-y-0 pb-2"
+            "flex flex-row items-center justify-between space-y-0 pb-2",
           )}
         >
-          <CardTitle className="font-semibold tracking-tight text-lg">
+          <CardTitle className="text-lg font-semibold tracking-tight">
             {name}
           </CardTitle>
           {type === "bovines" ? (
@@ -103,13 +103,13 @@ export default function AnimalCard({
       {!simple && (
         <button
           onClick={() => onSelect(id)}
-          className="flex justify-center items-center p-4"
+          className="flex items-center justify-center p-4"
         >
           <div
             aria-checked="true"
             data-state={selected ? "checked" : "unchecked"}
             value="on"
-            className="peer h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground scale-125"
+            className="peer h-4 w-4 shrink-0 scale-125 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
           >
             {selected && (
               <span

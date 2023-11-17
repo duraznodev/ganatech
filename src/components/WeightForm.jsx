@@ -25,7 +25,7 @@ export default function WeightForm({
     selectedAnimals.reduce((acc, animalId) => {
       acc[animalId] = z.string().min(1, "El peso es requerido");
       return acc;
-    }, {})
+    }, {}),
   );
 
   const form = useForm({
@@ -61,9 +61,9 @@ export default function WeightForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-y-3 w-full "
+          className="flex w-full flex-col gap-y-3 "
         >
-          <div className="flex flex-col gap-y-3 w-full max-h-[70vh] overflow-scroll">
+          <div className="flex max-h-[70vh] w-full flex-col gap-y-3 overflow-scroll">
             {selectedAnimals.map((animalId) => {
               const animal = animals.find((animal) => animal.id === animalId);
               return (

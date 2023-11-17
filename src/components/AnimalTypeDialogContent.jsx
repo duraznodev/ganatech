@@ -17,10 +17,10 @@ export function AnimalTypeDialogContent({ handleTypeSelection }) {
           Seleccione el tipo de animal que desea añadir
         </DialogDescription>
       </DialogHeader>
-      <DialogFooter className="flex flex-row gap-2 w-full">
+      <DialogFooter className="flex w-full flex-row gap-2">
         <Button
           onClick={() => handleTypeSelection("bovines")}
-          className="gap-x-1 flex-1 py-2 font-semibold"
+          className="flex-1 gap-x-1 py-2 font-semibold"
           variant="outline"
           size="lg"
         >
@@ -28,7 +28,7 @@ export function AnimalTypeDialogContent({ handleTypeSelection }) {
         </Button>
         <Button
           onClick={() => handleTypeSelection("porcines")}
-          className="gap-x-1 flex-1 py-2 font-semibold"
+          className="flex-1 gap-x-1 py-2 font-semibold"
           variant="outline"
           size="lg"
         >

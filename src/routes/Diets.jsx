@@ -17,7 +17,7 @@ export default function Diets({ type }) {
       {animalDiets.length > 0 ? (
         animalDiets.map((diet) => (
           <Card key={crypto.randomUUID()}>
-            <CardContent className="pt-6 flex flex-col gap-y-2">
+            <CardContent className="flex flex-col gap-y-2 pt-6">
               <div>
                 <span className="font-semibold">Cantidad de alimento: </span>
                 {diet?.foodAmount}
@@ -30,7 +30,7 @@ export default function Diets({ type }) {
           </Card>
         ))
       ) : (
-        <div className="flex justify-center items-center h-full">
+        <div className="flex h-full items-center justify-center">
           <div className="text-2xl text-gray-400">No hay dietas :(</div>
         </div>
       )}

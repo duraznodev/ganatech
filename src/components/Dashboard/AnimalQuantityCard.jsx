@@ -5,7 +5,7 @@ import { GiCow, GiPig } from "react-icons/gi";
 export default function AnimalQuantityCard({ title, type, count, percentage }) {
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pt-4 pb-1">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 pt-4">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         {type === "bovine" ? (
           <GiCow className="text-2xl" />

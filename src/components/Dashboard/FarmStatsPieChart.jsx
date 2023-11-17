@@ -19,7 +19,7 @@ export default function FarmStatsPieChart() {
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
               />
-            )
+            ),
           )}
         </Pie>
         <Tooltip />
