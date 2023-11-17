@@ -1,16 +1,14 @@
-import { GiCow, GiPig } from "react-icons/gi";
+import { useGlobal } from "@/contexts/GlobalContext";
+import { signOut } from "firebase/auth";
+import { Button } from "../components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-import { signOut } from "firebase/auth";
 import { firebase_auth } from "../firebase/config";
-import { useGlobal } from "@/contexts/GlobalContext";
 
 export default function Settings() {
   const { farm, ironImgURL, user } = useGlobal();
@@ -21,7 +19,6 @@ export default function Settings() {
   function handleSignOut() {
     signOut(firebase_auth);
   }
-  // console.log(ironImgRef, ironImgURL);
   return (
     <>
       <Card>

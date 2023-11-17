@@ -14,11 +14,11 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaMars, FaPlus, FaVenus } from "react-icons/fa6";
 import * as z from "zod";
+import { useGlobal } from "../contexts/GlobalContext";
 import { addToCollection, getCollection } from "../firebase/api";
 import { useSelectAnimal } from "../hooks/useSelectAnimal";
 import AnimalList from "./AnimalList";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import { useGlobal } from "../contexts/GlobalContext";
 
 const FormSchemaAdd = z.object({
   earring: z.string().nullable(),
@@ -45,7 +45,7 @@ export default function AddAnimalForm({ children, animals, type }) {
     (animal) => animal?.attributes?.genre === "M"
   );
 
-  const femenineAnimals = animals.filter(
+  const feminineAnimals = animals.filter(
     (animal) => animal?.attributes?.genre === "F"
   );
 
@@ -83,14 +83,14 @@ export default function AddAnimalForm({ children, animals, type }) {
           } ${new Date().getTime()}`,
     };
     animal.genre = null;
-    const submitedAnimal = await addToCollection(
+    const submittedAnimal = await addToCollection(
       getCollection(type, farmId),
       animal
     );
-    // console.log(submitedAnimal);
+
     addAnimal(type, {
       ...animal,
-      id: submitedAnimal.id,
+      id: submittedAnimal.id,
     });
 
     form.reset();
@@ -112,9 +112,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                 <FormControl>
                   <Input placeholder="Nombre del animal" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                Este es el numero de chapa de la vaca
-              </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -130,9 +127,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                 <FormControl>
                   <Input type="number" placeholder="1234" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                Este es el numero de chapa de la vaca
-              </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -258,23 +252,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                       </div>
                     </DialogContent>
                   </Dialog>
-                  {/* <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecciona un padre" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {animals
-                        .filter((animal) => animal.attributes?.genre === "M")
-                        .map((animal) => (
-                          <SelectItem key={animal.id} value={animal.id}>
-                            {animal.name}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -319,28 +296,11 @@ export default function AddAnimalForm({ children, animals, type }) {
                           multiple={false}
                           onSelect={toggleMotherSelection}
                           simple
-                          animals={femenineAnimals}
+                          animals={feminineAnimals}
                         />
                       </div>
                     </DialogContent>
                   </Dialog>
-                  {/* <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecciona un padre" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {animals
-                        .filter((animal) => animal.attributes?.genre === "M")
-                        .map((animal) => (
-                          <SelectItem key={animal.id} value={animal.id}>
-                            {animal.name}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>

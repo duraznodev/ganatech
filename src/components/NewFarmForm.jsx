@@ -9,34 +9,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import {
-  addToCollection,
-  getCollection,
-  newFarm,
-  uploadFile,
-} from "../firebase/api";
-import { useGlobal } from "../contexts/GlobalContext";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref } from "firebase/storage";
 import { useState } from "react";
-import { firebase_storage } from "../firebase/config";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+import { useGlobal } from "../contexts/GlobalContext";
+import { newFarm, uploadFile } from "../firebase/api";
+import { firebase_storage } from "../firebase/config";
 
 const FormSchema = z.object({
   name: z.string().min(1, "El nombre de la finca es requerido"),
   iron: z.any(),
-  //  z
-  //   .custom((file) => {
-  //     console.log(file);
-  //     return file.length > 0 && file.item(0);
-  //   })
-  //   .refine((file) => !file || (!!file && file.size <= 5 * 1024 * 1024), {
-  //     message: "La imagen del fierro debe ser de máximo 5MB.",
-  //   })
-  //   .refine((file) => !file || (!!file && file.type?.startsWith("image")), {
-  //     message: "Solo es permitido subir imágenes",
-  //   }),
 });
 
 export default function NewFarmForm({ type, selectedAnimals, children }) {
@@ -99,19 +83,6 @@ export default function NewFarmForm({ type, selectedAnimals, children }) {
               </FormItem>
             )}
           />
-          {/* <FormField
-            control={form.control}
-            name="iron"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="font-semibold">Fierro</FormLabel>
-                <FormControl>
-                  <Input type="file" accept="image/*" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )} */}
-          {/* /> */}
           <div className="space-y-2">
             <Label htmlFor="iron" className="font-semibold">
               Fierro

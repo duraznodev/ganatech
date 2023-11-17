@@ -1,15 +1,8 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { format } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,9 +13,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
 import { Timestamp } from "firebase/firestore";
-import { updateInCollection } from "../firebase/api";
+import { CalendarIcon } from "lucide-react";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import { useGlobal } from "../contexts/GlobalContext";
+import { updateInCollection } from "../firebase/api";
 
 const FormSchema = z.object({
   dob: z.date({

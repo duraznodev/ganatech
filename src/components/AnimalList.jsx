@@ -48,9 +48,6 @@ export default function AnimalList({
                 handleSearch(e.target.value);
               }}
             />
-            {/* <Button className="aspect-square" size="icon">
-              <FaFilter />
-            </Button> */}
           </div>
         </CardContent>
       </Card>

@@ -8,12 +8,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Timestamp } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { addToCollection, getCollection } from "../firebase/api";
 import { useGlobal } from "../contexts/GlobalContext";
+import { addToCollection, getCollection } from "../firebase/api";
 import AnimalCard from "./AnimalCard";
-import { Timestamp } from "firebase/firestore";
 
 export default function WeightForm({
   resetSelection,

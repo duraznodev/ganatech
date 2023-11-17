@@ -10,15 +10,15 @@ import { Guest, Private } from "./lib/Auth";
 import {
   Animal,
   Animals,
+  Calving,
   Dashboard,
   Diets,
   Login,
   NewFarm,
   Porcines,
   Register,
-  WeightHistory,
-  Calving,
   Vaccine,
+  WeightHistory,
 } from "./routes";
 import Settings from "./routes/Settings";
 
@@ -117,7 +117,6 @@ export default function Router() {
           path="/animales/porcinos/:id/diets"
           element={Private(<Diets type="porcines" />, user, farmId)}
         />
-        {/* <Route path="/nutricion" element={Private(<Nutrition />, user,farmId)} /> */}
         <Route path="/settings" element={Private(<Settings />, user, farmId)} />
         <Route path="/login" element={Guest(<Login />, user)} />
         <Route path="/register" element={Guest(<Register />, user)} />

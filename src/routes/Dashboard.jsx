@@ -5,10 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-
 import { Separator } from "@/components/ui/separator";
 import { GiCow, GiPig } from "react-icons/gi";
 import { SiHappycow } from "react-icons/si";
@@ -20,7 +18,6 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { allFromCollection, getCollection } from "../firebase/api";
 import { useGlobal } from "../contexts/GlobalContext";
 
 export default function Dashboard() {
@@ -80,10 +77,7 @@ export default function Dashboard() {
   }, [global]);
 
   const [dynamicText, setDynamicText] = useState("estado");
-
   const [isMounted, setIsMounted] = useState(false);
-
-  // const [timeFilter, setTimeFilter] = useState("Hoy");
 
   const dataTipo = [
     { name: "Vacas", value: bovineFCount },
@@ -99,29 +93,6 @@ export default function Dashboard() {
     { name: "Vendidos", value: sold },
   ];
 
-  // const dataByTime = {
-  //   Hoy: [
-  //     { name: "Vacas", value: 100 },
-  //     { name: "Toros", value: 80 },
-  //     { name: "Cerdos", value: 50 },
-  //   ],
-  //   Semanal: [
-  //     { name: "Vacas", value: 500 },
-  //     { name: "Toros", value: 400 },
-  //     { name: "Cerdos", value: 300 },
-  //   ],
-  //   Mensual: [
-  //     { name: "Vacas", value: 2000 },
-  //     { name: "Toros", value: 1500 },
-  //     { name: "Cerdos", value: 1200 },
-  //   ],
-  //   Anual: [
-  //     { name: "Vacas", value: 8000 },
-  //     { name: "Toros", value: 7000 },
-  //     { name: "Cerdos", value: 6000 },
-  //   ],
-  // };
-
   const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
   const handleButtonClick = (text) => {
@@ -130,7 +101,6 @@ export default function Dashboard() {
 
   const renderLabel = (entry) => {
     const currentData = dynamicText === "tipo" ? dataTipo : dataEstado;
-    // dynamicText === "tipo" ? dataByTime[timeFilter] : dataEstado;
     const total = currentData.reduce((acc, curr) => acc + curr.value, 0);
     return `${((entry.value / total) * 100).toFixed(1)}%`;
   };
@@ -182,12 +152,7 @@ export default function Dashboard() {
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={
-                    dynamicText === "tipo"
-                      ? // dataByTime[timeFilter]
-                        dataTipo
-                      : dataEstado
-                  }
+                  data={dynamicText === "tipo" ? dataTipo : dataEstado}
                   labelLine={true}
                   label={renderLabel}
                   outerRadius={80}

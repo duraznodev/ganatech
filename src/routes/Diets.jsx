@@ -1,14 +1,7 @@
 import { useParams } from "react-router-dom";
-import { useGlobal } from "../contexts/GlobalContext";
 import AnimalCard from "../components/AnimalCard";
-import { columns } from "../components/WeigthTable/columns";
-import { DataTable } from "../components/ui/data-table";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
+import { Card, CardContent } from "../components/ui/card";
+import { useGlobal } from "../contexts/GlobalContext";
 
 export default function Diets({ type }) {
   const { id } = useParams();

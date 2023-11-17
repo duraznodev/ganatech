@@ -1,7 +1,7 @@
 import { FaHouse } from "react-icons/fa6";
 import { HiChartPie } from "react-icons/hi";
 import { MdSettings } from "react-icons/md";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGlobal } from "../contexts/GlobalContext";
 
 export default function Layout({ children }) {

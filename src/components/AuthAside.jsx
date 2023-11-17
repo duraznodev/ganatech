@@ -8,10 +8,6 @@ export function AuthAside({ type }) {
       <div className="absolute inset-0 bg-primary/70">
         <img src={url} alt="" />
       </div>
-      {/* <div className="relative z-20 flex items-center text-lg gap-x-1 font-semibold tracking-wide">
-      <img src="/src/assets/logo.png" className="w-8" />
-      <span>Ganatech</span>
-    </div> */}
     </div>
   );
 }

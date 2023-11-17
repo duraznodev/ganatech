@@ -1,8 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { allFromCollection, getCollection } from "../firebase/api";
-import { seeder } from "../firebase/seeder";
-import { firebase_auth } from "../firebase/config";
-import { onAuthStateChanged } from "firebase/auth";
 
 export const GlobalContext = createContext(null);
 

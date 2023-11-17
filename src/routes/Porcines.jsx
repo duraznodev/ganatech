@@ -8,30 +8,30 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+import { DialogClose } from "@radix-ui/react-dialog";
 import { BiFoodMenu } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
+import { GiScalpel } from "react-icons/gi";
+import { IoMdOptions } from "react-icons/io";
 import { TbWeight } from "react-icons/tb";
 import AddAnimalForm from "../components/AddAnimalForm";
 import AnimalList from "../components/AnimalList";
-import { allFromCollection, getCollection } from "../firebase/api";
-import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
-import DietForm from "../components/DietForm";
-import { DialogClose } from "@radix-ui/react-dialog";
-import { useGlobal } from "../contexts/GlobalContext";
-import WeightForm from "../components/WeigthForm";
-import { GiScalpel } from "react-icons/gi";
 import { CastrationForm } from "../components/CastrationForm";
+import DietForm from "../components/DietForm";
 import ModalOptions from "../components/ModalOptions";
-import { IoMdOptions } from "react-icons/io";
+import WeightForm from "../components/WeigthForm";
+import { useGlobal } from "../contexts/GlobalContext";
+import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
 export default function Porcines() {
   const { selectedAnimals, resetSelection, toggleAnimalSelection } =
     useSelectedAnimals();
   const global = useGlobal();
   const porcines = global?.porcines || [];
 
-  const allMale = selectedAnimals.every(animal =>
-    porcines.find(porcine => porcine.id === animal)?.attributes?.genre === 'M'
+  const allMale = selectedAnimals.every(
+    (animal) =>
+      porcines.find((porcine) => porcine.id === animal)?.attributes?.genre ===
+      "M"
   );
 
   return (
@@ -54,9 +54,9 @@ export default function Porcines() {
               </DialogTrigger>
               <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
                 <DialogHeader>
-                  <DialogTitle>Plan de Alimentacion</DialogTitle>
+                  <DialogTitle>Plan de Alimentación</DialogTitle>
                   <DialogDescription>
-                    Parametros del plan de alimentacion
+                    Parámetros del plan de alimentación
                   </DialogDescription>
                 </DialogHeader>
                 <DietForm
@@ -92,7 +92,7 @@ export default function Porcines() {
               <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
                 <DialogHeader>
                   <DialogTitle>Pesaje</DialogTitle>
-                  <DialogDescription>Parametros del pesaje</DialogDescription>
+                  <DialogDescription>Parámetros del pesaje</DialogDescription>
                 </DialogHeader>
                 <WeightForm
                   type="porcines"
@@ -128,10 +128,16 @@ export default function Porcines() {
                 </DialogTrigger>
                 <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
                   <DialogHeader>
-                    <DialogTitle>Castracion</DialogTitle>
-                    <DialogDescription>Registro de castraciones</DialogDescription>
+                    <DialogTitle>Castración</DialogTitle>
+                    <DialogDescription>
+                      Registro de castraciones
+                    </DialogDescription>
                   </DialogHeader>
-                  <CastrationForm type="porcines" selectedAnimals={selectedAnimals} resetSelection={resetSelection}>
+                  <CastrationForm
+                    type="porcines"
+                    selectedAnimals={selectedAnimals}
+                    resetSelection={resetSelection}
+                  >
                     <DialogFooter className="flex-row gap-x-2 mt-1">
                       <DialogClose className="flex-1">
                         <Button
@@ -148,10 +154,8 @@ export default function Porcines() {
                       </Button>
                     </DialogFooter>
                   </CastrationForm>
-
                 </DialogContent>
               </Dialog>
-
             ) : null}
 
             <Dialog>
@@ -203,7 +207,7 @@ export default function Porcines() {
             <DialogHeader>
               <DialogTitle>Agregar porcino</DialogTitle>
               <DialogDescription>
-                Agregue las caracteristicas del porcino
+                Agregue las características del porcino
               </DialogDescription>
             </DialogHeader>
             <AddAnimalForm type="porcines" animals={porcines}>

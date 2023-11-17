@@ -1,18 +1,18 @@
 import { Check } from "lucide-react";
 import { FaCircle, FaHeart, FaMars, FaTag, FaVenus } from "react-icons/fa6";
 import { GiCow, GiPig } from "react-icons/gi";
+import { Link } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { Badge } from "./ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Separator } from "./ui/separator";
-import { Link } from "react-router-dom";
 
 export default function AnimalCard({
   id,
   name,
   attributes,
   interaction = true,
-  onSelect = () => { },
+  onSelect = () => {},
   selected,
   multiple,
   simple,
@@ -22,7 +22,6 @@ export default function AnimalCard({
   badges = true,
   children,
 }) {
-
   return (
     <Card className={cn("flex", selected && "bg-secondary", className)}>
       <Link
@@ -123,7 +122,6 @@ export default function AnimalCard({
           </div>
         </button>
       )}
-      {/* <Checkbox onClick={() => onSelect(id)} className="scale-125" /> */}
     </Card>
   );
 }

@@ -9,19 +9,19 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { BiFoodMenu, BiEditAlt } from "react-icons/bi";
+import { BiFoodMenu } from "react-icons/bi";
 import { FaPlus } from "react-icons/fa6";
+import { GiScalpel } from "react-icons/gi";
+import { IoMdOptions } from "react-icons/io";
 import { TbWeight } from "react-icons/tb";
 import AddAnimalForm from "../components/AddAnimalForm";
 import AnimalList from "../components/AnimalList";
+import { CastrationForm } from "../components/CastrationForm";
 import DietForm from "../components/DietForm";
+import ModalOptions from "../components/ModalOptions";
 import WeightForm from "../components/WeigthForm";
 import { useGlobal } from "../contexts/GlobalContext";
 import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
-import { GiScalpel } from "react-icons/gi";
-import { CastrationForm } from "../components/CastrationForm";
-import { IoMdOptions } from "react-icons/io";
-import ModalOptions from "../components/ModalOptions";
 export default function Bovines() {
   const { selectedAnimals, resetSelection, toggleAnimalSelection } =
     useSelectedAnimals();
@@ -53,9 +53,9 @@ export default function Bovines() {
               </DialogTrigger>
               <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
                 <DialogHeader>
-                  <DialogTitle>Plan de Alimentacion</DialogTitle>
+                  <DialogTitle>Plan de Alimentación</DialogTitle>
                   <DialogDescription>
-                    Parametros del plan de alimentacion
+                    Parámetros del plan de alimentación
                   </DialogDescription>
                 </DialogHeader>
                 <DietForm
@@ -91,7 +91,7 @@ export default function Bovines() {
               <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
                 <DialogHeader>
                   <DialogTitle>Pesaje</DialogTitle>
-                  <DialogDescription>Parametros del pesaje</DialogDescription>
+                  <DialogDescription>Parámetros del pesaje</DialogDescription>
                 </DialogHeader>
                 <WeightForm
                   type="bovines"
@@ -127,7 +127,7 @@ export default function Bovines() {
                 </DialogTrigger>
                 <DialogContent className=" flex flex-col h-auto  sm:max-w-3xl">
                   <DialogHeader>
-                    <DialogTitle>Castracion</DialogTitle>
+                    <DialogTitle>Castración</DialogTitle>
                     <DialogDescription>
                       Registro de castraciones
                     </DialogDescription>

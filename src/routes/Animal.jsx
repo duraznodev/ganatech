@@ -1,29 +1,4 @@
-import { useParams } from "react-router-dom";
-import AnimalCard from "../components/AnimalCard";
-import { columns } from "../components/WeigthTable/columns";
-import { DataTable } from "../components/ui/data-table";
-import { useGlobal } from "../contexts/GlobalContext";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../components/ui/card";
-import { Link } from "react-router-dom";
-import { BiFoodMenu } from "react-icons/bi";
-import { TbWeight } from "react-icons/tb";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -32,25 +7,42 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useSelectAnimal } from "../hooks/useSelectAnimal";
-import { Input } from "@/components/ui/input";
-import { FaMars, FaPlus, FaVenus } from "react-icons/fa6";
-import AnimalList from "../components/AnimalList";
-import { doc, updateDoc } from "firebase/firestore";
-import { firebase_db } from "../firebase/config";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { updateInCollection } from "../firebase/api";
-import { Button } from "@/components/ui/button";
-import { BiEditAlt } from "react-icons/bi";
+import { useForm } from "react-hook-form";
+import { BiEditAlt, BiFoodMenu } from "react-icons/bi";
 import { FaBirthdayCake } from "react-icons/fa";
+import { FaMars, FaPlus, FaVenus } from "react-icons/fa6";
 import { MdVaccines } from "react-icons/md";
-
+import { TbWeight } from "react-icons/tb";
+import { Link, useParams } from "react-router-dom";
+import * as z from "zod";
+import AnimalCard from "../components/AnimalCard";
+import AnimalList from "../components/AnimalList";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../components/ui/card";
+import { useGlobal } from "../contexts/GlobalContext";
+import { updateInCollection } from "../firebase/api";
+import { useSelectAnimal } from "../hooks/useSelectAnimal";
 
 const formSchema = z.object({
   father_id: z.string().nullable(),
@@ -80,8 +72,8 @@ export default function Animal({ type }) {
     purposes: animal?.purposes || "",
     weight: animal?.weight || "",
   });
-  const global = useGlobal()
-  // console.log(animal);
+  const global = useGlobal();
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: initialValues,
@@ -100,7 +92,7 @@ export default function Animal({ type }) {
     (animal) => animal?.attributes?.genre === "M"
   );
 
-  const femenineAnimals = animals.filter(
+  const feminineAnimals = animals.filter(
     (animal) => animal?.attributes?.genre === "F"
   );
 
@@ -117,7 +109,6 @@ export default function Animal({ type }) {
     });
 
     if (Object.keys(updatedFields).length === 0) {
-      // console.log("No hay cambios");
       return;
     }
 
@@ -129,7 +120,6 @@ export default function Animal({ type }) {
         global.farmId
       );
       if (success) {
-        // console.log("Document updated successfully");
         state.updateAnimal(type, id, updatedFields);
         form.reset();
       } else {
@@ -143,8 +133,6 @@ export default function Animal({ type }) {
   return (
     <>
       <AnimalCard type={type} {...animal} simple />
-      {/* <DataTable columns={columns} data={[]} /> */}
-
       <Card>
         <CardHeader className="pb-2">
           <CardTitle>Información General:</CardTitle>
@@ -176,13 +164,13 @@ export default function Animal({ type }) {
             </span>
           </div>
           <div>
-            <span className="font-semibold text-sm">Proposito: </span>
+            <span className="font-semibold text-sm">Propósito: </span>
             <span className="text-sm">{animal?.purposes}</span>
           </div>
 
           {animal?.attributes.genre === "M" ? (
             <div>
-              <span className="font-semibold text-sm">Fecha Castracion: </span>
+              <span className="font-semibold text-sm">Fecha Castración: </span>
               <span className="text-sm">
                 {castrationDateJs
                   ? castrationDateJs.toLocaleDateString()
@@ -199,7 +187,7 @@ export default function Animal({ type }) {
         <DialogTrigger className="flex justify-center">
           <Button type="submit" className="flex gap-2">
             <BiEditAlt />
-            Editar Informacion
+            Editar Información
           </Button>
         </DialogTrigger>
         <DialogContent>
@@ -305,7 +293,7 @@ export default function Animal({ type }) {
                                 form.setValue("mother_id", animalId);
                               }}
                               simple
-                              animals={femenineAnimals}
+                              animals={feminineAnimals}
                             />
                           </div>
                         </DialogContent>
@@ -341,7 +329,7 @@ export default function Animal({ type }) {
                     <FormControl>
                       <Input
                         type="number"
-                        placeholder="Digite el peso"
+                        placeholder="Ingrese el peso"
                         {...field}
                       />
                     </FormControl>
@@ -371,10 +359,10 @@ export default function Animal({ type }) {
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="Trabajo">Trabajo</SelectItem>
-                              <SelectItem value="Produccion de carne">
+                              <SelectItem value="Producción de carne">
                                 Producción de carne
                               </SelectItem>
-                              <SelectItem value="Reproduccion">
+                              <SelectItem value="Reproducción">
                                 Reproducción
                               </SelectItem>
                             </SelectContent>
@@ -403,13 +391,13 @@ export default function Animal({ type }) {
                               <SelectValue placeholder="Selecciona un propósito" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="Produccion de carne">
+                              <SelectItem value="Producción de carne">
                                 Producción de carne
                               </SelectItem>
-                              <SelectItem value="Produccion de leche">
+                              <SelectItem value="Producción de leche">
                                 Producción de leche
                               </SelectItem>
-                              <SelectItem value="Reproduccion">
+                              <SelectItem value="Reproducción">
                                 Reproducción
                               </SelectItem>
                             </SelectContent>
@@ -439,10 +427,10 @@ export default function Animal({ type }) {
                             <SelectValue placeholder="Selecciona un propósito" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="Produccion de carne">
+                            <SelectItem value="Producción de carne">
                               Producción de carne
                             </SelectItem>
-                            <SelectItem value="Reproduccion">
+                            <SelectItem value="Reproducción">
                               Reproducción
                             </SelectItem>
                           </SelectContent>

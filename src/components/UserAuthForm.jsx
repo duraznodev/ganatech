@@ -1,4 +1,4 @@
-import * as React from "react";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -7,18 +7,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { FaSpinner } from "react-icons/fa";
-import * as z from "zod";
+import { signIn, signUp } from "@/firebase/auth";
+import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import * as React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { signIn, signUp } from "@/firebase/auth";
-import { redirect } from "react-router-dom";
+import { FaSpinner } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import * as z from "zod";
 
 const formAuth = z.object({
   email: z.string().email(),

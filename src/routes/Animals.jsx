@@ -1,4 +1,5 @@
-import { AnimalTypeDialogContent } from "../components/AnimalTypeDialogContent";
+import { GiCow, GiPig } from "react-icons/gi";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -6,9 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { Button } from "../components/ui/button";
-import { GiCow, GiPig } from "react-icons/gi";
-import { Link } from "react-router-dom";
 
 export default function Animals() {
   return (

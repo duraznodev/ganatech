@@ -3,10 +3,14 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 export const columns = [
   {
-    accessorKey: "childrenNumber",
-    header: "Crías",
+    accessorKey: "weight",
+    header: "Peso",
     cell: ({ row }) => {
-      return <div className="capitalize">{row.getValue("childrenNumber")}</div>;
+      return (
+        <div className="capitalize">
+          {Number(row.getValue("weight")).toFixed(1)}
+        </div>
+      );
     },
   },
   {

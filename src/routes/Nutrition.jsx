@@ -57,7 +57,7 @@ export default function Nutrition() {
         <Card>
           <CardHeader>
             <CardTitle className="font-semibold tracking-tight text-lg ">
-              Plan de Nutricion
+              Plan de Nutrición
             </CardTitle>
           </CardHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -71,7 +71,7 @@ export default function Nutrition() {
                     <Input
                       id="foodType"
                       {...register("foodType", { required: true })}
-                      placeholder="Ej: Montarascal"
+                      placeholder="Ej: Pasto"
                       onChange={(e) => setValue("foodType", e.target.value)}
                     />
                   </div>
@@ -85,7 +85,7 @@ export default function Nutrition() {
                       type="number"
                       min="0"
                       step="0.1"
-                      placeholder="Ej: Muuucha"
+                      placeholder="Ej: 10 libras"
                       onChange={(e) => setValue("foodAmount", e.target.value)}
                     />
                   </div>
