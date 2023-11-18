@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import AnimalCard from "../components/AnimalCard";
-import { columns } from "../components/CalvingTable/columns";
 import { Card, CardHeader } from "../components/ui/card";
 import { DataTable } from "../components/ui/data-table";
 import { useGlobal } from "../contexts/GlobalContext";
+import { CalvingColumns } from "../utils/columns";
 
 export default function Calving({ type }) {
   const { id } = useParams();
@@ -29,7 +29,7 @@ export default function Calving({ type }) {
           </p>
         </CardHeader>
       </Card>
-      <DataTable columns={columns} data={animalCalvings} />
+      <DataTable columns={CalvingColumns} data={animalCalvings} />
     </>
   );
 }

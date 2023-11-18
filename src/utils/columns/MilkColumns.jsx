@@ -1,14 +1,14 @@
+import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-export const columns = [
+export const MilkColumns = [
   {
-    accessorKey: "weight",
-    header: "Peso",
+    accessorKey: "milk",
+    header: "Litros",
     cell: ({ row }) => {
       return (
         <div className="capitalize">
-          {Number(row.getValue("weight")).toFixed(1)}
+          {Number(row.getValue("milk")).toFixed(1)}
         </div>
       );
     },

@@ -1,7 +1,7 @@
+import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-export const columns = [
+export const VaccineColumns = [
   {
     accessorKey: "VaccineType",
     header: "Vaccine",

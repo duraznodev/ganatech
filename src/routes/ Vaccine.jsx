@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import AnimalCard from "../components/AnimalCard";
-import { columns } from "../components/VaccineTable/columns";
 import { DataTable } from "../components/ui/data-table";
 import { useGlobal } from "../contexts/GlobalContext";
+import { VaccineColumns } from "../utils/columns";
 
 export default function Vaccine({ type }) {
   const { id } = useParams();
@@ -20,7 +20,7 @@ export default function Vaccine({ type }) {
   return (
     <>
       <AnimalCard {...animal} type={type} simple interaction={false} />
-      <DataTable columns={columns} data={animalVaccines} />
+      <DataTable columns={VaccineColumns} data={animalVaccines} />
     </>
   );
 }

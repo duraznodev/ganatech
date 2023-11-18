@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useGlobal } from "../contexts/GlobalContext";
 import AnimalCard from "../components/AnimalCard";
-import { columns } from "../components/MilkTable/columns";
 import { DataTable } from "../components/ui/data-table";
+import { MilkColumns } from "../utils/columns";
 
 export default function MilkHistory({ type }) {
   const { id } = useParams();
@@ -12,13 +12,13 @@ export default function MilkHistory({ type }) {
   const milkHistories = state?.milkHistories || [];
 
   const animalMilkHistory = milkHistories.filter(
-    (milkHistory) => milkHistory.animalId === id
+    (milkHistory) => milkHistory.animalId === id,
   );
 
   return (
     <>
       <AnimalCard {...animal} type={type} simple interaction={false} />
-      <DataTable columns={columns} data={animalMilkHistory} />
+      <DataTable columns={MilkColumns} data={animalMilkHistory} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { ArrowUpDown } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
-export const columns = [
+
+export const CalvingColumns = [
   {
     accessorKey: "childrenNumber",
     header: "Crías",
