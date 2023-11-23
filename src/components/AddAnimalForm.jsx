@@ -77,7 +77,6 @@ export default function AddAnimalForm({ children, animals, type }) {
   }, [selectedFather, selectedMother]);
 
   async function onSubmit(data) {
-    console.log(data)
     toggleFatherSelection("");
     toggleMotherSelection("");
     const animal = {
@@ -86,11 +85,12 @@ export default function AddAnimalForm({ children, animals, type }) {
         genre: data.genre,
       },
       weight: Number(data.weight),
-      purpuses: data.purposes,
+      purposes: data.purposes,
       name: data.name.trim()
         ? data.name.trim()
-        : `${type === "bovines" ? "Bovino" : "Porcino"
-        } ${new Date().getTime()}`,
+        : `${
+            type === "bovines" ? "Bovino" : "Porcino"
+          } ${new Date().getTime()}`,
     };
     animal.genre = null;
     const submitedAnimal = await addToCollection(
@@ -107,7 +107,7 @@ export default function AddAnimalForm({ children, animals, type }) {
   }
   return (
     <>
-      <Form {...form} >
+      <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
           className="grid grid-cols-1 gap-y-3 w-full"
@@ -122,9 +122,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                 <FormControl>
                   <Input placeholder="Nombre del animal" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                Este es el numero de chapa de la vaca
-              </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -140,9 +137,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                 <FormControl>
                   <Input type="number" placeholder="1234" {...field} />
                 </FormControl>
-                {/* <FormDescription>
-                Este es el numero de chapa de la vaca
-              </FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -161,7 +155,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                   <RadioGroup
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    // defaultValue="option-one"
                     className="flex flex-col space-y-1"
                   >
                     <FormItem className="flex items-center space-y-0 space-x-2">
@@ -201,7 +194,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                 <FormControl>
                   <Input type="number" placeholder="400..." {...field} />
                 </FormControl>
-                {/* <FormDescription>Ingrese el peso de el animal</FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -219,7 +211,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                 <FormControl>
                   <Input type="text" placeholder="Brahman..." {...field} />
                 </FormControl>
-                <FormDescription></FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -268,23 +259,6 @@ export default function AddAnimalForm({ children, animals, type }) {
                       </div>
                     </DialogContent>
                   </Dialog>
-                  {/* <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecciona un padre" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {animals
-                        .filter((animal) => animal.attributes?.genre === "M")
-                        .map((animal) => (
-                          <SelectItem key={animal.id} value={animal.id}>
-                            {animal.name}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -334,143 +308,18 @@ export default function AddAnimalForm({ children, animals, type }) {
                       </div>
                     </DialogContent>
                   </Dialog>
-                  {/* <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecciona un padre" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {animals
-                        .filter((animal) => animal.attributes?.genre === "M")
-                        .map((animal) => (
-                          <SelectItem key={animal.id} value={animal.id}>
-                            {animal.name}
-                          </SelectItem>
-                        ))}
-                    </SelectContent>
-                  </Select> */}
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-
-          {/* {animal?.hasOwnProperty("earring") ? (
-            animal.attributes?.genre === "M" ? (
-              <FormField
-                className="flex flex-col gap-y-1.5"
-                control={form.control}
-                name="purposes"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-semibold">
-                      Propósitos
-                    </FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecciona un propósito" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Trabajo">Trabajo</SelectItem>
-                          <SelectItem value="Producción de carne">
-                            Producción de carne
-                          </SelectItem>
-                          <SelectItem value="Reproducción">
-                            Reproducción
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            ) : (
-              <FormField
-                className="flex flex-col gap-y-1.5"
-                control={form.control}
-                name="purposes"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-semibold">
-                      Propósitos
-                    </FormLabel>
-                    <FormControl>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecciona un propósito" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="Produccion de carne">
-                            Producción de carne
-                          </SelectItem>
-                          <SelectItem value="Produccion de leche">
-                            Producción de leche
-                          </SelectItem>
-                          <SelectItem value="Reproduccion">
-                            Reproducción
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            )
-          ) : (
-            <FormField
-              className="flex flex-col gap-y-1.5"
-              control={form.control}
-              name="purposes"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-semibold">
-                    Propósitos
-                  </FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecciona un propósito" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Produccion de carne">
-                          Producción de carne
-                        </SelectItem>
-                        <SelectItem value="Reproduccion">
-                          Reproducción
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-          )} */}
-
           <FormField
             className="flex flex-col gap-y-1.5"
             control={form.control}
             name="purposes"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-semibold">
-                  Propósitos
-                </FormLabel>
+                <FormLabel className="font-semibold">Propósitos</FormLabel>
                 <FormControl>
                   <Select
                     onValueChange={field.onChange}
@@ -486,12 +335,8 @@ export default function AddAnimalForm({ children, animals, type }) {
                       <SelectItem value="Produccion de leche">
                         Producción de leche
                       </SelectItem>
-                      <SelectItem value="Reproduccion">
-                        Reproducción
-                      </SelectItem>
-                      <SelectItem value="Trabajo">
-                        Trabajo
-                      </SelectItem>
+                      <SelectItem value="Reproduccion">Reproducción</SelectItem>
+                      <SelectItem value="Trabajo">Trabajo</SelectItem>
                     </SelectContent>
                   </Select>
                 </FormControl>
