@@ -43,6 +43,8 @@ import {
 import { useGlobal } from "../contexts/GlobalContext";
 import { updateInCollection } from "../firebase/api";
 import { useSelectAnimal } from "../hooks/useSelectAnimal";
+import CardLink from "../components/CardLink";
+import AnimalRegisters from "../components/AnimalRegisters";
 
 const formSchema = z.object({
   father_id: z.string().nullable(),
@@ -448,50 +450,7 @@ export default function AnimalDetail({ type }) {
           </Form>
         </DialogContent>
       </Dialog>
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-center">Registros</CardTitle>
-        </CardHeader>
-        <CardContent className="grid grid-cols-2 gap-3">
-          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
-            <Link
-              to="diets"
-              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
-            >
-              <BiFoodMenu className="text-xl" />
-              Dietas
-            </Link>
-          </div>
-          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
-            <Link
-              to="weight_history"
-              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
-            >
-              <TbWeight className="text-xl" />
-              Pesajes
-            </Link>
-          </div>
-          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
-            <Link
-              to="calving"
-              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
-            >
-              <FaBirthdayCake className="text-xl" />
-              Partos
-            </Link>
-          </div>
-
-          <div className="  flex flex-1 items-center justify-center rounded-lg border bg-card text-card-foreground shadow-sm">
-            <Link
-              to="vaccine"
-              className="flex flex-1 items-center justify-center gap-x-2 py-4 text-lg font-semibold"
-            >
-              <MdVaccines className="text-xl" />
-              Vacunas
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+      <AnimalRegisters type={type} genre={animal?.attributes?.genre} />
     </>
   );
 }
