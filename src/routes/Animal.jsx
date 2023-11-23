@@ -69,7 +69,7 @@ export default function Animal({ type }) {
   const animal = animals.find((_animal) => _animal.id === id);
   const father = animals.find((_animal) => _animal.id === animal?.father_id);
   const mother = animals.find((_animal) => _animal.id === animal?.mother_id);
-
+  console.log(animal)
   const castrationDate = animal?.castrationDate;
   const castrationDateJs = castrationDate?.toDate();
 

@@ -7,6 +7,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,6 +35,7 @@ const FormSchemaAdd = z.object({
   breed: z.string().nullable(),
   father_id: z.string().nullable(),
   mother_id: z.string().nullable(),
+  purposes: z.string().nullable(),
 });
 
 export default function AddAnimalForm({ children, animals, type }) {
@@ -59,6 +67,7 @@ export default function AddAnimalForm({ children, animals, type }) {
       father_id: "",
       mother_id: "",
       breed: "",
+      purposes: "",
     },
   });
 
@@ -68,6 +77,7 @@ export default function AddAnimalForm({ children, animals, type }) {
   }, [selectedFather, selectedMother]);
 
   async function onSubmit(data) {
+    console.log(data)
     toggleFatherSelection("");
     toggleMotherSelection("");
     const animal = {
@@ -76,6 +86,7 @@ export default function AddAnimalForm({ children, animals, type }) {
         genre: data.genre,
       },
       weight: Number(data.weight),
+      purpuses: data.purposes,
       name: data.name.trim()
         ? data.name.trim()
         : `${type === "bovines" ? "Bovino" : "Porcino"
@@ -96,10 +107,10 @@ export default function AddAnimalForm({ children, animals, type }) {
   }
   return (
     <>
-      <Form {...form}>
+      <Form {...form} >
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-y-3 w-full"
+          className="grid grid-cols-1 gap-y-3 w-full"
         >
           <FormField
             className="grid w-full max-w-sm items-center gap-y-1.5"
@@ -340,6 +351,149 @@ export default function AddAnimalForm({ children, animals, type }) {
                         ))}
                     </SelectContent>
                   </Select> */}
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* {animal?.hasOwnProperty("earring") ? (
+            animal.attributes?.genre === "M" ? (
+              <FormField
+                className="flex flex-col gap-y-1.5"
+                control={form.control}
+                name="purposes"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-semibold">
+                      Propósitos
+                    </FormLabel>
+                    <FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona un propósito" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Trabajo">Trabajo</SelectItem>
+                          <SelectItem value="Producción de carne">
+                            Producción de carne
+                          </SelectItem>
+                          <SelectItem value="Reproducción">
+                            Reproducción
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ) : (
+              <FormField
+                className="flex flex-col gap-y-1.5"
+                control={form.control}
+                name="purposes"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="font-semibold">
+                      Propósitos
+                    </FormLabel>
+                    <FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecciona un propósito" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="Produccion de carne">
+                            Producción de carne
+                          </SelectItem>
+                          <SelectItem value="Produccion de leche">
+                            Producción de leche
+                          </SelectItem>
+                          <SelectItem value="Reproduccion">
+                            Reproducción
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )
+          ) : (
+            <FormField
+              className="flex flex-col gap-y-1.5"
+              control={form.control}
+              name="purposes"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="font-semibold">
+                    Propósitos
+                  </FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Selecciona un propósito" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Produccion de carne">
+                          Producción de carne
+                        </SelectItem>
+                        <SelectItem value="Reproduccion">
+                          Reproducción
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+          )} */}
+
+          <FormField
+            className="flex flex-col gap-y-1.5"
+            control={form.control}
+            name="purposes"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="font-semibold">
+                  Propósitos
+                </FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona un propósito" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Produccion de carne">
+                        Producción de carne
+                      </SelectItem>
+                      <SelectItem value="Produccion de leche">
+                        Producción de leche
+                      </SelectItem>
+                      <SelectItem value="Reproduccion">
+                        Reproducción
+                      </SelectItem>
+                      <SelectItem value="Trabajo">
+                        Trabajo
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
