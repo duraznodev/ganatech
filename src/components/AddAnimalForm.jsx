@@ -15,6 +15,13 @@ import { useForm } from "react-hook-form";
 import { FaMars, FaPlus, FaVenus } from "react-icons/fa6";
 import * as z from "zod";
 import { useGlobal } from "../contexts/GlobalContext";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { addToCollection, getCollection } from "../firebase/api";
 import { useSelectAnimal } from "../hooks/useSelectAnimal";
 import AnimalList from "./AnimalList";
@@ -28,6 +35,7 @@ const FormSchemaAdd = z.object({
   breed: z.string().nullable(),
   father_id: z.string().nullable(),
   mother_id: z.string().nullable(),
+  purposes: z.string().nullable(),
 });
 
 export default function AddAnimalForm({ children, animals, type }) {
@@ -59,6 +67,7 @@ export default function AddAnimalForm({ children, animals, type }) {
       father_id: "",
       mother_id: "",
       breed: "",
+      purposes: "",
     },
   });
 
@@ -76,10 +85,12 @@ export default function AddAnimalForm({ children, animals, type }) {
         genre: data.genre,
       },
       weight: Number(data.weight),
+      purposes: data.purposes,
       name: data.name.trim()
         ? data.name.trim()
-        : `${type === "bovines" ? "Bovino" : "Porcino"
-        } ${new Date().getTime()}`,
+        : `${
+            type === "bovines" ? "Bovino" : "Porcino"
+          } ${new Date().getTime()}`,
     };
     animal.genre = null;
     const submittedAnimal = await addToCollection(
@@ -99,7 +110,7 @@ export default function AddAnimalForm({ children, animals, type }) {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex w-full flex-col gap-y-3"
+          className="grid w-full grid-cols-1 gap-y-3"
         >
           <FormField
             className="grid w-full max-w-sm items-center gap-y-1.5"
@@ -300,6 +311,37 @@ export default function AddAnimalForm({ children, animals, type }) {
                       </div>
                     </DialogContent>
                   </Dialog>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            className="flex flex-col gap-y-1.5"
+            control={form.control}
+            name="purposes"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="font-semibold">Propósitos</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona un propósito" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Producción de carne">
+                        Producción de carne
+                      </SelectItem>
+                      <SelectItem value="Producción de leche">
+                        Producción de leche
+                      </SelectItem>
+                      <SelectItem value="Reproducción">Reproducción</SelectItem>
+                      <SelectItem value="Trabajo">Trabajo</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </FormControl>
                 <FormMessage />
               </FormItem>
