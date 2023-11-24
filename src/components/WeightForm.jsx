@@ -48,7 +48,7 @@ export default function WeightForm({
     }));
 
     weights.forEach((w) => {
-      addToCollection(getCollection("weight_history"), w);
+      addToCollection(getCollection("weight_history", global.farmId), w);
       global.addWeightHistory(w);
     });
 
