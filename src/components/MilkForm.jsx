@@ -48,7 +48,7 @@ export default function MilkForm({
         }));
 
         milks.forEach((m) => {
-            addToCollection(getCollection("milk_history"), m);
+            addToCollection(getCollection("milk_history",global.farmId), m);
             global.addMilkHistory(m);
         });
 

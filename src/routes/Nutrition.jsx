@@ -18,6 +18,7 @@ import { AnimalTypeDialogContent } from "../components/AnimalTypeDialogContent";
 import { CardFooter } from "../components/ui/card";
 import { allFromCollection, getCollection } from "../firebase/api";
 import { useSelectedAnimals } from "../hooks/useSelectedAnimals";
+import { useGlobal } from "../contexts/GlobalContext";
 
 export default function Nutrition() {
   const { register, handleSubmit, setValue, getValues, reset, watch } =
@@ -26,11 +27,14 @@ export default function Nutrition() {
     useSelectedAnimals();
   const [animals, setAnimals] = useState([]);
   const [type, setType] = useState(null);
+  const global = useGlobal();
 
   useEffect(() => {
     if (type != null) {
       const init = async () => {
-        const animals = await allFromCollection(getCollection(type));
+        const animals = await allFromCollection(
+          getCollection(type, global.farmId),
+        );
         setAnimals(animals);
       };
       init();
