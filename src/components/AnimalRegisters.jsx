@@ -21,20 +21,22 @@ export default function AnimalRegisters({ type, genre }) {
           <TbWeight className="text-xl" />
           Pesajes
         </CardLink>
-        <CardLink to="calving">
-          <FaBirthdayCake className="text-xl" />
-          Partos
-        </CardLink>
+
         <CardLink to="vaccine">
           <MdVaccines className="text-xl" />
           Vacunas
         </CardLink>
-        {type === "bovines" && genre == "F" && (
-          <CardLink to="milk_history">
-            <LuMilk className="text-xl" />
-            Leche
-          </CardLink>
-        )}
+        {type === "bovines" &&
+          genre == "F" && [
+            <CardLink to="milk_history">
+              <LuMilk className="text-xl" />
+              Leche
+            </CardLink>,
+            <CardLink to="calving">
+              <FaBirthdayCake className="text-xl" />
+              Partos
+            </CardLink>,
+          ]}
       </CardContent>
     </Card>
   );
