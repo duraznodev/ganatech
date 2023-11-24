@@ -4,6 +4,7 @@ import { Card, CardHeader } from "../components/ui/card";
 import { DataTable } from "../components/ui/data-table";
 import { useGlobal } from "../contexts/GlobalContext";
 import { CalvingColumns } from "../utils/columns";
+import StatisticsModal from "../components/StatisticsModal";
 
 export default function Calving({ type }) {
   const { id } = useParams();
@@ -18,6 +19,13 @@ export default function Calving({ type }) {
     (calvings) => calvings.animalId === id,
   );
 
+  const data = animalCalvings
+    .sort((a, b) => a.date - b.date)
+    .map((animalCalving) => ({
+      item: Number(animalCalving.childrenNumber),
+      date: animalCalving.date.toDate().toLocaleDateString(),
+    }));
+
   return (
     <>
       <AnimalCard {...animal} type={type} simple interaction={false} />
@@ -30,6 +38,11 @@ export default function Calving({ type }) {
         </CardHeader>
       </Card>
       <DataTable columns={CalvingColumns} data={animalCalvings} />
+      <StatisticsModal
+        data={data}
+        itemName="Cantidad de hijos"
+        description={"Estadísticas sobre la cantidad de hijos"}
+      />
     </>
   );
 }

@@ -3,6 +3,7 @@ import { useGlobal } from "../contexts/GlobalContext";
 import AnimalCard from "../components/AnimalCard";
 import { DataTable } from "../components/ui/data-table";
 import { MilkColumns } from "../utils/columns";
+import StatisticsModal from "../components/StatisticsModal";
 
 export default function MilkHistory({ type }) {
   const { id } = useParams();
@@ -15,10 +16,22 @@ export default function MilkHistory({ type }) {
     (milkHistory) => milkHistory.animalId === id,
   );
 
+  const data = animalMilkHistory
+    .sort((a, b) => a.date - b.date)
+    .map((milkHistory) => ({
+      item: Number(milkHistory.milk),
+      date: milkHistory.date.toDate().toLocaleDateString(),
+    }));
+
   return (
     <>
       <AnimalCard {...animal} type={type} simple interaction={false} />
       <DataTable columns={MilkColumns} data={animalMilkHistory} />
+      <StatisticsModal
+        data={data}
+        itemName="Litros de leche"
+        description={"Estadísticas sobre la producción de leche"}
+      />
     </>
   );
 }
