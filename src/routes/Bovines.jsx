@@ -203,7 +203,7 @@ export default function Bovines() {
               Nuevo animal
             </div>
           </DialogTrigger>
-          <DialogContent className=" flex h-auto flex-col  sm:max-w-3xl">
+          <DialogContent className="flex h-full flex-col overflow-auto  sm:max-w-3xl">
             <DialogHeader>
               <DialogTitle>Agregar bovino</DialogTitle>
               <DialogDescription>
