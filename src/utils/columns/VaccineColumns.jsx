@@ -28,4 +28,23 @@ export const VaccineColumns = [
       </div>
     ),
   },
+  {
+    accessorKey: "price",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Precio
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div>
+        {row?.getValue("price") != null ? Number(row?.getValue("price")) : 0}
+      </div>
+    ),
+  },
 ];
