@@ -18,8 +18,8 @@ export function Private(Component, user, farm_id) {
     }
   }, [user, farm_id]);
 
-  if (loading) return <LoadingSkeleton />;
   if (!user) return <Navigate to="/login" />;
+  if (loading) return <LoadingSkeleton />;
   if (user && !farm_id) {
     return <NewFarm />;
   }
